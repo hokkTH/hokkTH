@@ -1,0 +1,133 @@
+local God = Instance.new("Part")
+God.Parent = Workspace
+God.Name = "God"
+God.CanCollide = true
+God.Anchored = true
+God.Transparency = 0.75
+God.Size = Vector3.new(15,.3,15)
+
+function f()
+local lv = game.Players.LocalPlayer.Data.Level.Value
+    if lv == 1 or lv <= 10000 then
+        _G.mm = "Bandit [Lv. 5]"
+        cmon = CFrame.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
+        pmon = Vector3.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
+        cq = CFrame.new(1061.66699, 16.5166187, 1544.52905, -0.942978859, -3.33851502e-09, 0.332852632, 7.04340497e-09, 1, 2.99841325e-08, -0.332852632, 3.06188177e-08, -0.942978859)
+        pq = Vector3.new(1061.66699, 16.5166187, 1544.52905, -0.942978859, -3.33851502e-09, 0.332852632, 7.04340497e-09, 1, 2.99841325e-08, -0.332852632, 3.06188177e-08, -0.942978859)
+    end
+end
+function q()
+    local lv = game.Players.LocalPlayer.Data.Level.Value
+
+    if lv == 1 or lv <= 10000 then
+
+local args = {
+    [1] = "StartQuest",
+    [2] = "BanditQuest1",
+    [3] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+        end
+    end
+function Tween(a,b)
+    local Distance = (a - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 250 then
+        Speed = 500
+    elseif Distance >= 250 then
+        Speed = 250
+    end
+    game:GetService("TweenService"):Create(
+        game.Players.LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = b}):Play()
+    wait(Distance/Speed)
+end
+
+function Buso()
+if game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+else
+    local buso = {
+        [1] = "Buso"
+}
+
+game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack(buso))
+end
+end
+
+function ATEQ()
+if game.Players.LocalPlayer.Backpack:FindFirstChild(_G.Select_Weapon) then
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(_G.Select_Weapon)
+    wait(.4)
+    game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+end
+
+_G.Select_Weapon = "Combat"
+function o()
+  
+    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+        
+        w = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position
+        e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,30,0)
+        Tween(w,e)
+    for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+        if v.Name == _G.mm then
+        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+            v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-30,0)
+            
+            v.HumanoidRootPart.CanCollide = false
+            v.Humanoid.WalkSpeed = 1
+            v.Humanoid.JumpPower = 1
+            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+        elseif (game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
+            print(1)
+            end
+        end
+    end
+    end
+end
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/zxciaz/VenyxUI/main/Reuploaded"))() --someone reuploaded it so I put it in place of the original back up so guy can get free credit.
+local venyx = library.new("HOK", 5013109572)
+
+local themes = {
+Background = Color3.fromRGB(24, 24, 24),
+Glow = Color3.fromRGB(255, 0, 0),
+Accent = Color3.fromRGB(10, 10, 10),
+LightContrast = Color3.fromRGB(20, 20, 20),
+DarkContrast = Color3.fromRGB(14, 14, 14),
+TextColor = Color3.fromRGB(255, 0, 0)
+}
+local page = venyx:addPage("Main", 5012544693)
+local section1 = page:addSection("Main")
+
+section1:addToggle("Autofarm", nil, function(e)
+    _G.d = e
+while _G.d do wait()
+    
+        spawn(function()
+            pcall(function()
+                God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-4,0)
+            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                f()
+                Tween(pq,cq)
+                q()
+                Tween(pmon, cmon)
+                elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    f()
+                    
+                    repeat wait()
+                    ATEQ()
+                    Buso()
+                    o()
+                    until  game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Health <= 0  or _G.d == false
+                            
+                        end
+                    end
+                end)
+            end)
+        end
+
+end)
