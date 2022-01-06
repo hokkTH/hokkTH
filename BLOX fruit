@@ -1,215 +1,12 @@
-
-c = require(game.ReplicatedStorage.Util.CameraShaker)
-c:Stop()
-
-local God = Instance.new("Part")
-God.Parent = Workspace
-God.Name = "God"
-God.CanCollide = true
-God.Anchored = true
-God.Transparency = 0.75
-God.Size = Vector3.new(15,.3,15)
-
-
-function f()
-local lv = game.Players.LocalPlayer.Data.Level.Value
-    if lv == 1 or lv <= 10000 then
-        _G.mm = "Bandit [Lv. 5]"
-        cmon = CFrame.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
-        pmon = Vector3.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
-        cq = CFrame.new(1060.56409, 16.4880657, 1548.3114, 0.384563804, -2.28600303e-08, 0.923098445, -6.22679419e-09, 1, 2.73585457e-08, -0.923098445, -1.62690501e-08, 0.384563804)
-        pq = Vector3.new(1060.56409, 16.4880657, 1548.3114, 0.384563804, -2.28600303e-08, 0.923098445, -6.22679419e-09, 1, 2.73585457e-08, -0.923098445, -1.62690501e-08, 0.384563804)
-    end
+if not game:IsLoaded() then
+    game.Loaded:Wait()
 end
-function q()
-    local lv = game.Players.LocalPlayer.Data.Level.Value
-
-    if lv == 1 or lv <= 10000 then
-
-local args = {
-    [1] = "StartQuest",
-    [2] = "BanditQuest1",
-    [3] = 1
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-
-        end
-    end
-function Tween(a,b)
-    local Distance = (a - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance < 250 then
-        Speed = 500
-    elseif Distance >= 250 then
-        Speed = 250
-    end
-    game:GetService("TweenService"):Create(
-        game.Players.LocalPlayer.Character.HumanoidRootPart,
-        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-        {CFrame = b}):Play()
-    wait(Distance/Speed)
+if not game.Players.LocalPlayer then
+    repeat wait() until game.Players.LocalPlayer
 end
-
-
-
-function ATEQ()
-if game.Players.LocalPlayer.Backpack:FindFirstChild(_G.Select_Weapon) then
-    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(_G.Select_Weapon)
-    wait(.4)
-    game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+if not game.Players.LocalPlayer.character then
+    repeat wait() until game.Players.LocalPlayer.Character
 end
-end
-
-_G.Select_Weapon = "Combat"
-function o()
-  
-    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-        
-        w = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position
-        e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,20,0)
-        Tween(w,e)
-    for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-        if v.Name == _G.mm then
-        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
-            v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
-            v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-            v.HumanoidRootPart.CanCollide = false
-            v.Humanoid.WalkSpeed = 1
-            v.Humanoid.JumpPower = 1
-            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-        elseif (game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
-            print(1)
-            end
-        end
-    end
-    end
-end
-function set()
-local args = {
-    [1] = "SetSpawnPoint"
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/zxciaz/VenyxUI/main/Reuploaded"))() --someone reuploaded it so I put it in place of the original back up so guy can get free credit.
-local venyx = library.new("HOK", 5013109572)
-
-local themes = {
-Background = Color3.fromRGB(24, 24, 24),
-Glow = Color3.fromRGB(255, 0, 0),
-Accent = Color3.fromRGB(10, 10, 10),
-LightContrast = Color3.fromRGB(20, 20, 20),
-DarkContrast = Color3.fromRGB(14, 14, 14),
-TextColor = Color3.fromRGB(255, 0, 0)
-}
-local page = venyx:addPage("Main", 5012544693)
-local section1 = page:addSection("Main")
-local section2 = page:addSection("stats")
-section1:addToggle("Autofarm", nil, function(e)
-    _G.d = e
-while _G.d do wait()
-    
-        spawn(function()
-            pcall(function()
-                God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-4,0)
-                set()
-            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                f()
-                Tween(pq,cq)
-                q()
-                Tween(pmon, cmon)
-                elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    f()
-                    
-                    repeat wait()
-                    ATEQ()
-                    
-                    o()
-                    game:GetService'VirtualUser':CaptureController()
-                    game:GetService'VirtualUser':Button1Down(Vector2.new(30, 30))  
-                    until  game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Health <= 0  or _G.d == false
-                            
-                        end
-                    end
-                end)
-            end)
-        end
-
-end)
-section2:addToggle("Melee", nil, function(M)
-    _G.ME = M
-    while _G.ME do
-local string_1 = "AddPoint";
-local string_2 = "Melee";
-local number_1 = 1;
-local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-Target:InvokeServer(string_1, string_2, number_1);
-wait()
-end
-end)
-section2:addToggle("Defense", nil, function(D)
-    _G.De = D
-    while _G.De do
--- Script generated by SimpleSpy - credits to exx#9394
-
-local args = {
-    [1] = "AddPoint",
-    [2] = "Defense",
-    [3] = 1
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-
-
-wait()
-end
-end)
-section2:addToggle("Sword", nil, function(S)
-    _G.SW = S
-    while _G.SW do
-local args = {
-    [1] = "AddPoint",
-    [2] = "Sword",
-    [3] = 1
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-
-wait()
-end
-end)
-section2:addToggle("Gun", nil, function(G)
-    _G.GU = G
-    while _G.GU do
-
-local args = {
-    [1] = "AddPoint",
-    [2] = "Gun",
-    [3] = 1
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-
-wait()
-end
-end)
-section2:addToggle("Blox Fruit", nil, function(R)
-    _G.DE = R
-    while _G.DE do
--- Script generated by SimpleSpy - credits to exx#9394
-
-local args = {
-    [1] = "AddPoint",
-    [2] = "Demon Fruit",
-    [3] = 1
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-
-wait()
-end
-end)
 COREGUI = game:GetService("CoreGui")	
     local Dir = COREGUI:FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
 	Dir.DescendantAdded:Connect(function(Err)
@@ -227,3 +24,429 @@ COREGUI = game:GetService("CoreGui")
 			end)
 		end
 	end)
+
+local God = Instance.new("Part")
+God.Parent = Workspace
+God.Name = "God"
+God.CanCollide = true
+God.Anchored = true
+God.Transparency = 0.75
+God.Size = Vector3.new(15,.3,15)
+
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+    AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+    table.insert(AllIDs, actualHour)
+    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+    local Site;
+    if foundAnything == "" then
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+    else
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+    end
+    local ID = ""
+    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+        foundAnything = Site.nextPageCursor
+    end
+    local num = 0;
+    for i,v in pairs(Site.data) do
+        local Possible = true
+        ID = tostring(v.id)
+        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+            for _,Existing in pairs(AllIDs) do
+                if num ~= 0 then
+                    if ID == tostring(Existing) then
+                        Possible = false
+                    end
+                else
+                    if tonumber(actualHour) ~= tonumber(Existing) then
+                        local delFile = pcall(function()
+                            delfile("NotSameServers.json")
+                            AllIDs = {}
+                            table.insert(AllIDs, actualHour)
+                        end)
+                    end
+                end
+                num = num + 1
+            end
+            if Possible == true then
+                table.insert(AllIDs, ID)
+                wait()
+                pcall(function()
+                    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                    wait()
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                end)
+                wait(4)
+            end
+        end
+    end
+end
+
+function Teleport()
+    while wait() do
+        pcall(function()
+            TPReturner()
+            if foundAnything ~= "" then
+                TPReturner()
+            end
+        end)
+    end
+end
+local ts = game:GetService("TeleportService")
+local p = game:GetService("Players").LocalPlayer
+function f()
+   local lv = game.Players.LocalPlayer.Data.Level.Value
+   if lv == 1 or lv <= 9 then
+      _G.mm = "Bandit [Lv. 5]"
+      _G.T = "BanditQuest1"
+      _G.L = 1
+      cmon = CFrame.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
+      pmon = Vector3.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
+      cq = CFrame.new(1060.56409, 16.4880657, 1548.3114, 0.384563804, -2.28600303e-08, 0.923098445, -6.22679419e-09, 1, 2.73585457e-08, -0.923098445, -1.62690501e-08, 0.384563804)
+      pq = Vector3.new(1060.56409, 16.4880657, 1548.3114, 0.384563804, -2.28600303e-08, 0.923098445, -6.22679419e-09, 1, 2.73585457e-08, -0.923098445, -1.62690501e-08, 0.384563804)
+   elseif lv == 10 or lv <= 14 then
+      _G.mm = "Monkey [Lv. 14]"
+      _G.T = "JungleQuest"
+      _G.L = 1
+
+      cq = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+      pq = Vector3.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+      cmon = CFrame.new(-1772.4093017578, 60.860641479492, 54.872589111328)
+      pmon = Vector3.new(-1772.4093017578, 60.860641479492, 54.872589111328)
+   elseif lv == 15 or lv <= 29 then
+      _G.mm = "Gorilla [Lv. 20]"
+      _G.T = "JungleQuest"
+      _G.L = 2
+
+      cq = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+      pq = Vector3.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+      cmon = CFrame.new(-1223.52808, 6.27936459, -502.292664, 0.310949147, -5.66602516e-08, 0.950426519, -3.37275488e-08, 1, 7.06501808e-08, -0.950426519, -5.40241736e-08, 0.310949147)
+      pmon = Vector3.new(-1223.52808, 6.27936459, -502.292664, 0.310949147, -5.66602516e-08, 0.950426519, -3.37275488e-08, 1, 7.06501808e-08, -0.950426519, -5.40241736e-08, 0.310949147)
+   elseif lv == 30 or lv <= 39 then
+      _G.mm = "Pirate [Lv. 35]"
+      _G.T = "BuggyQuest1"
+      _G.L = 1
+
+      cq = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+      pq =Vector3.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+      cmon = CFrame.new(-1219.32324, 4.75205183, 3915.63452, -0.966492832, -6.91238853e-08, 0.25669381, -5.21195496e-08, 1, 7.3047012e-08, -0.25669381, 5.72206496e-08, -0.966492832)
+      pmon = Vector3.new(-1219.32324, 4.75205183, 3915.63452, -0.966492832, -6.91238853e-08, 0.25669381, -5.21195496e-08, 1, 7.3047012e-08, -0.25669381, 5.72206496e-08, -0.966492832)
+   elseif lv == 40 or lv <= 59 then
+      _G.mm = "Brute [Lv. 45]"
+      _G.T = "BuggyQuest1"
+      _G.L = 2
+
+      cq = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+      pq = Vector3.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+      cmon = CFrame.new(-1146.49646, 96.0936813, 4312.1333, -0.978175163, -1.53222057e-08, 0.207781896, -3.33316912e-08, 1, -8.31738873e-08, -0.207781896, -8.82843523e-08, -0.978175163)
+      pmon = Vector3.new(-1146.49646, 96.0936813, 4312.1333, -0.978175163, -1.53222057e-08, 0.207781896, -3.33316912e-08, 1, -8.31738873e-08, -0.207781896, -8.82843523e-08, -0.978175163)
+   elseif lv == 60 or lv <= 74 then
+      _G.mm = "Desert Bandit [Lv. 60]"
+      _G.T = "DesertQuest"
+      _G.L = 1
+
+      cq = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+      pq = Vector3.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+      cmon = CFrame.new(932.788818, 6.4503746, 4488.24609, -0.998625934, 3.08948351e-08, 0.0524050146, 2.79967303e-08, 1, -5.60361286e-08, -0.0524050146, -5.44919629e-08, -0.998625934)
+      pmon = Vector3.new(932.788818, 6.4503746, 4488.24609, -0.998625934, 3.08948351e-08, 0.0524050146, 2.79967303e-08, 1, -5.60361286e-08, -0.0524050146, -5.44919629e-08, -0.998625934)
+   elseif lv == 75 or lv <= 89 then
+      _G.mm = "Desert Officer [Lv. 70]"
+      _G.T = "DesertQuest"
+      _G.L = 2
+
+      cq = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+      pq =Vector3.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+      cmon = CFrame.new(1580.03198, 4.61375761, 4366.86426, 0.135744005, -6.44280718e-08, -0.990743816, 4.35738308e-08, 1, -5.90598574e-08, 0.990743816, -3.51534837e-08, 0.135744005)
+      pmon = Vector3.new(1580.03198, 4.61375761, 4366.86426, 0.135744005, -6.44280718e-08, -0.990743816, 4.35738308e-08, 1, -5.90598574e-08, 0.990743816, -3.51534837e-08, 0.135744005)
+
+   elseif lv == 90 or lv <= 99 then
+      _G.mm = "Snow Bandit [Lv. 90]"
+      _G.T = "SnowQuest"
+      _G.L = 1
+
+      cq = CFrame.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+      pq = Vector3.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+      cmon = CFrame.new(1370.24316, 102.403511, -1411.52905, 0.980274439, -1.12995728e-08, 0.197641045, -9.57343449e-09, 1, 1.04655214e-07, -0.197641045, -1.04482936e-07, 0.980274439)
+      pmon = Vector3.new(1370.24316, 102.403511, -1411.52905, 0.980274439, -1.12995728e-08, 0.197641045, -9.57343449e-09, 1, 1.04655214e-07, -0.197641045, -1.04482936e-07, 0.980274439)
+   elseif lv == 100 or lv <= 119 then
+      _G.mm = "Snowman [Lv. 100]"
+      _G.T = "SnowQuest"
+      _G.L = 2
+      NameMon = "Snowman"
+      cq = CFrame.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+      pq = Vector3.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+      cmon = CFrame.new(1370.24316, 102.403511, -1411.52905, 0.980274439, -1.12995728e-08, 0.197641045, -9.57343449e-09, 1, 1.04655214e-07, -0.197641045, -1.04482936e-07, 0.980274439)
+      pmon = Vector3.new(1370.24316, 102.403511, -1411.52905, 0.980274439, -1.12995728e-08, 0.197641045, -9.57343449e-09, 1, 1.04655214e-07, -0.197641045, -1.04482936e-07, 0.980274439)
+   elseif lv == 120 or lv <= 149 then
+      _G.mm = "Chief Petty Officer [Lv. 120]"
+      _G.T = "MarineQuest2"
+      _G.L = 1
+      NameMon = "Chief Petty Officer"
+      cq = CFrame.new(-5035.0835, 28.6520386, 4325.29443, 0.0243340395, -7.08064647e-08, 0.999703884, -6.36926814e-08, 1, 7.23777944e-08, -0.999703884, -6.54350671e-08, 0.0243340395)
+      pq = Vector3.new(-5035.0835, 28.6520386, 4325.29443, 0.0243340395, -7.08064647e-08, 0.999703884, -6.36926814e-08, 1, 7.23777944e-08, -0.999703884, -6.54350671e-08, 0.0243340395)
+      cmon = CFrame.new(-4882.8623, 22.6520386, 4255.53516, 0.273695946, -5.40380647e-08, -0.96181643, 4.37720793e-08, 1, -4.37274998e-08, 0.96181643, -3.01326679e-08, 0.273695946)
+      pmon = Vector3.new(-4882.8623, 22.6520386, 4255.53516, 0.273695946, -5.40380647e-08, -0.96181643, 4.37720793e-08, 1, -4.37274998e-08, 0.96181643, -3.01326679e-08, 0.273695946)
+   elseif lv == 150 or lv <= 174 then
+      _G.mm = "Sky Bandit [Lv. 150]"
+      _G.T = "SkyQuest"
+      _G.L = 1
+      NameMon = "Sky Bandit"
+      cq = CFrame.new(-4841.83447, 717.669617, -2623.96436, -0.875942111, 5.59710216e-08, -0.482416272, 3.04023082e-08, 1, 6.08195947e-08, 0.482416272, 3.86078725e-08, -0.875942111)
+      pq = Vector3.new(-4841.83447, 717.669617, -2623.96436, -0.875942111, 5.59710216e-08, -0.482416272, 3.04023082e-08, 1, 6.08195947e-08, 0.482416272, 3.86078725e-08, -0.875942111)
+      cmon = CFrame.new(-4970.74219, 294.544342, -2890.11353, -0.994874597, -8.61311236e-08, -0.101116329, -9.10836206e-08, 1, 4.43614923e-08, 0.101116329, 5.33441664e-08, -0.994874597)
+      pmon = Vector3.new(-4970.74219, 294.544342, -2890.11353, -0.994874597, -8.61311236e-08, -0.101116329, -9.10836206e-08, 1, 4.43614923e-08, 0.101116329, 5.33441664e-08, -0.994874597)
+
+   end
+end
+
+function q()
+
+   if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+
+      local args = {
+         [1] = "StartQuest",
+         [2] = _G.T,
+         [3] = _G.L
+      }
+
+      game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+   end
+end
+function Tween(a,b)
+   local Distance = (a - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+   if Distance < 250 then
+      Speed = 5000
+   elseif Distance >= 250 then
+      Speed = 250
+   end
+   game:GetService("TweenService"):Create(
+   game.Players.LocalPlayer.Character.HumanoidRootPart,
+   TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+   {CFrame = b}):Play()
+   wait(Distance/Speed)
+end
+function Buso()
+   if game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+   else
+      local buso = {
+         [1] = "Buso"
+      }
+
+      game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack(buso))
+   end
+end
+
+
+function ATEQ()
+   if game.Players.LocalPlayer.Backpack:FindFirstChild(_G.Select_Weapon) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(_G.Select_Weapon)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+   end
+end
+
+_G.Select_Weapon = "Combat"
+function o()
+
+   if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+
+      w = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position
+      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+      Tween(w,e)
+      for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+         if v.Name == _G.mm then
+            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 90 and v.Humanoid.Health >= 0 then
+               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
+               v.HumanoidRootPart.CanCollide = false
+               v.Humanoid:ChangeState(11)
+               sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+            elseif (game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
+
+            end
+         end
+      end
+   end
+end
+function fast()
+   local CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+   local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
+   CameraShakerR:Stop()
+   CombatFrameworkR.activeController.attacking = false
+   CombatFrameworkR.activeController.timeToNextAttack = 0
+   CombatFrameworkR.activeController.increment = 3
+   CombatFrameworkR.activeController.hitboxMagnitude = 50
+   game:GetService'VirtualUser':CaptureController()
+   game:GetService'VirtualUser':Button1Down(Vector2.new(30, 30))
+end
+function set()
+
+   local args = {
+      [1] = "SetSpawnPoint"
+   }
+
+   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+end
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/zxciaz/VenyxUI/main/Reuploaded"))() --someone reuploaded it so I put it in place of the original back up so guy can get free credit.
+local venyx = library.new("HOK", 5013109572)
+
+local themes = {
+   Background = Color3.fromRGB(24, 24, 24),
+   Glow = Color3.fromRGB(255, 0, 0),
+   Accent = Color3.fromRGB(10, 10, 10),
+   LightContrast = Color3.fromRGB(20, 20, 20),
+   DarkContrast = Color3.fromRGB(14, 14, 14),
+   TextColor = Color3.fromRGB(255, 0, 0)
+}
+   local page = venyx:addPage("Main", 5012544693)
+   local section1 = page:addSection("Main")
+   local section2 = page:addSection("stats")
+   local se1 = page:addSection("server")
+   local theme = venyx:addPage("Theme", 5012544693)
+   local colors = theme:addSection("Colors")
+   for theme, color in pairs(themes) do -- all in one theme changer, i know, im cool
+colors:addColorPicker(theme, color, function(color3)
+venyx:setTheme(theme, color3)
+end)
+end
+   
+section1:addToggle("Autofarm", nil, function(e)
+    
+_G.d = e
+while _G.d do wait()
+
+   spawn(function()
+   pcall(function()
+   set()
+   God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-4,0)
+   if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+      if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+         f()
+         Tween(pq,cq)
+         wait(1.5)
+         if game:GetService("Workspace").Characters.wfwefw3l.HumanoidRootPart.CFrame == cq then
+            q()
+         end
+      end
+   elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+
+      for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+         f()
+         if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
+            repeat wait()
+               ATEQ()
+               Buso()
+               o()
+               fast()
+            until  v.HumanoidRootPart.Health <= 0  or _G.d == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
+         else
+            f()
+            Tween(pmon,cmon)
+         end
+
+
+
+      end
+   end
+   end)
+   end)
+end
+
+end)
+section2:addToggle("Melee", nil, function(M)
+_G.ME = M
+while _G.ME do
+   local string_1 = "AddPoint";
+   local string_2 = "Melee";
+   local number_1 = 1;
+   local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
+   Target:InvokeServer(string_1, string_2, number_1);
+   wait()
+end
+end)
+section2:addToggle("Defense", nil, function(D)
+_G.De = D
+while _G.De do
+   -- Script generated by SimpleSpy - credits to exx#9394
+
+   local args = {
+      [1] = "AddPoint",
+      [2] = "Defense",
+      [3] = 1
+   }
+
+   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+   wait()
+end
+end)
+section2:addToggle("Sword", nil, function(S)
+_G.SW = S
+while _G.SW do
+   local args = {
+      [1] = "AddPoint",
+      [2] = "Sword",
+      [3] = 1
+   }
+
+   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+   wait()
+end
+end)
+section2:addToggle("Gun", nil, function(G)
+_G.GU = G
+while _G.GU do
+
+   local args = {
+      [1] = "AddPoint",
+      [2] = "Gun",
+      [3] = 1
+   }
+
+   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+   wait()
+end
+end)
+section2:addToggle("Blox Fruit", nil, function(R)
+_G.DE = R
+while _G.DE do
+   -- Script generated by SimpleSpy - credits to exx#9394
+
+   local args = {
+      [1] = "AddPoint",
+      [2] = "Demon Fruit",
+      [3] = 1
+   }
+
+   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+   wait()
+end
+end)
+se1:addButton("server hop", function()
+Teleport()
+end)
+se1:addButton("rejoin", function()
+ts:Teleport(game.PlaceId, p)
+end)
+
+colors:addKeybind("Toggle Keybind", Enum.KeyCode.One, function()
+
+venyx:toggle()
+end, function()
+end)
+colors:addButton("Destroy", function()
+game:GetService("CoreGui").HOK:Destroy()
+end)
