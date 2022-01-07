@@ -7,6 +7,16 @@ end
 if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
+local gt = getrawmetatable(game)
+local old = gt.__newindex
+setreadonly(gt,false)
+gt.__newindex = function(self, key, value)
+    if tostring(self) == "Humanoid" and tostring(key) == "WalkSpeed" and not checkcaller() then    
+
+        return old(self, key, self.WalkSpeed)
+    end
+    return old(self, key, value)
+end
 local Flux = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local PresetColor = Color3.fromRGB(66, 134, 255)
 local UserInputService = game:GetService("UserInputService")
@@ -2769,7 +2779,20 @@ end
 
 
 -----AUTO FARM
-
+_G.NoCIP = false
+local function NoclipLoop()
+        if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
+            for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if child:IsA("BasePart") and child.CanCollide == true then
+                    child.CanCollide = false
+                end
+            end
+        end
+end
+if _G.CNOCLIP then
+    _G.CNOCLIP:Disconnect()
+end
+_G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
 
 
 
@@ -3198,10 +3221,11 @@ end
 
 end)
 tab:Toggle("Auto farm","EZ", false, function(q)
-    
+_G.NoCIP = q    
 _G.d = q
 while _G.d do wait()
-
+ 
+if   _G.Select_Weapon then
    spawn(function()
    pcall(function()
    set()
@@ -3237,6 +3261,10 @@ while _G.d do wait()
    end
    end)
    end)
+else
+    _G.d = false
+Flux:Notification("Please select tool first!","...")
+end
 end
 end)
 tab:Line()
@@ -3252,20 +3280,20 @@ tab:Toggle("Auto Superhuman","",false,function(SUUU)
                                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                             end   
                                             if game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") or game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
-                                                SelectToolWeapon = "Superhuman"
+                                                _G.Select_Weapon = "Superhuman"
                                             end  
                                             if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") or game.Players.LocalPlayer.Character:FindFirstChild("Electro") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") then
                                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
-                                                    SelectToolWeapon = "Black Leg"
+                                                    _G.Select_Weapon = "Black Leg"
                                                 end
                                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
-                                                    SelectToolWeapon = "Electro"
+                                                    _G.Select_Weapon = "Electro"
                                                 end
                                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
-                                                    SelectToolWeapon = "Fishman Karate"
+                                                    _G.Select_Weapon = "Fishman Karate"
                                                 end
                                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
-                                                    SelectToolWeapon = "Dragon Claw"
+                                                    _G.Select_Weapon = "Dragon Claw"
                                                 end
                                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 then
                                                     local args = {
@@ -3409,13 +3437,17 @@ while _G.DE do
 end)
 
 
-local ta2 = win:Tab("M", "http://www.roblox.com/asset/?id=6023426915")
+local ta2 = win:Tab("Misc", "http://www.roblox.com/asset/?id=6023426915")
 ta2:Button("Destroy GUI","Destroy GUI" ,function()
 game:GetService("CoreGui").FluxLib:Destroy()
 end)
 ta2:Button("server hop","server hop", function()
+    Flux:Notification("Please wait 3 seconds","ok")
 Teleport()
 end)
 ta2:Button("rejoin","rejoin", function()
 ts:Teleport(game.PlaceId, p)
+end)
+ta2:Slider("walk speed", "",0,100, 0,function(sl)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = sl
 end)
