@@ -17,6 +17,9 @@ gt.__newindex = function(self, key, value)
     end
     return old(self, key, value)
 end
+if game.CoreGui:FindFirstChild("FluxLib") then
+   game.CoreGui:FindFirstChild("FluxLib"):Destroy()
+ end   
 local Flux = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local PresetColor = Color3.fromRGB(66, 134, 255)
 local UserInputService = game:GetService("UserInputService")
@@ -2799,7 +2802,7 @@ end
 _G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
 
 
-local win = Flux:Window("Blox fruit", "HOK", Color3.fromRGB(0,102,51), Enum.KeyCode.RightControl)
+local win = Flux:Window(" Blox Fruits", "[UPDATE 17]", Color3.fromRGB(0,102,51), Enum.KeyCode.RightControl)
 local tab = win:Tab("main", "http://www.roblox.com/asset/?id=6023426915")
 local God = Instance.new("Part")
 
@@ -2891,7 +2894,7 @@ function f()
        pmon = Vector3.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
        cq = CFrame.new(1060.56409, 16.4880657, 1548.3114, 0.384563804, -2.28600303e-08, 0.923098445, -6.22679419e-09, 1, 2.73585457e-08, -0.923098445, -1.62690501e-08, 0.384563804)
        pq = Vector3.new(1060.56409, 16.4880657, 1548.3114, 0.384563804, -2.28600303e-08, 0.923098445, -6.22679419e-09, 1, 2.73585457e-08, -0.923098445, -1.62690501e-08, 0.384563804)
-    elseif lv == 10 or lv <= 140000 then
+    elseif lv == 10 or lv <= 14 then
        _G.mm = "Monkey [Lv. 14]"
        _G.T = "JungleQuest"
        _G.L = 1
@@ -2943,12 +2946,12 @@ function f()
        _G.mm = "Desert Officer [Lv. 70]"
        _G.T = "DesertQuest"
        _G.L = 2
-       _G.TR ="Reward:\n$4,500\n50,000 Exp."
+       _G.TR = "Reward:\n$4,500\n50,000 Exp."
        cq = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
        pq =Vector3.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
        cmon = CFrame.new(1580.03198, 4.61375761, 4366.86426, 0.135744005, -6.44280718e-08, -0.990743816, 4.35738308e-08, 1, -5.90598574e-08, 0.990743816, -3.51534837e-08, 0.135744005)
        pmon = Vector3.new(1580.03198, 4.61375761, 4366.86426, 0.135744005, -6.44280718e-08, -0.990743816, 4.35738308e-08, 1, -5.90598574e-08, 0.990743816, -3.51534837e-08, 0.135744005)
-       _G.TR =""
+       
     elseif lv == 90 or lv <= 99 then
        _G.mm = "Snow Bandit [Lv. 90]"
        _G.T = "SnowQuest"
@@ -3103,9 +3106,27 @@ function f()
                  cmon = CFrame.new(5658.5752, 38.5361786, 4928.93506, -0.996873081, 2.12391046e-06, -0.0790185928, 2.16989656e-06, 1, -4.96097414e-07, 0.0790185928, -6.66008248e-07, -0.996873081)
                  pmon = Vector3.new(5658.5752, 38.5361786, 4928.93506, -0.996873081, 2.12391046e-06, -0.0790185928, 2.16989656e-06, 1, -4.96097414e-07, 0.0790185928, -6.66008248e-07, -0.996873081)
     end
- end
+end
+nododgecool = false
+       function NoDodgeCool()
+          if nododgecool then
+             for i,v in next, getgc() do
+                if game.Players.LocalPlayer.Character.Dodge then
+                   if typeof(v) == "function" and getfenv(v).script == game.Players.LocalPlayer.Character.Dodge then
+                      for i2,v2 in next, getupvalues(v) do
+                         if tostring(v2) == "0.4" then
+                            repeat wait(.1)
+                               setupvalue(v,i2,0)
+                            until not nododgecool
+                         end
+                      end
+                   end
+                end
+             end
+          end
+       end
 function Quesss()
-    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestReward.Title.Text == _G.TR then
+    if  game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestReward.Title.Text == _G.TR then
 print(1)
 else
 local args = {
@@ -3179,13 +3200,13 @@ function o()
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
 
       w = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position
-      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,20,-2)
       Tween(w,e)
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 130 and v.Humanoid.Health >= 0 then
-               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
-               --v.HumanoidRootPart.CanCollide = false
+               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,2)
+               v.HumanoidRootPart.CanCollide = false
                v.Humanoid:ChangeState(11)
                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
             elseif (game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
@@ -3195,25 +3216,30 @@ function o()
       end
    end
 end
-function fast()
-   local CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+game:GetService("RunService").Heartbeat:Connect(function()
+if _G.d then
+    local CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
    local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
    CameraShakerR:Stop()
    CombatFrameworkR.activeController.attacking = false
+    CombatFrameworkR.activeController.blocking = false
    CombatFrameworkR.activeController.timeToNextAttack = 0
+   CombatFrameworkR.activeController.timeToNextBlock = 0
    CombatFrameworkR.activeController.increment = 3
    CombatFrameworkR.activeController.hitboxMagnitude = 50
    game:GetService'VirtualUser':CaptureController()
-   game:GetService'VirtualUser':Button1Down(Vector2.new(30, 30))
-end
-function set()
+   game:GetService'VirtualUser':Button1Down(Vector2.new(110, 110))
+   end
+end)
 
+function set()
+if  game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
    local args = {
       [1] = "SetSpawnPoint"
    }
 
    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-
+end
 end
 wapon = {}
 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
@@ -3254,6 +3280,7 @@ while _G.d do wait()
 if  _G.Select_Weapon then
     spawn(function()
         pcall(function()
+        set()
         king()
         God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-4,0)
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
@@ -3262,21 +3289,24 @@ if  _G.Select_Weapon then
         Tween(pq,cq)
         wait(1.5)
         if game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == cq then
+            f()
         quest()
-        Quesss()
+        
         end
       end
    elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-         f()
+        
          if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
+             
             repeat wait()
+                f()
                 Quesss()
                ATEQ()
                Buso()
                o()
                fast()
-               set()
+               
             until  v.HumanoidRootPart.Health <= 0  or _G.d == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
          else
             f()
@@ -3293,87 +3323,13 @@ Flux:Notification("select wapon","ok")
 end
 end
 end)
-tab:Toggle("Autonewworld","EZ", false, function(g)
-   
-   AutoNew = g
-       end)
-       spawn(function()
-          while wait(.1) do
-             if AutoNew then
-                
-                local MyLevel = game.Players.localPlayer.Data.Level.Value
-                if MyLevel >= 700  then
-                    _G.d = false
-                   _G.Select_Weapon = "Key"
-                   wc= CFrame.new(4849.29883, 5.65138149, 719.611877)
-                   wp = Vector3.new(4849.29883, 5.65138149, 719.611877)
-                   Tween(wp,wc)
-                   wait(0.5)
-                   local args = {
-                      [1] = "DressrosaQuestProgress",
-                      [2] = "Detective"
-                   }
-                   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                   wait(0.5)
-                   if game.Players.LocalPlayer.Backpack:FindFirstChild("Key") then
-                      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("Key")
-                      wait(.4)
-                      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-                   end
-                   wc= CFrame.new(1347.7124, 37.3751602, -1325.6488)
-                   wait(0.5)
-                   function click()
-                      game:GetService'VirtualUser':CaptureController()
-                      game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                   end
-                   if game.Workspace.Enemies:FindFirstChild("Ice Admiral [Lv. 700] [Boss]") and game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
-                      CheckBoss = true
-                      _G.Select_Weapon =  _G.sel
-                      for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                         if CheckBoss and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == "Ice Admiral [Lv. 700] [Boss]" then
-                            repeat wait(.1)
-                               pcall(function() 
-                                  v.HumanoidRootPart.Transparency = 0.5
-                                  v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                                  v.HumanoidRootPart.BrickColor = BrickColor.new("White")
-                                  v.HumanoidRootPart.CanCollide = false
-                                  wc  = v.HumanoidRootPart.CFrame*CFrame.new(0, 10, 10)
-                                  wp  = v.HumanoidRootPart.Vector3.new(0, 10, 10)
-                                   Tween(wp,wc)
-                                  click()
-                               end)
-                            until not CheckBoss or not v.Parent or v.Humanoid.Health <= 0
-                         end
-                      end
-                      CheckBoss = false
-                      wait(0.5)
-                      wc= CFrame.new(-1166.23743, 7.65220165, 1728.36487)
-                       wp = Vector3.new(-1166.23743, 7.65220165, 1728.36487)
-                       Tween(wp,wc)
-                      wait(0.5)
-                      local args = {
-                          [1] = "TravelDressrosa"
-                      }
-                      game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                   else
-                      if game.Players.LocalPlayer.Backpack:FindFirstChild("Key") then
-                         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("Key")
-                         wait(.4)
-                         game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-                      end
-                      wc= CFrame.new(1347.7124, 37.3751602, -1325.6488)
-                      wp = Vector3.new(1347.7124, 37.3751602, -1325.6488)
-                      Tween(wp,wc)
-                   end 
-                end
-             end 
-          end
-end)
 tab:Label("auto superhuman")
 tab:Toggle("Auto Superhuman","",false,function(SUUU)
                                     _G.Superhuman = SUUU
                                     while wait()do 
-                                        if Superhuman then
+                                        spawn(function()
+                                                pcall(function()
+                                        if _G.Superhuman then
                                             if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") then
                                                 local args = {
                                                     [1] = "BuyBlackLeg"
@@ -3462,12 +3418,15 @@ tab:Toggle("Auto Superhuman","",false,function(SUUU)
                                                 end 
                                             end
                                         end
-                                    end
+                                                end)
+                                                    end)
+                                                end
+                            
                                 end)
 tab:Label("auto stats")
 tab:Toggle("Melee","AddPoint", false, function(M)
 _G.ME = M
-while _G.ME do
+while _G.ME do 
    local string_1 = "AddPoint";
    local string_2 = "Melee";
    local number_1 = 1;
@@ -3535,8 +3494,35 @@ while _G.DE do
    end
 end)
 
-
+local ta3 = win:Tab("BUY", "http://www.roblox.com/asset/?id=6023426915")
+       ta3:Button("Skyjump","Skyjump",function()
+          local args = {
+             [1] = "BuyHaki",
+             [2] = "Geppo"
+          }
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+       end)
+       ta3:Button("Buso Haki","Buso Haki",function()
+          local args = {
+             [1] = "BuyHaki",
+             [2] = "Buso"
+          }
+       
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+       end)
+       ta3:Button("Soru","Soru",function()
+          local args = {
+             [1] = "BuyHaki",
+             [2] = "Soru"
+          }
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+       end)
+       
 local ta2 = win:Tab("Misc", "http://www.roblox.com/asset/?id=6023426915")
+ta2:Toggle("Dodge","no cooldown", false, function(DOW)
+nododgecool = DOW
+NoDodgeCool()
+end)
 ta2:Button("Destroy GUI","Destroy GUI" ,function()
 game:GetService("CoreGui").FluxLib:Destroy()
 end)
@@ -3550,6 +3536,7 @@ end)
 ta2:Slider("walk speed", "",0,100, 0,function(sl)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = sl
 end)
+
 ta2:Button("seconds word","server hop", function()
 local args = {
                           [1] = "TravelDressrosa"
