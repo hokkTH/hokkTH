@@ -955,6 +955,7 @@ end)
 
 
 local mic = serv:Channel("misc")
+mic:Label("BUY")
 mic:Button("BuySkyjump", function()
     local args = {
              [1] = "BuyHaki",
@@ -999,7 +1000,19 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-DiscordLib:Notification("Notification", "you stats is refun", "Okay!")
+
+end)
+mic:Button("Fragmants",function()
+
+local args = {
+    [1] = "Candies",
+    [2] = "Buy",
+    [3] = 2,
+    [4] = 2
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
 end)
 mic:Label("FpsBoot")
 mic:Button("fps Boot", function()
@@ -1022,7 +1035,8 @@ workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
             v.BlastRadius = 1
         end
         end
-    end)
+end)
+mic:Label("Players")
 mic:Toggle("DodgeNoCooldown", false, function(DOW)
 nododgecool = DOW
 NoDodgeCool()
