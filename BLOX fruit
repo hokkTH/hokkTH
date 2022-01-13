@@ -976,7 +976,7 @@ mic:Button("BuySoru", function()
           }
           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
-lbls:Label("Candies")
+mic:Label("Candies")
 mic:Button("ExpX2", function()
 
 local args = {
@@ -1001,6 +1001,7 @@ local args = {
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 DiscordLib:Notification("Notification", "you stats is refun", "Okay!")
 end)
+mic:Label("FpsBoot")
 mic:Button("fps Boot", function()
 workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
     workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
