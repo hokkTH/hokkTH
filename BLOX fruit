@@ -615,11 +615,10 @@ function o()
       wait(0.5)
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
-            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 150 and v.Humanoid.Health >= 0 then
+            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
                v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
-               v.Humanoid.WalkSpeed = 1
-                v.Humanoid.JumpPower = 1
-               v.HumanoidRootPart.CanCollide = false
+              v.Head.CanCollide = false
+			  v.HumanoidRootPart.CanCollide = false
                v.Humanoid:ChangeState(11)
                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
             elseif (game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
@@ -841,19 +840,19 @@ _G.da=bool
 _G.NoCIP = bool
 _G.Superhuman= bool
 _G.NEW = bool
-while _G.da do
+while Wait() do 
   
     spawn(function()
         pcall(function()
-            
-            God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.928,0)
+        if _G.da then
+        God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.928,0)
         if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-        f()
-        Tween(cq)
-        wait(1.5)
-        if game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == cq then
-        quest()
+            if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+                f()
+                Tween(cq)
+                wait(1.5)
+            if game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == cq then
+                quest()
         end
       end
    elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
@@ -868,17 +867,18 @@ while _G.da do
                Buso()
                EquipWeapon(_G.Select_Weapon)
                 game:GetService'VirtualUser':CaptureController()
-   game:GetService'VirtualUser':Button1Down(Vector2.new(110, 110))
+                game:GetService'VirtualUser':Button1Down(Vector2.new(110, 110))
             until  v.HumanoidRootPart.Health <= 0  or _G.da == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
-         else
+        else
             f()
             Tween(cmon)
+                            end
+                        end
                     end
                 end
-            end
+            
             end)
         end)
-    wait()
     end
 end)
 function su()
