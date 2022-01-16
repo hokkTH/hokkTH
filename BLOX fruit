@@ -1,15 +1,5 @@
 repeat wait() until game:IsLoaded()
-wait(1)
-local gt = getrawmetatable(game)
-local old = gt.__newindex
-setreadonly(gt,false)
-gt.__newindex = function(self, key, value)
-    if tostring(self) == "Humanoid" and tostring(key) == "WalkSpeed" and not checkcaller() then    
 
-        return old(self, key, self.WalkSpeed)
-    end
-    return old(self, key, value)
-end
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
 		v.Function()
 	end
@@ -671,6 +661,15 @@ wait(3)
 end
 wait(2)
 end
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.da then
+        king()
+        end
+        end
+        end)
+    end)
 function Buso()
    if game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
    else
@@ -846,26 +845,23 @@ while _G.da do
   
     spawn(function()
         pcall(function()
-            king()
-            set()
+            
             God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.928,0)
-            su()
         if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
         f()
         Tween(cq)
         wait(1.5)
         if game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == cq then
-
         quest()
         end
       end
    elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-        
          if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
-             
             repeat wait()
+               set()
+               su()
                f()
                o()
                Quesss()
@@ -873,7 +869,7 @@ while _G.da do
                EquipWeapon(_G.Select_Weapon)
                 game:GetService'VirtualUser':CaptureController()
    game:GetService'VirtualUser':Button1Down(Vector2.new(110, 110))
-            until  v.HumanoidRootPart.Health <= 0  or _G.d == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
+            until  v.HumanoidRootPart.Health <= 0  or _G.da == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
          else
             f()
             Tween(cmon)
@@ -881,8 +877,7 @@ while _G.da do
                 end
             end
             end)
-    end)
-
+        end)
     wait()
     end
 end)
@@ -982,11 +977,13 @@ for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 	if v:IsA("Tool")and v.ToolTip == "Melee" then
 		print(v.Name)
 		_G.Select_Weapon = v.Name
+		_G.sel = v.Name
 	end
 end
 for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 	if v:IsA("Tool") and v.ToolTip == "Melee" then
 	 _G.Select_Weapon = v.Name
+	 _G.sel = v.Name
 	end
 end
 
@@ -1062,26 +1059,26 @@ end)
 
 spawn(function()
     pcall(function()
-while wait()do
+while wait() do
         local Lv = game.Players.LocalPlayer.Data.Level.Value
         if _G.NEW then
             if Lv >= 700  and Old_World then
-         
+                Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
               _G.da = false
+              Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                 if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
                     Tween(CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563))
                     wait(.5)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
-                    EquipWeapon("key")
-                    
+                    EquipWeapon("Key")
                     Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
                     wait(3)
                 elseif game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
                     if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral [Lv. 700] [Boss]") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v.Name == "Ice Admiral [Lv. 700] [Boss]" and v.Humanoid.Health > 0 then
-                                repeat game:GetService("RunService").Heartbeat:wait()
-                                    pcall(function()
+                                
+                                repeat wait()
                                         EquipWeapon(_G.sel)
                                         Twnon(v.HumanoidRootPart.CFrame * CFrame.new(0, 25, 25))
                                         v.HumanoidRootPart.CanCollide = false
@@ -1089,13 +1086,32 @@ while wait()do
                                         v.HumanoidRootPart.Transparency = .8
                                         game:GetService("VirtualUser"):CaptureController()
                                         game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 870),workspace.CurrentCamera.CFrame)
-                                    end)
-                                until v.Humanoid.Health <= 0 or not v.Parent
+                                until     v.Humanoid.Health <= 0 
+                                
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
                             end
                         end
                     else
                         Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral [Lv. 700] [Boss]") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Ice Admiral [Lv. 700] [Boss]" and v.Humanoid.Health > 0 then
+                                   repeat wait()
+                                        Buso()
+                                        EquipWeapon(_G.sel)
+                                        Twnon(v.HumanoidRootPart.CFrame * CFrame.new(0, 25, 25))
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                        v.HumanoidRootPart.Transparency = .8
+                                        game:GetService("VirtualUser"):CaptureController()
+                                        game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 870),workspace.CurrentCamera.CFrame)
+                                 
+                                   until     v.Humanoid.Health <= 0 
+                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                            end
+                        end
+                        end
+                        
                     end
                 else
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
