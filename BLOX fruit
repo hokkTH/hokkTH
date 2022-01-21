@@ -247,6 +247,7 @@ if Old_World then
                  end
 end
         if New_World then
+             local lv = game.Players.LocalPlayer.Data.Level.Value
            if lv == 700 or lv <= 724 then 
                  _G.mm = "Raider [Lv. 700]"
                  _G.T = "Area1Quest"
@@ -586,7 +587,14 @@ end
 		end
 	end
 end
+function can()
+for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+    if v.ClassName == "MeshPart" then
+        v.CanCollide = false
+        end
 
+end
+end
 function quest()
    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
 
@@ -622,14 +630,15 @@ function o()
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
 
  
-      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,40,1)
+      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,40,0)
       Tween(e)
      
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
-               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-40,-1)
+               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-40,0)
                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+               v.Humanoid.WalkSpeed = 1
               v.Head.CanCollide = false
 			  v.HumanoidRootPart.CanCollide = false
                v.Humanoid:ChangeState(11)
@@ -642,17 +651,17 @@ function o()
    end
 end
 
-
+local CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework) 
+local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
 game:GetService("RunService").Heartbeat:Connect(function()
 if _G.da then
     for i = 1,5 do
-local CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework) 
-	local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
-					CameraShakerR:Stop()
-					CombatFrameworkR.activeController.attacking = false
-					CombatFrameworkR.activeController.timeToNextAttack = 0
-					CombatFrameworkR.activeController.increment = 3
-					CombatFrameworkR.activeController.hitboxMagnitude = 50
+        can()
+		CameraShakerR:Stop()
+		CombatFrameworkR.activeController.attacking = false
+		CombatFrameworkR.activeController.timeToNextAttack = 0
+		CombatFrameworkR.activeController.increment = 3
+		CombatFrameworkR.activeController.hitboxMagnitude = 50
     end
    end
 end)
@@ -665,7 +674,7 @@ if Old_World then
     lv = game.Players.LocalPlayer.Data.Level.Value
 if game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") or game:GetService("Workspace").Enemies:FindFirstChild("Fishman Commando [Lv. 400]")  then
 
-elseif lv == 375 and  lv <=449 then
+elseif lv == 375 or  lv <=449 then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.CFrame 
 
 elseif game.Players.LocalPlayer.Data.Level.Value >= 449  and game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") then
@@ -916,36 +925,36 @@ end)
 spawn(function()
     pcall(function()
         while wait(.1) do
-
-   local args = {
+if string.find(game:GetService("Players").sfsfsdfsdfef.PlayerGui.Main.Stats.Container.Melee.Number.Text, 2200) then
+    local args = {
       [1] = "AddPoint",
       [2] = "Defense",
       [3] = 1
    }
 
    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-   wait()
+    end
     end
 
 end)
 end)
 
 
---spawn(function()
---    pcall(function()
---while true do  wait()
---if game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible == false then 
---	local args = {
---		[1] = "getInventoryFruits"
---	}
---	
---	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryFruits")
---	game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible = true
---else
---        end
---    end
---end)
---end)
+spawn(function()
+   pcall(function()
+while true do  wait()
+if game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible == false then 
+	local args = {
+		[1] = "getInventoryFruits"
+	}
+	
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryFruits")
+	game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible = true
+else
+     end
+  end
+end)
+end)
 
 spawn(function()
     pcall(function()
@@ -1029,4 +1038,182 @@ while wait() do
             end
             end
         end)
-    end)    
+end)
+if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and New_World then
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Container.Stored.ScrollingFrame.Frame:GetDescendants()) do
+if v.ClassName  == "ImageButton" then
+if v.Name == "Quake-Quake" or v.Name == "Human-Human: Buddha" or v.Name == "String-String" or v.Name == "Bird-Bird: Phoenix" or v.Name == "Paw-Paw"or v.Name == "Gravity-Gravity" or v.Name == "Dough-Dough" or v.Name == "Shadow-Shadow" or v.Name == "Venom-Venom" or v.Name == "Control-Control" or v.Name == "Dragon-Dragon" then
+ _G.reeee = true
+    end
+    end
+end
+end
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if  _G.reeee then
+                if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and New_World then
+                    _G.da = false
+                    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Check") == 0 then
+                        Tween(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
+                        if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                            wait(1.1)
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
+                        end
+                        wait(2)
+                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra [Lv. 1500] [Boss]") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "rip_indra [Lv. 1500] [Boss]" then
+                                    repeat game:GetService("RunService").Heartbeat:wait()
+                                        pcall(function()
+                                            EquipWeapon(_G.Select_Weapon)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(0,25,25))
+                                            require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework).activeController.hitboxMagnitude = 1000
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                            FoundIndra = true
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+                                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                        end)
+                                    until AutoThird == false or v.Humanoid.Health <= 0 or not v.Parent
+                                end
+                            end
+                        elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra [Lv. 1500] [Boss]") and (CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            Tween(CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016))
+                        end
+                    end
+                end
+            end
+        end
+    end)
+end)
+spawn(function()
+	pcall(function()
+		while wait(.1) do
+			
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Bomb Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Bomb Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Bomb-Bomb")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spike Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spike Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spike-Spike")
+                end
+                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Chop Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chop Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Chop-Chop")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spring Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spring Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spring-Spring")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Kilo Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Kilo Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Kilo-Kilo")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Smoke Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Smoke Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Smoke-Smoke")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spin Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spin Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spin-Spin")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flame Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flame Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Flame-Flame")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Bird: Falcon Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Bird: Falcon Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Bird-Bird: Falcon")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Ice Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Ice Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Ice-Ice")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Sand Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Sand Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Sand-Sand")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dark Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dark Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dark-Dark")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Revive Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Revive Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Revive-Dark")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Diamond Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Diamond Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Diamond-Diamond")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Light Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Light Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Light-Light")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Love Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Love Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Love-Love")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Rubber Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Rubber Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Rubber-Rubber")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Barrier Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Barrier Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Barrier-Barrier")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Magma Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Magma Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Magma-Magma")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Door Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Door Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Door-Door")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Quake Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Quake Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Quake-Quake")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Human-Human: Buddha Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Human-Human: Buddha Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Human-Human: Buddha")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("String Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("String Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","String-String")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Bird: Phoenix Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Bird: Phoenix Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Bird-Bird: Phoenix")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Rumble Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Rumble Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Rumble-Rumble")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Paw Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Paw Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Paw-Paw")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Gravity Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Gravity Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Gravity-Gravity")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dough Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dough Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dough-Dough")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Shadow Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Shadow Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Shadow-Shadow")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Venom Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Venom Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Venom-Venom")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Control Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Control Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Control-Control")
+                end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dragon Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dragon Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dragon-Dragon")
+				end
+			end
+		
+	end)
+end)
+spawn(function()
+    while wait(.1) do
+        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
+        
+    end
+end)
+--- code
+function UseCode(Text)
+game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Text)
+				end
+                UseCode("UPD16")
+                UseCode("2BILLION")
+                UseCode("UPD15")
+                UseCode("FUDD10")
+                UseCode("BIGNEWS")
+                UseCode("THEGREATACE")
+                UseCode("SUB2GAMERROBOT_EXP1")
+                UseCode("StrawHatMaine")
+                UseCode("Sub2OfficialNoobie")
+                UseCode("SUB2NOOBMASTER123")
+                UseCode("Sub2Daigrock")
+                UseCode("Axiore")
+                UseCode("TantaiGaming")
+                UseCode("STRAWHATMAINE")
