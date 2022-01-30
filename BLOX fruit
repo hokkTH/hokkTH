@@ -1214,3 +1214,15 @@ game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Text)
                 UseCode("Axiore")
                 UseCode("TantaiGaming")
                 UseCode("STRAWHATMAINE")
+tgls:Button("Fragmants",function()
+
+local args = {
+    [1] = "Candies",
+    [2] = "Buy",
+    [3] = 2,
+    [4] = 2
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+end)
