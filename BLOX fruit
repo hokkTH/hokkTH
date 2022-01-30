@@ -670,19 +670,16 @@ end)
 
 
 function king()
-if Old_World then
-    lv = game.Players.LocalPlayer.Data.Level.Value
-if game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") or game:GetService("Workspace").Enemies:FindFirstChild("Fishman Commando [Lv. 400]")  then
 
-elseif lv == 375 or  lv <=449 then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.CFrame 
-
-elseif game.Players.LocalPlayer.Data.Level.Value >= 449  and game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") then
-       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.ExitPoint.CFrame 
-wait(3)
-end
-wait(2)
-end
+   
+        if game:GetService("Workspace").NPCs:FindFirstChild("Kinorg Neptune") or game:GetService("Workspace").Enemies:FindFirstChild("Fishman Commando [Lv. 400]")  then
+        elseif game.Players.LocalPlayer.Data.Level.Value >= 374 and game.Players.LocalPlayer.Data.Level.Value <= 449  then
+           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.CFrame 
+         
+        elseif game.Players.LocalPlayer.Data.Level.Value >= 449   then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.ExitPoint.CFrame 
+        wait(2)
+            end
 end
 spawn(function()
     pcall(function()
@@ -733,7 +730,7 @@ local function NoclipLoop()
         if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
             for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
                 if child:IsA("BasePart") and child.CanCollide == true then
-                    child.CanCollide = false
+                    child.CanCollide = false 
                 end
             end
         end
@@ -943,7 +940,7 @@ end)
 spawn(function()
    pcall(function()
 while true do  wait()
-if game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible == false then 
+if game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible == false and game.Players.LocalPlayer.Data.Level.Value >= 1500 and New_World then 
 	local args = {
 		[1] = "getInventoryFruits"
 	}
