@@ -1,3 +1,4 @@
+_G.AutoFarm = true
 repeat wait() until game:IsLoaded()
 
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
@@ -638,7 +639,9 @@ function o()
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
                v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+               v.Accessory.Handle.CanCollide = false
                v.Humanoid.WalkSpeed = 1
+               v.Humanoid.JumpPower = 1
               v.Head.CanCollide = false
 			  v.HumanoidRootPart.CanCollide = false
                v.Humanoid:ChangeState(11)
