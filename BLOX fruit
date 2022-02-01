@@ -1,3 +1,4 @@
+_G.AutoFarm = true
 repeat wait() until game:IsLoaded()
 
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
@@ -630,13 +631,13 @@ function o()
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
 
  
-      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,40,0)
+      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,20,0)
       Tween(e)
      
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
-               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-40,0)
+               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
                v.Humanoid.WalkSpeed = 1
               v.Head.CanCollide = false
@@ -748,17 +749,27 @@ if  game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end
 end
-local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+local DiscordLib = loadstring(game:HttpGet"https://pastebin.com/raw/d7SRXek3")()
 local win = DiscordLib:Window("discord library")
 local serv = win:Server("HOK HUB", "")
 local tgls = serv:Channel("main")
-tgls:Toggle("Auto-Farm",false, function(bool)
+tgls:Toggle("Auto-Farm",_G.AutoFarm, function(bool)
 _G.da=bool
 _G.NoCIP = bool
 _G.NEW = bool
-while wait() do 
+
+end)
+ spawn(function()
+        pcall(function()
+while wait() do
+    dae()
+end
+end)
+end)
+function dae()
     spawn(function()
         pcall(function()
+            
         if _G.da then
         God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.928,0)
         if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
@@ -791,11 +802,10 @@ while wait() do
                         end
                     end
                 end
-            
+                
             end)
         end)
-    end
-end)
+end
 function su()
 
      if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") then
@@ -1225,4 +1235,11 @@ local args = {
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 
+end)
+tgls:Button("shop", function()
+    local args = {
+        [1] = "GetFruits"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
 end)
