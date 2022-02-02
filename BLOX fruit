@@ -640,11 +640,6 @@ function o()
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
                v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-20,0)
                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-               v.Accessory.Handle.CanCollide = false
-               v.Combat.RightLeg.Handle.CanCollide = false
-               v.Combat.LeftLeg.Handle.CanCollide = false
-               v.Combat.Left.Handle.CanCollide =false 
-               v.Combat.Right.Handle.CanCollide =false
                v.Humanoid.WalkSpeed = 1
                v.Humanoid.JumpPower = 1
               v.Head.CanCollide = false
