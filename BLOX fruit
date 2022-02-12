@@ -1,4 +1,4 @@
-_G.AutoFarm = true
+
 repeat wait() until game:IsLoaded()
 
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
@@ -15,7 +15,63 @@ elseif placeId == 4442272183 then
 elseif placeId == 7449423635 then
 	Three_World = true
 end
+local RigC = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
 
+for _,v in pairs(getgc(true)) do
+    if type(v)=="table" then
+        if rawget(v,"attack") then
+                _G.Attack = rawget(v,"attack")
+        end
+        if rawget(v,"increment") and rawget(v,"equipped") then
+            _G.p13 = v
+        end
+    end
+end
+
+
+
+local SelectMob 
+local a = _G.Attack
+
+
+
+local u7 = debug.getupvalues(_G.Attack)[4]
+local u8 = debug.getupvalues(_G.Attack)[5]
+local u9 = debug.getupvalues(_G.Attack)[6]
+local u10 = debug.getupvalues(_G.Attack)[7]
+
+function fastattack()
+local Fast = {}
+    for i, v in pairs(game:GetService("CollectionService"):GetTagged("ActiveRig")) do
+        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Name ~= game.Players.LocalPlayer.Name and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude <= 250 then
+            p = v.HumanoidRootPart
+        table.insert(Fast, v.HumanoidRootPart) 
+        end
+end
+
+-- print(u7,u8,u9,u10,"\n")
+    local u12 = (u8 * 798405 + u7 * 727595) % u9;
+        local u13 = u7 * 798405;
+        
+            u12 = (u12 * u9 + u13) % 1099511627776;
+            u8 = math.floor(u12 / u9);
+            u7 = u12 - u8 * u9;
+    
+        u10 = u10 + 1;
+          local Animate =  Instance.new("Animation")
+        Animate.AnimationId = RigC.activeController.anims.basic[1]
+        game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Animate):Play(0.1,2,1)
+        game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10);
+
+        -- print(#Fast)
+        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", Fast , 1 , "");
+        
+debug.setupvalue(_G.Attack,4,u7)
+debug.setupvalue(_G.Attack,5,u8)
+debug.setupvalue(_G.Attack,6,u9)
+debug.setupvalue(_G.Attack,7,u10)
+
+end
 
 local God = Instance.new("Part")
 
@@ -632,26 +688,42 @@ function Twnon(e)
    end
    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = e}):Play()
 end
-function o()
-   if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and game:GetService("Workspace").Enemies[_G.mm].Humanoid.Health > 0  then
-           e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,60,0)
-           Tween(e)
-        for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-            if v.Name == _G.mm  and v.Humanoid.Health > 0 then
-                if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
-                    v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-60,0)
-                    v.HumanoidRootPart.Size = Vector3.new(80,80,80)
-                    v.Humanoid.WalkSpeed = 1
-                    v.Head.CanCollide = false
-			        v.HumanoidRootPart.CanCollide = false
-                    v.Humanoid:ChangeState(11)
-                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                end
-            end
+
+function pos()
+    f()
+    for _,x in pairs(game.Workspace.Enemies:GetDescendants()) do
+        if x.Name == _G.mm then
+           _G.pos =  x.HumanoidRootPart.CFrame
         end
     end
 end
+function o()
+   if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and game:GetService("Workspace").Enemies[_G.mm].Humanoid.Health > 0  then
+      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,60,0)
+      Tween(e)
+    for o = 1,20 do
+      for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+         if v.Name == _G.mm then
+            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
+            v.HumanoidRootPart.CFrame   =  _G.pos
+            v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+            v.Humanoid.WalkSpeed = 1
+            v.Head.CanCollide = false
+			v.HumanoidRootPart.CanCollide = false
+            v.Humanoid:ChangeState(11)
+            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+            end
+            end
+         end
+      end
+   end
+end
 
+game:GetService("RunService").Heartbeat:Connect(function()
+if _G.da then
+   fastattack()
+   end
+end)
 
 
 
@@ -662,7 +734,7 @@ function king()
         
         elseif game.Players.LocalPlayer.Data.Level.Value >= 374 and game.Players.LocalPlayer.Data.Level.Value <= 449 and not game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") and not  game:GetService("Workspace").Enemies:FindFirstChild("Fishman Commando [Lv. 400]") and not game:GetService("Workspace").Enemies:FindFirstChild("Fishman Warrior [Lv. 375]")  then
            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.EntrancePoint.CFrame 
-        elseif game.Players.LocalPlayer.Data.Level.Value >= 449 and game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") and   game:GetService("Workspace").Enemies:FindFirstChild("Fishman Commando [Lv. 400]") and not game:GetService("Workspace").Enemies:FindFirstChild("Fishman Warrior [Lv. 375]")  then
+        elseif game.Players.LocalPlayer.Data.Level.Value >= 449 and not game:GetService("Workspace").NPCs:FindFirstChild("King Neptune") and   game:GetService("Workspace").Enemies:FindFirstChild("Fishman Commando [Lv. 400]") and  game:GetService("Workspace").Enemies:FindFirstChild("Fishman Warrior [Lv. 375]")  then
         
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.TeleportSpawn.ExitPoint.CFrame 
         wait(2)
@@ -673,6 +745,7 @@ spawn(function()
         while wait() do
             if _G.da then
         king()
+        pos()
         end
         end
         end)
@@ -749,6 +822,7 @@ end)
         pcall(function()
 while wait() do
     dae()
+    pos()
 end
 end)
 end)
@@ -769,22 +843,20 @@ function dae()
       end
    elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-        if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
+         if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
             repeat wait()
-                    set()
-                    su()
-                    f()
-                    EquipWeapon(_G.Select_Weapon)
-                    game:GetService'VirtualUser':CaptureController()
-                    game:GetService'VirtualUser':Button1Down(Vector2.new(110, 110))
-                    Quesss()
-                    Buso()
-                    o()
+               set()
+               su()
+               f()
+               EquipWeapon(_G.Select_Weapon)
+               Quesss()
+               Buso()
+               o()
             until  v.HumanoidRootPart.Health <= 0  or _G.da == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
         else
             f()
-            Tween(cmon) 
-                            end
+            Tween(cmon)
+                                end
                         end
                     end
                 end
