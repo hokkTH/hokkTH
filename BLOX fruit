@@ -701,7 +701,7 @@ function o()
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and game:GetService("Workspace").Enemies[_G.mm].Humanoid.Health > 0  then
       e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,60,0)
       Tween(e)
-    for o = 1,5 do
+    
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
@@ -709,10 +709,10 @@ function o()
             v.HumanoidRootPart.Size = Vector3.new(60,60,60)
             v.Humanoid.WalkSpeed = 1
             v.Head.CanCollide = false
-			v.HumanoidRootPart.CanCollide = false
+	    v.HumanoidRootPart.CanCollide = false
             v.Humanoid:ChangeState(11)
             sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-            end
+          
             end
          end
       end
