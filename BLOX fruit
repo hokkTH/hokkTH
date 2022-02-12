@@ -701,7 +701,7 @@ function o()
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and game:GetService("Workspace").Enemies[_G.mm].Humanoid.Health > 0  then
       e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,60,0)
       Tween(e)
-    for o = 1,20 do
+    for o = 1,5 do
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
