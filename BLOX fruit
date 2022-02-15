@@ -1,4 +1,4 @@
-
+_G.AutoFarm = true
 repeat wait() until game:IsLoaded()
 
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
@@ -691,33 +691,34 @@ end
 
 function pos()
     f()
-    for _,x in pairs(game.Workspace.Enemies:GetDescendants()) do
-        if x.Name == _G.mm then
+    for _,x in pairs(game.Workspace.Enemies:GetChildren()) do
+        if x.Name == _G.mm  then
            _G.pos =  x.HumanoidRootPart.CFrame
         end
     end
 end
-function o()
-   if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and game:GetService("Workspace").Enemies[_G.mm].Humanoid.Health > 0  then
-      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,60,0)
-      Tween(e)
-    
-      for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+spawn(function()
+pcall(function()
+    f()
+for i = 1,math.huge do game:GetService("RunService").RenderStepped:wait()
+        if _G.da  then
+    for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
          if v.Name == _G.mm then
-            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
+            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health >= 0 then
             v.HumanoidRootPart.CFrame   =  _G.pos
             v.HumanoidRootPart.Size = Vector3.new(60,60,60)
             v.Humanoid.WalkSpeed = 1
             v.Head.CanCollide = false
-	    v.HumanoidRootPart.CanCollide = false
+			v.HumanoidRootPart.CanCollide = false
             v.Humanoid:ChangeState(11)
             sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-          
+                    end
+                end
             end
-         end
-      end
-   end
-end
+        end
+    end
+end)
+end)
 
 game:GetService("RunService").Heartbeat:Connect(function()
 if _G.da then
@@ -843,20 +844,24 @@ function dae()
       end
    elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-         if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
+         if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm)  and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
             repeat wait()
+                f()
                set()
                su()
-               f()
                EquipWeapon(_G.Select_Weapon)
                Quesss()
                Buso()
-               o()
+               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,40,0)
             until  v.HumanoidRootPart.Health <= 0  or _G.da == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <=0
-        else
+        elseif game:GetService("Workspace").Enemies:FindFirstChild(_G.mm)  and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 250 and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and  game.Players.LocalPlayer.Character.Humanoid.Health > 0  then
+            f()
+            e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,40,0)
+            Tween(e)
+        elseif not game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and  game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
             f()
             Tween(cmon)
-                                end
+                            end
                         end
                     end
                 end
@@ -865,7 +870,7 @@ function dae()
         end)
 end
 function su()
-
+wait(1)
      if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") then
          local args = {
              [1] = "BuyBlackLeg"
@@ -953,7 +958,7 @@ function su()
              game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
          end 
      end
-
+wait(1)
 end
 
 local args = {
@@ -1066,7 +1071,7 @@ while wait() do
                             if v.Name == "Ice Admiral [Lv. 700] [Boss]" and v.Humanoid.Health > 0 then
                                 
                                 repeat wait()
-                                        EquipWeapon(_G.sel)
+                                        EquipWeapon(_G.Select_Weapon)
                                         Twnon(v.HumanoidRootPart.CFrame * CFrame.new(0, 25, 25))
                                         v.HumanoidRootPart.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(60,60,60)
@@ -1085,7 +1090,7 @@ while wait() do
                             if v.Name == "Ice Admiral [Lv. 700] [Boss]" and v.Humanoid.Health > 0 then
                                    repeat wait()
                                         Buso()
-                                        EquipWeapon(_G.sel)
+                                        EquipWeapon(_G.Select_Weapon)
                                         Twnon(v.HumanoidRootPart.CFrame * CFrame.new(0, 25, 25))
                                         v.HumanoidRootPart.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(60,60,60)
