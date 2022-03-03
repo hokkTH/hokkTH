@@ -1,3 +1,4 @@
+_G.AutoFarm = true
 repeat wait() until game:IsLoaded()
 
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
@@ -804,7 +805,7 @@ end
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local X = Material.Load({
-    Title = "ChibuHub",
+    Title = "HOKHUB",
     Style = 3,
     SizeX = 500,
     SizeY = 350,
@@ -815,11 +816,7 @@ local X = Material.Load({
 })
 
 local Y = X.New({
-    Title = "1"
-})
-
-local Z = X.New({
-    Title = "2"
+    Title = "main"
 })
 
 local A = Y.Button({
@@ -1186,6 +1183,8 @@ spawn(function()
                 if v.ClassName  == "ImageButton" then
                     if v.Name == "Quake-Quake" or v.Name == "Human-Human: Buddha" or v.Name == "String-String" or v.Name == "Bird-Bird: Phoenix" or v.Name == "Paw-Paw"or v.Name == "Gravity-Gravity" or v.Name == "Dough-Dough" or v.Name == "Shadow-Shadow" or v.Name == "Venom-Venom" or v.Name == "Control-Control" or v.Name == "Dragon-Dragon" then
                     _G.reeee = true
+                    else
+                       _G.reeee = false 
                     end
                 end
             end
