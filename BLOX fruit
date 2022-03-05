@@ -702,13 +702,13 @@ function o()
    if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and game:GetService("Workspace").Enemies[_G.mm].Humanoid.Health > 0 then
 
  
-      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,60,0)
+      e = game:GetService("Workspace").Enemies[_G.mm].HumanoidRootPart.CFrame * CFrame.new(0,40,0)
       Tween(e)
      
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
          if v.Name == _G.mm then
-            if v.Name == _G.mm and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 400 and v.Humanoid.Health > 0 then
-               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-60,0)
+            if v.Name == _G.mm and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 and v.Humanoid.Health > 0 then
+               v.HumanoidRootPart.CFrame   =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame* CFrame.new(0,-40,0)
                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
                v.Humanoid.WalkSpeed = 1
               v.Head.CanCollide = false
@@ -891,10 +891,11 @@ function dae()
             if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                 f()
                 Tween(cq)
-                wait(1.5)
-            if game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == cq then
+            --if game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == cq then
+                wait(1)
                 quest()
-        end
+                Quesss()
+        --end
       end
    elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
       for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
@@ -909,7 +910,7 @@ function dae()
                Quesss()
                Buso()
                o()
-                elseif not game:GetService("Workspace").Enemies:FindFirstChild(_G.mm)  then
+                elseif not game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
                     f()
                 Tween(cmon)
                 end
@@ -1020,7 +1021,6 @@ function su()
              game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
          end 
      end
-wait(1)
 end
 
 local args = {
