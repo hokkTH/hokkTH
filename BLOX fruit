@@ -927,6 +927,7 @@ end
         end
     end)
 end)
+if _G.AutoSelectWeapon then
 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     if v:IsA("Tool")and v.ToolTip == "Melee" then
        print(v.Name)
@@ -940,7 +941,7 @@ for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
         _G.sel = v.Name
     end
 end
-
+end
    
 --[[function dd()
     spawn(function()
