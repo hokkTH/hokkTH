@@ -896,6 +896,7 @@ function autofarm()
                     if  v.Name == _G.mm  then
                         repeat wait()
                             if  game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true  and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
+                                 _G.max = false
                                 f()
                                 set()
                                 EquipWeapon(_G.Select_Weapon)
@@ -1700,13 +1701,6 @@ spawn(function()
         end
     end
 end)
-
-
-
-
-
-
-
 
 local Tab5 = GUI:Tab{
     Name = "misc",
