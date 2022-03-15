@@ -1310,7 +1310,7 @@ Tab2:Toggle{
 spawn(function()
     pcall(function()
         while wait() do 
-            if _G.kai and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Stats.Container.Melee.Number.Text, 2300) then
+            if _G.kai then
                 local string_1 = "AddPoint";
                 local string_2 = "Melee";
                 local number_1 = 1;
@@ -1323,7 +1323,7 @@ end)
 spawn(function()
     pcall(function()
         while wait() do 
-            if G.kai and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Stats.Container.Melee.Number.Text, 2300) then 
+            if _G.kai and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Stats.Container.Melee.Number.Text, 2300) then 
                 local string_1 = "AddPoint";
                 local string_2 = "Defense";
                 local number_1 = 1;
