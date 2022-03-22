@@ -3,5 +3,6 @@ wait(1)
 
 if game.PlaceId == 2753915549 or game.PlaceId == 4442272183 or  game.PlaceId == 7449423635 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/BLOX%20fruit"))()
-else
+elseif  game.PlaceId ==  1499872953 then
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/BLOX%20fruit"))()
 end
