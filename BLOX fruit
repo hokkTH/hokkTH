@@ -9,11 +9,10 @@ end
 if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
-game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Size = UDim2.new(0, 10000, 0, 10000)
-game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Position = UDim2.new(-4, 0, -5, 0)
-wait(.5)
-game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
-game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+wait(5)
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
+    v.Function()
+end
 Old_World = false
 New_World = false
 Three_World = false
@@ -901,7 +900,7 @@ spawn(function()
         while wait() do
             if _G.set.AutoFarm and _G.set.Select_Weapon ~= nil then
                 autofarm()
-                God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.828,0)
+                God.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.728,0)
             elseif _G.set.AutoFarm and _G.set.Select_Weapon == nil  then
                 GUI:Notification{
                     Title = "AutoFarm",
@@ -923,9 +922,9 @@ function autofarm()
                         _G.bring = false
                         _G.fast = false 
                         f()
-                        Tween(cq)
+                       qc =  Tween(cq)
                         f()
-                        wait(1)
+                        wait(1.5)
                         if (cq.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
                             wait(1)
                             quest()
@@ -938,6 +937,7 @@ function autofarm()
                     repeat wait()
                         if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true  and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
                             f()
+                            if qc then qc:Stop() end
                             d = Tween(v.HumanoidRootPart.CFrame * CFrame.new(0,35,0))
                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                                 EquipWeapon(_G.set.Select_Weapon)
@@ -963,22 +963,21 @@ local a = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
     for i,v in pairs(debug.getupvalues(a)) do
         if type(v) == "table" then
             function fast()
-                v.activeController:attack()
-                v.activeController.hitboxMagnitude = 100
+                pcall(function()
+                    v.activeController:attack()
+                    v.activeController.hitboxMagnitude = 100
+                end)
             end
         end
     end
 spawn(function()
     pcall(function()
         while wait() do
-            f()
             if _G.fast then
-                if game:GetService("Workspace").Enemies:FindFirstChild(_G.mm) then
-                    spawn(function()
-                        fast()
-                        wait(0.02)
-                    end)
-                end
+				spawn(function()
+                    fast()
+                    wait(0.02)
+                end)
             end
         end
     end)
@@ -1148,7 +1147,7 @@ section1:Toggle{
         Callback = function(bol) 
         _G.set.Superhuman = bol
             Save()
-            if bol then
+            if bol and not game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") and not game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
                 local args = {
                     [1] = "BuyElectro"
                 }
@@ -2156,129 +2155,108 @@ spawn(function()
     end)
 end)
 local section7 = Tab6:section{
-    Name = "WebHook" -- default
+    Name = "GoogleSheet" -- default
 }
 section7:Textbox{
-	Name = "WebHookUrl",
+	Name = "googlesheetUrl",
 	Callback = function(text) 
-	    _G.urlWebhook = text
+	    _G.url = text
 	    end
 }
 section7:Button{
-    Name = "WebItem",
+    Name = "GooogleSheetItem",
     Description = nil,
     Callback = function()
-
-        web()
+        google()
     end
 }
-function web()
+function google()
+    Old_World = false
+    New_World = false
+    Three_World = false
+    local placeId = game.PlaceId
+    if placeId == 2753915549 then
+        Old_World = true
+    elseif placeId == 4442272183 then
+        New_World = true
+    elseif placeId == 7449423635 then
+        Three_World = true
+    end
     if Old_World then
-        local Word = "FirstWorld"
-    elseif  New_World then
-        local Word = "SecondWorld"
+        wwww = 1
+    elseif New_World then
+        wwww = 2
     elseif Three_World then
-        local Word = "ThirdtWorld"
+        wwww = 3
     end
     local args = {
-        [1] = "getInventoryWeapons"
-     }
-     dd =  game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-     f = {}
-     ww = {}
-     for i,v in pairs(dd) do
-        if v.Type == "Sword" then
-            table.insert(f,v.Name)
-        elseif v.Type == "Wear" then
-            table.insert(ww,v.Name)
+       [1] = "getInventoryWeapons"
+    }
+    dd =  game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    f = {}
+    ww = {}
+    for i,v in pairs(dd) do
+       if v.Type == "Sword" then
+           table.insert(f,v.Name)
+       elseif v.Type == "Wear" then
+           table.insert(ww,v.Name)
+       end
+    end
+    
+    function convert(t)
+        local arr = {}
+        local cyclic = {}
+        local function convert_subtable(t, prefix)
+        assert(not cyclic[t], 'Cannot convert: cyclic reference detected')
+        cyclic[t] = true
+        for k, v in pairs(t) do
+                k = prefix..tostring(k)
+            if type(v) == 'number' or type(v) == 'boolean' then
+                table.insert(arr,tostring(v))
+            elseif type(v) == 'table' then
+                convert_subtable(v, prefix..k..'_')
+            else
+                table.insert(arr,string.format('%q', tostring(v)))
+            end
         end
-     end
-     
-     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+    cyclic[t] = nil
+    end
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
         if v.ToolTip == "Blox Fruit" then
             d = v.Name
         elseif v.ToolTip == "Melee" then
            m = v.Name
         end
-     end
-     
-     local function convert(t)
-     local arr = {}
-     local cyclic = {}
-     
-     local function convert_subtable(t, prefix)
-     assert(not cyclic[t], 'Cannot convert: cyclic reference detected')
-     cyclic[t] = true
-     for k, v in pairs(t) do
-     k = prefix..tostring(k)
-     if type(v) == 'number' or type(v) == 'boolean' then
-        table.insert(arr,tostring(v))
-     elseif type(v) == 'table' then
-        convert_subtable(v, prefix..k..'_')
-     else
-        table.insert(arr,string.format('%q', tostring(v)))
-     end
-     end
-     cyclic[t] = nil
-     end
-     
-     convert_subtable(t, '')
-     table.sort(arr)
-     return table.concat(arr, ', ')
-     end
-     
-     local url = _G.urlWebhook
-     local data = {
-     
-        ["embeds"] = {
-           {
-                ["title"] = "Username: " .. game.Players.LocalPlayer.Name,
-                ["color"] = 15258703,
-                ["fields"] = {
-                    {
-                        ["name"] =  "Word",
-                        ["value"] =  Word,
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] =  "Melee",
-                        ["value"] =  m,
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] =  "Wapon",
-                        ["value"] =  convert(f),
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] =  "Fruit is",
-                        ["value"] =  d,
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] =  "Wear",
-                        ["value"] =  convert(ww),
-                        ["inline"] = true
-                    },
-                },
-                ["image"] = {
-                    ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username="..tostring(game:GetService("Players").LocalPlayer.Name)
-                }
-           }
-       }
-     }
-     local newdata = game:GetService("HttpService"):JSONEncode(data)
-     
-     local headers = {
+    end
+    if m == nil then
+        m = "nothave"
+    end
+    
+    convert_subtable(t, '')
+    table.sort(arr)
+    return table.concat(arr, ', ')
+    end
+    local url = _G.url
+    local data = {
+        ["Name"] = game.Players.LocalPlayer.Name,
+        ["Lv"] = game:GetService("Players").LocalPlayer.Data.Level.Value,
+        ["Weapon"] = convert(f),
+        ["Melee"] = m,
+        ["Fruit"] = d,
+        ["Beli"] = game:GetService("Players").LocalPlayer.Data.Beli.Value,
+        ["Fragment"] = game:GetService("Players").LocalPlayer.Data.Fragments.Value,
+        ["World"] = wwww
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    
+    local headers = {
        ["content-type"] = "application/json"
-     }
-     request = http_request or request or HttpPost or syn.request
-     local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-     request(abcdef)
+    }
+    request = http_request or request or HttpPost or syn.request
+    local hok = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    request(hok)
 end
-    game:GetService("ReplicatedStorage").Assets.GUI:Destroy()
-    game:GetService("ReplicatedStorage").Assets.SlashHit:Destroy()
-    game:GetService("ReplicatedStorage").Effect.Container:Destroy()
+
 --- auto raid
 --[[   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
