@@ -4,7 +4,7 @@ local Account = {} Account.__index = Account
 
 local WebserverSettings = {
     Port = '7963',
-    Password = 5555
+    Password = '5555'
 }
 
 local function GET(Method, Account, ...)
