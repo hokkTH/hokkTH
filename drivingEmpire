@@ -1,0 +1,93 @@
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local X = Material.Load({
+    Title = "HOKHub",
+    Style = 3,
+    SizeX = 500,
+    SizeY = 350,
+    Theme = "Dark",
+    ColorOverrides = {
+        MainFrame = Color3.fromRGB(179, 173, 173)
+    }
+})
+
+local Y = X.New({
+    Title = "1"
+})
+
+local B = Y.Toggle({
+    Text = "AutoFarm",
+    Callback = function(Value)
+        _G.auto = Value
+    end,
+    Enabled = false
+})
+CFrace = CFrame.new(-5645.77832, 14.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
+function TP(d)
+    game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:SetPrimaryPartCFrame(d)
+end
+spawn(function() 
+    while  wait(0) do 
+        if _G.auto then
+            if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+                if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+                    for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+                        for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+                            if v.Name == "Forcefield"  and c.Name == "Forcefield" then
+                                if v.Transparency == 0.20000000298023224 and c.Transparency == 0.20000000298023224 then
+                                    if v.Position ~= c.Position then
+                                        _G.fis = false
+                                        _G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
+                                        _G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                                        if _G.A < _G.B then
+                                            wait(0.4)
+                                            TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(45),0))
+                                        elseif _G.B < _G.A then
+                                            wait(0.4)
+                                            TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(45),0))
+                                        end
+                                    elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
+                                            if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
+                                                wait(0.4)
+                                                _G.fis = true
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    if _G.fis then
+                        TP(CFrame.new(-5626.45947, 13.6925869, -4808.39697, -0.862579763, -0.00317192334, 0.505911112, -0.00418647891, 0.99999088, -0.00086828979, -0.505903721, -0.00286695547, -0.862585187))
+                    end
+                end
+            else
+                _G.fis = false
+                if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
+                    TP(CFrace)
+                end
+            end
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        local GC = getconnections or get_signal_cons
+        if GC then
+            for i,v in pairs(GC(game.Players.LocalPlayer.Idled)) do
+                if v["Disable"] then
+                    v["Disable"](v)
+                elseif v["Disconnect"] then
+                    v["Disconnect"](v)
+                end
+            end
+        else
+            print("lol bad exploit")
+            local vu = game:GetService("VirtualUser")
+            game:GetService("Players").LocalPlayer.Idled:connect(function()
+                vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                wait(1)
+                vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            end)
+        end
+    end
+end)
