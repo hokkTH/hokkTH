@@ -1,3 +1,13 @@
+function Save()
+    writefile('hokhub.lua',game:service'HttpService':JSONEncode(_G.set))
+end
+if not isfile('hokhub.lua') then
+    _G.set = {
+
+    }
+    Save()
+end
+    _G.set = game:service'HttpService':JSONDecode(readfile('hokhub.lua'))
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local X = Material.Load({
@@ -31,7 +41,8 @@ end
 local D = Y.Dropdown({
     Text = "SelectCar",
     Callback = function(Value)
-        _G.SelectCar = Value
+        _G.set.SelectCar = Value
+        Save()
     end,
     Options = car,
     Menu = {
@@ -91,7 +102,7 @@ spawn(function()
             elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
                 local args = {
                     [1] = "Spawn",
-                    [2] = _G.SelectCar
+                    [2] = _G.set.SelectCar
                 }
                 
                 game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
@@ -104,7 +115,7 @@ end)
 local H = Y.TextField({
     Text = "WebhookUrl",
     Callback = function(web)
-        _G.webhook = web
+        _G.set.webhook = web
     end
 })
 local A = Y.Button({
@@ -114,7 +125,7 @@ local A = Y.Button({
     end
 })
 function  web()
-local url = _G.webhook
+local url = _G.set.webhook
 local data = {
  
     ["embeds"] = {
