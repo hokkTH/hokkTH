@@ -95,6 +95,7 @@ spawn(function()
                 }
                 
                 game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+                wait(3)
             end
         end
     end
