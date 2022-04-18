@@ -144,7 +144,19 @@ local data = {
 
 end
 
-
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.RightControl then
+		if Open then
+            game:GetService("CoreGui").HOKHub.MainFrame.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").HOKHub.MainFrame.Visible = false
+            -- = true
+		end
+	end
+end)
 
 
 --- antiAFK
