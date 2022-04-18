@@ -8,51 +8,60 @@ if not isfile('hokhub.lua') then
     Save()
 end
     _G.set = game:service'HttpService':JSONDecode(readfile('hokhub.lua'))
-local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+if game:GetService("CoreGui"):FindFirstChild("Discord")    then
+    game:GetService("CoreGui").Discord:Destroy()
+end
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
 
-local X = Material.Load({
-    Title = "HOKHub",
-    Style = 3,
-    SizeX = 500,
-    SizeY = 350,
-    Theme = "Light",
-    ColorOverrides = {
-        MainFrame = Color3.fromRGB(255, 255, 255)
-    }
-})
+local win = DiscordLib:Window("discord library")
 
-local Y = X.New({
-    Title = "1"
-})
+local serv = win:Server("HOKHUB", "rbxassetid://6035145364")
 
-local B = Y.Toggle({
-    Text = "AutoFarm",
-    Callback = function(Value)
-        _G.auto = Value
-    end,
-    Enabled = false
-})
+
+local tgls = serv:Channel("Main")
+
+tgls:Toggle("Auto-Farm",false, function(bool)
+    _G.auto = bool
+end)
+
+
+
+
 local car = {}
 for i ,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Vehicles.Container:GetDescendants()) do
     if v.ClassName == "ImageButton" and v.Name ~= "Template" and v.Name ~= "Sell" and v.Name ~= "Favorited" and v.Name ~= "Teleport" then
         table.insert(car,v.Name)
     end
 end
-local D = Y.Dropdown({
-    Text = "SelectCar",
-    Callback = function(Value)
-        _G.set.SelectCar = Value
-        Save()
-    end,
-    Options = car,
-    Menu = {
-        Information = function(self)
-            X.Banner({
-                Text = "CAR"
-            })
-        end
-    }
-})
+
+local drop =tgls:Dropdown("SelectCar",car, function(car)
+    _G.set.SelectCar = car
+    Save()
+end)
+
+tgls:Button("ResetCar", function()
+drop:Clear()
+for i ,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Vehicles.Container:GetDescendants()) do
+    if v.ClassName == "ImageButton" and v.Name ~= "Template" and v.Name ~= "Sell" and v.Name ~= "Favorited" and v.Name ~= "Teleport" then
+        drop:Add(v.Name)
+    end
+end
+end)
+
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.RightControl then
+		if Open then
+            game:GetService("CoreGui").Discord.MainFrame.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").Discord.MainFrame.Visible = false
+            -- = true
+		end
+	end
+end)
+
 
 CFrace = CFrame.new(-5645.77832, 14.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
 function TP(d)
@@ -112,31 +121,24 @@ spawn(function()
     end
 end)
 
-local H = Y.TextField({
-    Text = "WebhookUrl",
-    Callback = function(web)
-        _G.set.webhook = web
-	 Save()
-    end
-})
-local A = Y.Button({
-    Text = "Webhook",
-    Callback = function()
-        web()
-    end
-})
+tgls:Textbox("URLWebHook", "Type here!", true, function(t)
+_G.webhook = t
+end)
+tgls:Button("WebHook", function()
+    web()
+end)
 function  web()
-local url = _G.set.webhook
+local url = _G.webhook
 local data = {
  
     ["embeds"] = {
        {
-            ["title"] = "Username: " .. game.Players.LocalPlayer.Name,
+            ["title"] = "Username: " ..game.Players.LocalPlayer.Name,
             ["color"] = 15258703,
             ["fields"] = {
                 {
                     ["name"] =  "Money",
-                    ["value"] =  game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text,
+                    ["value"] =  "$" ..game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text,
                     ["inline"] = true
                 },
             },
@@ -157,22 +159,6 @@ local data = {
 
 end
 
-local Open = false
-game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
-	if KeyCode.KeyCode == Enum.KeyCode.RightControl then
-		if Open then
-            game:GetService("CoreGui").HOKHub.MainFrame.Visible = true
-            Open =false
-		else
-		    Open = true
-            game:GetService("CoreGui").HOKHub.MainFrame.Visible = false
-            -- = true
-		end
-	end
-end)
-
-
---- antiAFK
 spawn(function()
     while wait() do
         local GC = getconnections or get_signal_cons
