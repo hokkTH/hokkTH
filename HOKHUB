@@ -7,9 +7,7 @@ end
 if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
-if game.PlaceId == 2753915549 or game.PlaceId == 4442272183 or  game.PlaceId == 7449423635 then
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/BLOX%20fruit"))()
-elseif  game.PlaceId ==  1499872953 then
+if  game.PlaceId ==  1499872953 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/my%20hero.lua"))()
 elseif game.PlaceId == 3351674303 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/drivingEmpire"))()
