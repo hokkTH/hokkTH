@@ -5,9 +5,9 @@ local X = Material.Load({
     Style = 3,
     SizeX = 500,
     SizeY = 350,
-    Theme = "Dark",
+    Theme = "Light",
     ColorOverrides = {
-        MainFrame = Color3.fromRGB(179, 173, 173)
+        MainFrame = Color3.fromRGB(255, 255, 255)
     }
 })
 
@@ -22,6 +22,27 @@ local B = Y.Toggle({
     end,
     Enabled = false
 })
+local car = {}
+for i ,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Vehicles.Container:GetDescendants()) do
+    if v.ClassName == "ImageButton" and v.Name ~= "Template" and v.Name ~= "Sell" and v.Name ~= "Favorited" and v.Name ~= "Teleport" then
+        table.insert(car,v.Name)
+    end
+end
+local D = Y.Dropdown({
+    Text = "SelectCar",
+    Callback = function(Value)
+        _G.SelectCar = Value
+    end,
+    Options = car,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "CAR"
+            })
+        end
+    }
+})
+
 CFrace = CFrame.new(-5645.77832, 14.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
 function TP(d)
     game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:SetPrimaryPartCFrame(d)
@@ -29,46 +50,104 @@ end
 spawn(function() 
     while  wait(0) do 
         if _G.auto then
-            if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
-                if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
-                    for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
-                        for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
-                            if v.Name == "Forcefield"  and c.Name == "Forcefield" then
-                                if v.Transparency == 0.20000000298023224 and c.Transparency == 0.20000000298023224 then
-                                    if v.Position ~= c.Position then
-                                        _G.fis = false
-                                        _G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
-                                        _G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                                        if _G.A < _G.B then
-                                            wait(0.4)
-                                            TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(45),0))
-                                        elseif _G.B < _G.A then
-                                            wait(0.4)
-                                            TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(45),0))
-                                        end
-                                    elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
-                                            if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
+            if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+                if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+                        for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+                            for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+                                if v.Name == "Forcefield"  and c.Name == "Forcefield" then
+                                    if v.Transparency == 0.20000000298023224 and c.Transparency == 0.20000000298023224 then
+                                        if v.Position ~= c.Position then
+                                            _G.fis = false
+                                            _G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
+                                            _G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                                            if _G.A < _G.B then
                                                 wait(0.4)
-                                                _G.fis = true
+                                                TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(45),0))
+                                            elseif _G.B < _G.A then
+                                                wait(0.4)
+                                                TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(45),0))
+                                            end
+                                        elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
+                                                if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
+                                                    wait(0.4)
+                                                    _G.fis = true
+                                            end
                                         end
                                     end
                                 end
                             end
                         end
+                        if _G.fis then
+                            TP(CFrame.new(-5626.45947, 13.6925869, -4808.39697, -0.862579763, -0.00317192334, 0.505911112, -0.00418647891, 0.99999088, -0.00086828979, -0.505903721, -0.00286695547, -0.862585187))
+                        end
                     end
-                    if _G.fis then
-                        TP(CFrame.new(-5626.45947, 13.6925869, -4808.39697, -0.862579763, -0.00317192334, 0.505911112, -0.00418647891, 0.99999088, -0.00086828979, -0.505903721, -0.00286695547, -0.862585187))
+                else
+                    _G.fis = false
+                    if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
+                        TP(CFrace)
                     end
                 end
-            else
-                _G.fis = false
-                if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
-                    TP(CFrace)
-                end
+            elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+                local args = {
+                    [1] = "Spawn",
+                    [2] = _G.SelectCar
+                }
+                
+                game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
             end
         end
     end
 end)
+
+local H = Y.TextField({
+    Text = "WebhookUrl",
+    Callback = function(web)
+        _G.webhook = web
+    end
+})
+local A = Y.Button({
+    Text = "Webhook",
+    Callback = function()
+        web()
+    end
+})
+function  web()
+local url = _G.webhook
+local data = {
+ 
+    ["embeds"] = {
+       {
+            ["title"] = "Username: " .. game.Players.LocalPlayer.Name,
+            ["color"] = 15258703,
+            ["fields"] = {
+                {
+                    ["name"] =  "Money",
+                    ["value"] =  game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text,
+                    ["inline"] = true
+                },
+            },
+            ["image"] = {
+                ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username="..tostring(game:GetService("Players").LocalPlayer.Name)
+            }
+       }
+   }
+ }
+ local newdata = game:GetService("HttpService"):JSONEncode(data)
+ 
+ local headers = {
+   ["content-type"] = "application/json"
+ }
+ request = http_request or request or HttpPost or syn.request
+ local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+ request(abcdef)
+
+end
+
+
+
+
+--- antiAFK
 spawn(function()
     while wait() do
         local GC = getconnections or get_signal_cons
