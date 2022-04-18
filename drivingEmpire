@@ -116,6 +116,7 @@ local H = Y.TextField({
     Text = "WebhookUrl",
     Callback = function(web)
         _G.set.webhook = web
+	 Save()
     end
 })
 local A = Y.Button({
