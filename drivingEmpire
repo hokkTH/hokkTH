@@ -2837,8 +2837,10 @@ end
 
 repeat wait() until game:IsLoaded()
 wait(20)
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.MouseButton1Click)) do
-    v.Function()
+if game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.Visible == true then
+	for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.MouseButton1Click)) do
+	    v.Function()
+	end
 end
 wait(7)
 if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Visible == true then
