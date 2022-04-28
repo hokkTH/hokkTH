@@ -112,7 +112,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 	Main.Name = "Main"
 	Main.Parent = UI
 	Main.AnchorPoint = Vector2.new(0.5, 0.5)
-	Main.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+	Main.BackgroundColor3 = Color3.fromRGB(2, 13, 54) ----////////TOP
 	Main.BorderSizePixel = 0
 	Main.ClipsDescendants = true
 	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -141,7 +141,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 	Name.Size = UDim2.new(0, 130, 0, 42)
 	Name.Font = Enum.Font.GothamSemibold
 	Name.Text = text
-	Name.TextColor3 = Color3.fromRGB(80, 245, 245)
+	Name.TextColor3 = Color3.fromRGB(246, 255, 79)
 	Name.TextSize = 14.000
 	Name.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -151,7 +151,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 	LogoMain.Parent = Main
 	LogoMain.Active = true
 	LogoMain.AnchorPoint = Vector2.new(0.5, 0.5)
-	LogoMain.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	LogoMain.BackgroundColor3 = Color3.fromRGB(4, 20, 82)  ----////////Logo
 	LogoMain.BorderSizePixel = 0
 	LogoMain.Position = UDim2.new(0.124091722, 0, 0.191334918, 0)
 	LogoMain.Size = UDim2.new(0, 155, 0, 107)
@@ -184,7 +184,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 	PageTap.Name = "PageTap"
 	PageTap.Parent = Main
-	PageTap.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	PageTap.BackgroundColor3 = Color3.fromRGB(4, 20, 82)  ----////////TAB
 	PageTap.BorderSizePixel = 0
 	PageTap.Position = UDim2.new(-0.00113782077, 0, 0.297485709, 0)
 	PageTap.Size = UDim2.new(0, 155, 0, 354)
@@ -271,7 +271,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 		FramePage.Name = "FramePage"
 		FramePage.Parent = MainFramePage
-		FramePage.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		FramePage.BackgroundColor3 = Color3.fromRGB(0, 14, 71) -----.//////////frame
 		FramePage.BorderSizePixel = 0
 		FramePage.Size = UDim2.new(0, 468, 0, 461)
 
@@ -347,7 +347,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				TweenService:Create(
 					TextButton_Tap,
 					TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-					{TextColor3 = Color3.fromRGB(80, 245, 245)}
+					{TextColor3 = Color3.fromRGB(246, 255, 79)}
 				):Play()
 			end
 		end)
@@ -358,7 +358,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 			TweenService:Create(
 				TextButton_Tap,
 				TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-				{TextColor3 = Color3.fromRGB(80, 245, 245)}
+				{TextColor3 = Color3.fromRGB(246, 255, 79)}
 			):Play()
 
 			MainFramePage.Visible = true
@@ -387,7 +387,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 			ScolPage2.Name = "ScolPage2"
 			ScolPage2.Parent = Page
 			ScolPage2.Active = true
-			ScolPage2.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+			ScolPage2.BackgroundColor3 = Color3.fromRGB(0, 14, 71) -----------////////////main
 			ScolPage2.BorderColor3 = Color3.fromRGB(20, 20, 20)
 			ScolPage2.BorderSizePixel = 0
 			ScolPage2.Size = UDim2.new(0, 457, 0, 461)
@@ -439,7 +439,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				TitleFrame.Name = "TitleFrame"
 				TitleFrame.Parent = NotiFrame
-				TitleFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+				TitleFrame.BackgroundColor3 = Color3.fromRGB(0, 14, 71) ----------///////notifi
 				TitleFrame.Size = UDim2.new(0, 0, 0, 0)
 
 				TitleFrame:TweenSizeAndPosition(UDim2.new(0, 250-10, 0, 70),  UDim2.new(0.5, 0, 0.5,0), "Out", "Back", 0.3, true)
@@ -471,7 +471,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				txdlid.Position = UDim2.new(0.275999993, 0, 0.25, 0)
 				txdlid.Size = UDim2.new(0, 175, 0, 24)
 				txdlid.Font = Enum.Font.GothamSemibold
-				txdlid.TextColor3 = Color3.fromRGB(80, 245, 245)
+				txdlid.TextColor3 = Color3.fromRGB(246, 255, 79)
 				txdlid.TextSize = 11.000
 				txdlid.Text = text
 				txdlid.TextXAlignment = Enum.TextXAlignment.Left
@@ -507,7 +507,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				Time.Name = "Time"
 				Time.Parent = TitleFrame
 				Time.Active = true
-				Time.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				Time.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				Time.BorderSizePixel = 0
 				Time.Position = UDim2.new(0.0320000015, 0, 0.870000005, 0)
 				Time.Size = UDim2.new(0, 236, 0, 3)
@@ -557,10 +557,10 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 			UserInputService.InputBegan:Connect(function(io, p)
 				if io.KeyCode == CloseBind then
 					if uitoggled == false then
-						TweenService:Create(Main,TweenInfo.new(0,Enum.EasingStyle.Back,Enum.EasingDirection.In),{Size = UDim2.new(0, 0, 0, 0)}):Play()
+						TweenService:Create(Main,TweenInfo.new(0.4,Enum.EasingStyle.Back,Enum.EasingDirection.In),{Size = UDim2.new(0, 0, 0, 0)}):Play()
 						uitoggled = true
 					else
-						Main:TweenSize(UDim2.new(0, 623, 0, 504), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0, true)
+						Main:TweenSize(UDim2.new(0, 623, 0, 504), Enum.EasingDirection.Out, Enum.EasingStyle.Back, .4, true)
 						uitoggled = false
 					end
 				end
@@ -574,7 +574,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				ButtonFrame.Name = "ButtonFrame"
 				ButtonFrame.Parent = ScolPage2
-				ButtonFrame.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				ButtonFrame.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				ButtonFrame.BorderSizePixel = 0
 				ButtonFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 				ButtonFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -586,7 +586,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				Button.Parent = ButtonFrame
 				Button.Name = "Button"
-				Button.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				Button.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				Button.Size = UDim2.new(0,345, 0, 25)
 				Button.Font = Enum.Font.Gotham
 				Button.Text = tostring(text)
@@ -668,7 +668,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local  lineframe = Instance.new("TextLabel")
 
 				lineframe.Parent = tiframe
-				lineframe.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				lineframe.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				lineframe.BackgroundTransparency = 0
 				lineframe.AnchorPoint = Vector2.new(0.1, 0.5)
 				lineframe.Position = UDim2.new(0., 0, 0.4, 0)
@@ -682,7 +682,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local  lineframe2 = Instance.new("TextLabel")
 
 				lineframe2.Parent = tiframe
-				lineframe2.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				lineframe2.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				lineframe2.BackgroundTransparency = 0
 				lineframe2.AnchorPoint = Vector2.new(0.9, 0.5)
 				lineframe2.Position = UDim2.new(1, 0, 0.4, 0)
@@ -704,7 +704,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				lineframe3.Size = UDim2.new(0, 130, 0, 20)
 				lineframe3.Font = Enum.Font.Gotham
 				lineframe3.Text = tostring(text)
-				lineframe3.TextColor3 = Color3.fromRGB(80, 245, 245)
+				lineframe3.TextColor3 = Color3.fromRGB(246, 255, 79)
 				lineframe3.TextSize = 11.000
 				lineframe3.TextWrapped = true
 			end
@@ -756,7 +756,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				LineFrame.Name = "LineFrame"
 				LineFrame.Parent = ScolPage2
-				LineFrame.BackgroundColor3 =  Color3.fromRGB(80, 245, 245)
+				LineFrame.BackgroundColor3 =  Color3.fromRGB(246, 255, 79)
 				LineFrame.BorderSizePixel = 0
 				LineFrame.Position = UDim2.new(0.5, 0, 0.7, 0)
 				LineFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -800,7 +800,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				TextButton_2_Toggle.Name = "TextButton_2_Toggle"
 				TextButton_2_Toggle.Parent = TextButton_Toggle
 				TextButton_2_Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
-				TextButton_2_Toggle.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+				TextButton_2_Toggle.BackgroundColor3 = Color3.fromRGB(14, 32, 102) -----------///////toggle
 				TextButton_2_Toggle.BorderSizePixel = 0
 				TextButton_2_Toggle.Position = UDim2.new(0.0807512328, 0, 0.5, 0)
 				TextButton_2_Toggle.Size = UDim2.new(0, 23, 0, 23)
@@ -824,14 +824,14 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				TextButton_2_Toggle_UIStroke.Parent = TextButton_2_Toggle
 				TextButton_2_Toggle_UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				TextButton_2_Toggle_UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-				TextButton_2_Toggle_UIStroke.Color = Color3.fromRGB(0,0,0)
+				TextButton_2_Toggle_UIStroke.Color = Color3.fromRGB(14, 32, 102) -------------///////togglle
 				TextButton_2_Toggle_UIStroke.Transparency = 0
 
 				local farmtoglist2 = Instance.new("TextButton")
 
 				farmtoglist2.Parent = TextButton_2_Toggle
-				farmtoglist2.BackgroundColor3 = Color3.fromRGB(64,64,64)
-				farmtoglist2.BorderColor3 = Color3.fromRGB(80, 245, 245)
+				farmtoglist2.BackgroundColor3 = Color3.fromRGB(14, 32, 102) -------------///////togglle
+				farmtoglist2.BorderColor3 = Color3.fromRGB(246, 255, 79)
 				farmtoglist2.BorderSizePixel = 0
 				farmtoglist2.AnchorPoint = Vector2.new(0.5, 0.5)
 				farmtoglist2.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -845,7 +845,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local listimage = Instance.new("ImageButton")
 
 				listimage.Parent = farmtoglist2
-				listimage.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				listimage.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				listimage.BackgroundTransparency = 0
 				listimage.AutoButtonColor = false
 				listimage.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -881,7 +881,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 					TweenService:Create(
 						TextLabel_Toggle,
 						TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextColor3 = Color3.fromRGB(80, 245, 245)} -- UDim2.new(0, 128, 0, 25)
+						{TextColor3 = Color3.fromRGB(246, 255, 79)} -- UDim2.new(0, 128, 0, 25)
 					):Play()
 				end)
 
@@ -1021,7 +1021,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local DropFrame = Instance.new("Frame")
 				DropFrame.Name = "DropFrame"
 				DropFrame.Parent = ScolPage2
-				DropFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+				DropFrame.BackgroundColor3 = Color3.fromRGB(14, 32, 102) -----------////////////////dropdown
 				DropFrame.Position = UDim2.new(0.375307113, 0, 0.9, 0)
 				DropFrame.Size = UDim2.new(0, 375, 0, 25)
 				DropFrame.ClipsDescendants = true
@@ -1150,7 +1150,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 					Line.Name = "Line"
 					Line.Parent = ButtonDrop2
-					Line.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+					Line.BackgroundColor3 = Color3.fromRGB(225,225,225) -----------////////////drop
 					Line.BorderSizePixel = 0
 					Line.Position = UDim2.new(0, 0, 1, 0)
 					Line.Size = UDim2.new(0, 375, 0, 1)
@@ -1261,7 +1261,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 					Line.Name = "Line"
 					Line.Parent = ButtonDrop2
-					Line.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+					Line.BackgroundColor3 = Color3.fromRGB(225,225,225) ---------////////////drop
 					Line.BorderSizePixel = 0
 					Line.Position = UDim2.new(0, 0, 1, 0)
 					Line.Size = UDim2.new(0, 375, 0, 1)
@@ -1292,7 +1292,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				SliderFrame.Name = "SliderFrame"
 				SliderFrame.Parent = ScolPage2
 				SliderFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-				SliderFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+				SliderFrame.BackgroundColor3 = Color3.fromRGB(14, 32, 102) -------------/////////////Slider
 				SliderFrame.ClipsDescendants = true
 				SliderFrame.Position = UDim2.new(0.5, 0, 0.457317084, 0)
 				SliderFrame.Size = UDim2.new(0, 375, 0, 47)
@@ -1309,7 +1309,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				SliderFrame_UIStroke.Parent = SliderFrame
 				SliderFrame_UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				SliderFrame_UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-				SliderFrame_UIStroke.Color = Color3.fromRGB(80, 245, 245)
+				SliderFrame_UIStroke.Color = Color3.fromRGB(246, 255, 79)
 				SliderFrame_UIStroke.Transparency = 0.7
 
 				local LabelNameSlider = Instance.new("TextLabel")
@@ -1334,7 +1334,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				ShowValueFrame.Name = "ShowValueFrame"
 				ShowValueFrame.Parent = SliderFrame
 				ShowValueFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-				ShowValueFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+				ShowValueFrame.BackgroundColor3 = Color3.fromRGB(14, 32, 102) --------///////////// Slider
 				ShowValueFrame.BorderSizePixel = 0
 				ShowValueFrame.Position = UDim2.new(0.85, 0, 0.285106391, 0)
 				ShowValueFrame.Size = UDim2.new(0, 100, 0, 15)
@@ -1351,7 +1351,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				ShowValueFrame_UIStroke.Parent = ShowValueFrame
 				ShowValueFrame_UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				ShowValueFrame_UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-				ShowValueFrame_UIStroke.Color = Color3.fromRGB(80, 245, 245)
+				ShowValueFrame_UIStroke.Color = Color3.fromRGB(246, 255, 79)
 				ShowValueFrame_UIStroke.Transparency = 0.7
 
 				local CustomValue = Instance.new("TextBox")
@@ -1379,7 +1379,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				ValueFrame.Name = "ValueFrame"
 				ValueFrame.Parent = SliderFrame
 				ValueFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-				ValueFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+				ValueFrame.BackgroundColor3 = Color3.fromRGB(10, 21, 66) -----//////////Slider
 				ValueFrame.BorderSizePixel = 0
 				ValueFrame.Position = UDim2.new(0.499824077, 0, 0.800000012, 0)
 				ValueFrame.Size = UDim2.new(0, 350, 0, 5)
@@ -1404,7 +1404,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				MainValue.Name = "MainValue"
 				MainValue.Parent = PartValue
-				MainValue.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				MainValue.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				MainValue.Position = UDim2.new(0.00101725257, 0, 0.200000003, 0)
 				MainValue.Size = UDim2.new((de or 0) / max, 0, 0, 5)
 
@@ -1566,7 +1566,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				TextFrame.Parent = ScolPage2
 				TextFrame.Active = true
 				TextFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-				TextFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				TextFrame.BackgroundColor3 = Color3.fromRGB(14, 32, 102) --------//////text
 				TextFrame.BackgroundTransparency = 1.000
 				TextFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 				TextFrame.Size = UDim2.new(0, 375, 0, 70)
@@ -1597,7 +1597,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				FrameBox.Name = "FrameBox"
 				FrameBox.Parent = TextFrame
 				FrameBox.AnchorPoint = Vector2.new(0.5, 0.5)
-				FrameBox.BackgroundColor3 = Color3.fromRGB(10,10,10)
+				FrameBox.BackgroundColor3 = Color3.fromRGB(14, 32, 102)  ---------/////////text
 				FrameBox.BorderSizePixel = 0
 				FrameBox.ClipsDescendants = true
 				FrameBox.Position = UDim2.new(0.5, 0, 0.649999976, 0)
@@ -1617,7 +1617,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				TextBox2Stroke.Name = ""
 				TextBox2Stroke.Parent = FrameBox
 				TextBox2Stroke.LineJoinMode = Enum.LineJoinMode.Round
-				TextBox2Stroke.Color = Color3.fromRGB(80, 245, 245)
+				TextBox2Stroke.Color = Color3.fromRGB(246, 255, 79)
 				TextBox2Stroke.Transparency = 0.7
 
 				local TextFrame2 = Instance.new("TextBox")
@@ -1664,7 +1664,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 					TweenService:Create(
 						FrameBox,
 						TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundColor3 = Color3.fromRGB(10,10,10)} -- UDim2.new(0, 128, 0, 25)
+						{BackgroundColor3 = Color3.fromRGB(14, 32, 102)} -- UDim2.new(0, 128, 0, 25)  -------------/////////////////////////text
 					):Play()
 					TweenService:Create(
 						TextFrame2,
@@ -1720,7 +1720,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				BindStroke.Name = ""
 				BindStroke.Parent = BindFrame
 				BindStroke.LineJoinMode = Enum.LineJoinMode.Round
-				BindStroke.Color = Color3.fromRGB(80, 245, 245)
+				BindStroke.Color = Color3.fromRGB(246, 255, 79)
 				BindStroke.Transparency = 0.7
 
 				local LabelBind = Instance.new("TextLabel")
@@ -1882,7 +1882,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				DropFrameStroke.Name = ""
 				DropFrameStroke.Parent = DropFrame
 				DropFrameStroke.LineJoinMode = Enum.LineJoinMode.Round
-				DropFrameStroke.Color = Color3.fromRGB(80, 245, 245)
+				DropFrameStroke.Color = Color3.fromRGB(246, 255, 79)
 				DropFrameStroke.Transparency = 0.7
 
 
@@ -1893,7 +1893,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				LabelFrameDrop.Parent = DropFrame
 				LabelFrameDrop.Name = "LabelFrameDrop"
-				LabelFrameDrop.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				LabelFrameDrop.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				LabelFrameDrop.Position = UDim2.new(0., 0, 0., 0)
 				LabelFrameDrop.Size =    UDim2.new(0, 375, 0, 30)
 				LabelFrameDrop.Font = Enum.Font.SourceSansSemibold
@@ -1909,7 +1909,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				TextLabel_TapDrop.Parent = LabelFrameDrop
 				TextLabel_TapDrop.Name = "TextLabel_TapDrop"
-				TextLabel_TapDrop.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				TextLabel_TapDrop.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				TextLabel_TapDrop.Position = UDim2.new(0.04, 0, 0.14, 0)
 				TextLabel_TapDrop.Size =    UDim2.new(0, 140, 0, 20)
 				TextLabel_TapDrop.Font = Enum.Font.SourceSansSemibold
@@ -2020,7 +2020,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 					local farmtoglist = Instance.new("TextButton")
 
 					farmtoglist.Parent = listtextbutton
-					farmtoglist.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+					farmtoglist.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 					farmtoglist.BorderColor3 = Color3.fromRGB(255, 255, 255)
 					farmtoglist.BorderSizePixel = 0
 					farmtoglist.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -2037,7 +2037,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 					farmtoglist2.Parent = farmtoglist
 					farmtoglist2.BackgroundColor3 = Color3.fromRGB(10,10,10)
-					farmtoglist2.BorderColor3 = Color3.fromRGB(80, 245, 245)
+					farmtoglist2.BorderColor3 = Color3.fromRGB(246, 255, 79)
 					farmtoglist2.BorderSizePixel = 0
 					farmtoglist2.AnchorPoint = Vector2.new(0.5, 0.5)
 					farmtoglist2.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -2052,7 +2052,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 					local listimage = Instance.new("ImageButton")
 
 					listimage.Parent = farmtoglist2
-					listimage.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+					listimage.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 					listimage.BackgroundTransparency = 0
 					listimage.AnchorPoint = Vector2.new(0.5, 0.5)
 					listimage.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -2101,7 +2101,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 						TweenService:Create(
 							textlist,
 							TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-							{TextColor3 = Color3.fromRGB(80, 245, 245)} -- UDim2.new(0, 128, 0, 25)
+							{TextColor3 = Color3.fromRGB(246, 255, 79)} -- UDim2.new(0, 128, 0, 25)
 						):Play()
 					end)
 
@@ -2217,7 +2217,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				Pixker.Name = "Pixker"
 				Pixker.Parent = ScolPage2
-				Pixker.BackgroundColor3 = Color3.fromRGB(10,10,10)
+				Pixker.BackgroundColor3 = Color3.fromRGB(14, 32, 102) -------/////////color
 				Pixker.Position = UDim2.new(0.0833333358, 0, 0.235135213, 0)
 				Pixker.Size = UDim2.new(0, 375, 0, 33)
 				Pixker.BackgroundTransparency = 0
@@ -2239,7 +2239,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				FrameStroke.Name = ""
 				FrameStroke.Parent = Pixker
 				FrameStroke.LineJoinMode = Enum.LineJoinMode.Round
-				FrameStroke.Color = Color3.fromRGB(80, 245, 245)
+				FrameStroke.Color = Color3.fromRGB(246, 255, 79)
 				FrameStroke.Transparency = 0.7
 
 
@@ -2335,7 +2335,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local TextButton_2_Toggle = Instance.new("TextButton")
 
 				TextButton_2_Toggle.Parent = TextFrameColor
-				TextButton_2_Toggle.BackgroundColor3 = Color3.fromRGB(15,15,15)
+				TextButton_2_Toggle.BackgroundColor3 = Color3.fromRGB(14, 32, 102)  -------/////color
 				--        TextButton_2_Toggle.BorderColor3 = Color3.fromRGB(255, 23, 46)
 				TextButton_2_Toggle.BorderSizePixel = 0
 				TextButton_2_Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -2427,7 +2427,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				TextButton_3_Toggle2.Parent = TextButton_2_Toggle
 				TextButton_3_Toggle2.BackgroundColor3 = Color3.fromRGB(32, 32,32)
-				TextButton_3_Toggle2.BorderColor3 = Color3.fromRGB(80, 245, 245)
+				TextButton_3_Toggle2.BorderColor3 = Color3.fromRGB(246, 255, 79)
 				TextButton_3_Toggle2.BorderSizePixel = 0
 				TextButton_3_Toggle2.AnchorPoint = Vector2.new(0.5, 0.5)
 				TextButton_3_Toggle2.Position = UDim2.new(2.2, 0, 0.5, 0)
@@ -2457,7 +2457,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 
 				Color.Name = "Color"
 				Color.Parent = TextFrameColor
-				Color.BackgroundColor3 = Color3.fromRGB(80, 245, 245)
+				Color.BackgroundColor3 = Color3.fromRGB(246, 255, 79)
 				Color.Position = UDim2.new(0.03,0,4,0)
 				Color.Size = UDim2.new(0, 350, 0, 40)
 				Color.ZIndex = 0
@@ -2502,13 +2502,13 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local HueGradient = Instance.new("UIGradient")
 
 				HueGradient.Color = ColorSequence.new {
-					ColorSequenceKeypoint.new(0.00, Color3.fromRGB(80, 245, 245)),
+					ColorSequenceKeypoint.new(0.00, Color3.fromRGB(246, 255, 79)),
 					ColorSequenceKeypoint.new(0.20, Color3.fromRGB(234, 255, 0)),
 					ColorSequenceKeypoint.new(0.40, Color3.fromRGB(21, 255, 0)),
 					ColorSequenceKeypoint.new(0.60, Color3.fromRGB(0, 255, 255)),
 					ColorSequenceKeypoint.new(0.80, Color3.fromRGB(0, 17, 255)),
 					ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 0, 251)),
-					ColorSequenceKeypoint.new(1.00, Color3.fromRGB(80, 245, 245))
+					ColorSequenceKeypoint.new(1.00, Color3.fromRGB(246, 255, 79))
 				}
 				HueGradient.Rotation = 0
 				HueGradient.Name = "HueGradient"
@@ -2531,7 +2531,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				local BTN_XD = Instance.new("TextButton")
 
 				BTN_XD.Parent = TextFrameColor
-				BTN_XD.BackgroundColor3 = Color3.fromRGB(10,10,10)
+				BTN_XD.BackgroundColor3 = Color3.fromRGB(14, 32, 102) -------///////////////color
 				BTN_XD.BorderColor3 = Color3.fromRGB(10,10,10)
 				BTN_XD.BorderSizePixel = 0
 				BTN_XD.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -2558,7 +2558,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				BTN_XDStroke.Parent = BTN_XD
 				BTN_XDStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				BTN_XDStroke.LineJoinMode = Enum.LineJoinMode.Round
-				BTN_XDStroke.Color = Color3.fromRGB(80, 245, 245)
+				BTN_XDStroke.Color = Color3.fromRGB(246, 255, 79)
 				BTN_XDStroke.Transparency = 0.7
 
 
@@ -2575,7 +2575,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 						TweenService:Create(
 							TextButton_2_Toggle,
 							TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-							{BackgroundColor3 =  Color3.fromRGB(80, 245, 245)} -- UDim2.new(0, 128, 0, 25)
+							{BackgroundColor3 =  Color3.fromRGB(246, 255, 79)} -- UDim2.new(0, 128, 0, 25)
 						):Play()
 						TextButton_3_Toggle:TweenSizeAndPosition(UDim2.new(0, 13, 0, 13), UDim2.new(0.8, 0, 0.5, 0), "Out", "Quad", 0.1, true)
 					else
@@ -2587,7 +2587,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 						TweenService:Create(
 							TextButton_2_Toggle,
 							TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-							{BackgroundColor3 =  Color3.fromRGB(15,15,15)} -- UDim2.new(0, 128, 0, 25)
+							{BackgroundColor3 =  Color3.fromRGB(14, 32, 102)} -- UDim2.new(0, 128, 0, 25) ----------/////////////color
 						):Play()
 						TextButton_3_Toggle:TweenSizeAndPosition(UDim2.new(0, 13, 0, 13), UDim2.new(0.214285731, 0, 0.5, 0), "Out", "Quad", 0.1, true)
 					end
@@ -2821,36 +2821,33 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 	end
 	return uitap
 end
-
-
-
---------------------------------------////////////////////////////////////////////////////// script
-
-
-
-
-
-
-
-
-
-
-repeat wait() until game:IsLoaded()
-wait(20)
-if game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.Visible == true then
-	for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.MouseButton1Click)) do
-	    v.Function()
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+if not game.Players.LocalPlayer then
+    repeat wait() until game.Players.LocalPlayer
+end
+if not game.Players.LocalPlayer.character then
+    repeat wait() until game.Players.LocalPlayer.Character
+end
+if game:GetService("Players").LocalPlayer.PlayerGui.Loading.Loading.Visible == true then
+    repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.Loading.Loading.Visible == false
+end
+wait(2)
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.MouseButton1Click)) do
+    v.Function()
+end
+if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text == '15,000' then
+	wait(7)
+	if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Visible == true then
+	    for k,l in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Contents.Dart.Select.MouseButton1Click)) do
+	        l.Function()
+	    end
+	else
+	    print('nil')
 	end
 end
-wait(7)
-if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Visible == true then
-    for k,l in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Contents.Dart.Select.MouseButton1Click)) do
-        l.Function()
-    end
-else
-    print('nil')
-end
-local window = ui:CreateWindow("HOKHUB",0,9478211728,Enum.KeyCode.RightControl)
+local window = ui:CreateWindow("HOKHUB|:Driving Empire",0,9478211728,Enum.KeyCode.RightControl)
 local tap1 = window:CreateTap("Main","6026568198")
 local tap2 = window:CreateTap("Server","6034470807")
 
