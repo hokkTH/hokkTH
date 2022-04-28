@@ -1,5 +1,5 @@
-
 repeat wait() until game:IsLoaded()
+
 do local ui =  game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("UI") if ui then ui:Destroy() end end
 
 local UserInputService = game:GetService("UserInputService")
@@ -1633,6 +1633,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 				TextFrame2.Size = UDim2.new(0, 375, 0, 35)
 				TextFrame2.Font = Enum.Font.GothamSemibold
 				TextFrame2.PlaceholderText = text2
+				TextFrame2.Text = ""
 				TextFrame2.PlaceholderColor3 = Color3.fromRGB(155, 155, 155)
 				TextFrame2.TextColor3 = Color3.fromRGB(155, 155, 155)
 				TextFrame2.TextSize = 11.000
@@ -1660,7 +1661,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 					):Play()
 				end)
 
-				TextFrame.MouseLeave:Connect(function()
+				TextFrame.MouseLeave:Connect(function(ep)
 					TweenService:Create(
 						FrameBox,
 						TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -2821,6 +2822,7 @@ function ui:CreateWindow(text,logo1,logo2,toclose)
 	end
 	return uitap
 end
+
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
