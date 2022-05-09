@@ -1,5 +1,3 @@
-
-
 repeat wait() until game:IsLoaded()
 
 do local ui =  game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("UI") if ui then ui:Destroy() end end
@@ -2882,7 +2880,6 @@ spawn(function()
         wait()
     end
 end)
-setfpscap(30)
 if _G.set.AutoFarmAndAfk then
 	_G.set.auto = false
 	Save()
@@ -2903,7 +2900,7 @@ page1:Dropdown("SelectMoneyForAFK",{"5m","10m","15m"},function(Value)
 	_G.set.Money =  Value
 	Save()
 end)
-setfpscap(30)
+
 spawn(function()
 	while true do wait()
 		if _G.set.AutoFarmAndAfk and _G.set.Money ~= nil then
@@ -3202,6 +3199,9 @@ local data = {
 end
 page2:Button("Rejoin", function()
 game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
+page2:Button("LockFps30", function()
+	setfpscap(30)
 end)
 spawn(function()
     while wait() do
