@@ -2903,7 +2903,7 @@ page1:Dropdown("SelectMoneyForAFK",{"5m","10m","15m"},function(Value)
 	_G.set.Money =  Value
 	Save()
 end)
-
+setfpscap(30)
 spawn(function()
 	while true do wait()
 		if _G.set.AutoFarmAndAfk and _G.set.Money ~= nil then
