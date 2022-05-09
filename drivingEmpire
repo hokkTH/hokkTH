@@ -2882,6 +2882,7 @@ spawn(function()
         wait()
     end
 end)
+setfpscap(30)
 if _G.set.AutoFarmAndAfk then
 	_G.set.auto = false
 	Save()
