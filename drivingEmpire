@@ -1,3 +1,5 @@
+
+
 repeat wait() until game:IsLoaded()
 
 do local ui =  game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("UI") if ui then ui:Destroy() end end
@@ -2880,6 +2882,10 @@ spawn(function()
         wait()
     end
 end)
+if _G.set.AutoFarmAndAfk then
+	_G.set.auto = false
+	Save()
+end
 page1:Line()
 local Farm = page1:Toggle("Auto-Farm",_G.set.auto, function(bool)
     _G.set.auto = bool
@@ -2888,12 +2894,127 @@ end)
 local  AFK = page1:Toggle("Auto-FarmAFK",_G.AFK, function(far)
     _G.AFK = far
 end)
+local AutoFarm = page1:Toggle("Auto-FarmAfkAndAuto-Farm",_G.set.AutoFarmAndAfk, function(Afk)
+    _G.set.AutoFarmAndAfk = Afk
+	Save()
+end)
+page1:Dropdown("SelectMoneyForAFK",{"5m","10m","15m"},function(Value)
+	_G.set.Money =  Value
+	Save()
+end)
+
+spawn(function()
+	while true do wait()
+		if _G.set.AutoFarmAndAfk and _G.set.Money ~= nil then
+	    	if _G.set.Money == "5m" then
+	    	    _G.set.Money = 5000000
+	    	elseif _G.set.Money == "10m" then
+	    	    _G.set.Money = 100000000
+	    	elseif _G.set.Money == "15m" then
+	    	    _G.set.Money = 150000000
+	    	end
+		elseif _G.set.AutoFarmAndAfk and _G.set.Money == nil then
+			ui:Notification("SelectMoneyForAFK","ok!",3,9478211728)
+			_G.set.AutoFarmAndAfk = false
+		end
+	end
+end)
+
+spawn(function()
+	while true do wait()
+		if _G.set.AutoFarmAndAfk and _G.set.Money ~= nil then
+			if game:GetService("Players").LocalPlayer.leaderstats.Cash.Value > _G.set.Money then
+				if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+					if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+							if (game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Body.FP.CFrame.Position  - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
+								local args = {
+									[1] = "Despawn"
+									}
+								game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+								wait(1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5537.16016, 14.9376659, -4597.00342, -0.630793452, -4.53971047e-08, -0.775950789, -2.97023064e-08, 1, -3.43592461e-08, 0.775950789, 1.37394029e-09, -0.630793452)
+								wait(1)
+								local args = {
+									[1] = "Spawn",
+									[2] = _G.set.SelectCar
+								}
+								game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+							end
+						end
+					else
+						if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+							TP(CFrace)
+						end
+					end
+				elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+					local args = {
+						[1] = "Spawn",
+						[2] = _G.set.SelectCar
+					}
+					game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+					wait(3)
+				end
+			else
+				if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+					if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+							for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+								for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+									if v.Name == "Forcefield"  and c.Name == "Forcefield" then
+										if v.Transparency == 0.20000000298023224 and c.Transparency == 0.20000000298023224 then
+											if v.Position ~= c.Position then
+												_G.fis = false
+												_G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
+												_G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+												if _G.A < _G.B then
+													wait(0.4)
+													TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(45),0))
+												elseif _G.B < _G.A then
+													wait(0.4)
+													TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(45),0))
+												end
+											elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
+													if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
+														wait(0.4)
+														_G.fis = true
+												end
+											end
+										end
+									end
+								end
+							end
+							if _G.fis then
+								TP(CFrame.new(-5626.45947, 13.6925869, -4808.39697, -0.862579763, -0.00317192334, 0.505911112, -0.00418647891, 0.99999088, -0.00086828979, -0.505903721, -0.00286695547, -0.862585187))
+							end
+						end
+					else
+						_G.fis = false
+						if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+							TP(CFrace)
+						end
+					end
+				elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+					local args = {
+						[1] = "Spawn",
+						[2] = _G.set.SelectCar
+					}
+					
+					game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+					wait(3)
+				end
+			end
+		end
+	end
+end)
 spawn(function()
 	while wait() do
 	    if _G.set.auto == true then
 	        AFK:lock()
+			AutoFarm:lock()
 	    elseif _G.set.auto == false then
 	        AFK:unlock()
+			AutoFarm:unlock()
 	    end
 	end
 end)
@@ -2901,8 +3022,21 @@ spawn(function()
 	while wait() do
 	    if _G.AFK == true then
 	        Farm:lock()
+			AutoFarm:lock()
 	    elseif _G.AFK == false then
 	        Farm:unlock()
+			AutoFarm:unlock()
+	    end
+	end
+end)
+spawn(function()
+	while wait() do
+	    if _G.set.AutoFarmAndAfk == true then
+	        Farm:lock()
+			AFK:lock()
+	    elseif _G.set.AutoFarmAndAfk == false then
+	        Farm:unlock()
+			AFK:unlock()
 	    end
 	end
 end)
