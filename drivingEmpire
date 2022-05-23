@@ -2907,9 +2907,9 @@ spawn(function()
 	    	if _G.set.Money == "5m" then
 	    	    _G.set.Money = 5000000
 	    	elseif _G.set.Money == "10m" then
-	    	    _G.set.Money = 100000000
+	    	    _G.set.Money = 10000000
 	    	elseif _G.set.Money == "15m" then
-	    	    _G.set.Money = 150000000
+	    	    _G.set.Money = 15000000
 	    	end
 		elseif _G.set.AutoFarmAndAfk and _G.set.Money == nil then
 			ui:Notification("SelectMoneyForAFK","ok!",3,9478211728)
