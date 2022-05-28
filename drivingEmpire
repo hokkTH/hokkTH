@@ -3203,6 +3203,9 @@ end)
 page2:Button("LockFps30", function()
 	setfpscap(30)
 end)
+if _G.LockFps30 then
+	setfpscap(30)
+end
 spawn(function()
     while wait() do
         local GC = getconnections or get_signal_cons
