@@ -2896,7 +2896,7 @@ local AutoFarm = page1:Toggle("Auto-FarmAfkAndAuto-Farm",_G.set.AutoFarmAndAfk, 
     _G.set.AutoFarmAndAfk = Afk
 	Save()
 end)
-page1:Dropdown("SelectMoneyForAFK",{"5m","10m","15m"},function(Value)
+page1:Dropdown("SelectMoneyForAFK",{"5m","10m","15m","20m","25m"},function(Value)
 	_G.set.Money =  Value
 	Save()
 end)
@@ -2910,6 +2910,10 @@ spawn(function()
 	    	    _G.set.Money = 10000000
 	    	elseif _G.set.Money == "15m" then
 	    	    _G.set.Money = 15000000
+			elseif _G.set.Money == "20m" then
+				_G.set.Money = 20000000
+			elseif _G.set.Money == "25m" then
+				_G.set.Money = 25000000
 	    	end
 		elseif _G.set.AutoFarmAndAfk and _G.set.Money == nil then
 			ui:Notification("SelectMoneyForAFK","ok!",3,9478211728)
