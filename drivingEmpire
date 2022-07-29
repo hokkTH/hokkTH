@@ -2833,6 +2833,22 @@ if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
 
+if game:GetService("Players").LocalPlayer.PlayerGui.Loading.Loading.Visible == true then
+    repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.Loading.Loading.Visible == false
+end
+if game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Visible == true then
+wait(2)
+	for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.MouseButton1Click)) do
+    	v.Function()
+	end
+end
+if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text == "15,000" then
+wait(10)
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Contents.Dart.Select.MouseButton1Click)) do
+        v.Function()
+    end
+end
+wait(8)
 local window = ui:CreateWindow("HOKHUB|:Driving Empire",0,9478211728,Enum.KeyCode.RightControl)
 local tap1 = window:CreateTap("Main","6026568198")
 local tap2 = window:CreateTap("Server","6034470807")
