@@ -1,5 +1,4 @@
 repeat wait() until game:IsLoaded()
-repeat wait() until game:IsLoaded()
 
 do local ui =  game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("UI") if ui then ui:Destroy() end end
 
@@ -2833,23 +2832,7 @@ end
 if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
-if game:GetService("Players").LocalPlayer.PlayerGui.Loading.Loading.Visible == true then
-    repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.Loading.Loading.Visible == false
-end
-wait(2)
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Loading.Menu.Main.Play.MouseButton1Click)) do
-    v.Function()
-end
-if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text == '15,000' then
-	wait(7)
-	if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Visible == true then
-	    for k,l in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Contents.Dart.Select.MouseButton1Click)) do
-	        l.Function()
-	    end
-	else
-	    print('nil')
-	end
-end
+
 local window = ui:CreateWindow("HOKHUB|:Driving Empire",0,9478211728,Enum.KeyCode.RightControl)
 local tap1 = window:CreateTap("Main","6026568198")
 local tap2 = window:CreateTap("Server","6034470807")
@@ -2904,7 +2887,7 @@ end)
 
 spawn(function()
 	while true do wait()
-		if _G.set.AutoFarmAndAfk  then
+		if _G.set.AutoFarmAndAfk and _G.set.Money ~= nil then
 	    	if _G.set.Money == "5m" then
 	    	    _G.set.Money = 5000000
 				Save()
