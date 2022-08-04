@@ -1,4 +1,4 @@
-
+repeat wait() until game:IsLoaded()
 if  game.PlaceId ==  1499872953 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/my%20hero.lua"))()
 elseif game.PlaceId == 3351674303 then
