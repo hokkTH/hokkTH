@@ -1,12 +1,4 @@
-if not game:IsLoaded() then
-    game.Loaded:Wait()
-end
-if not game.Players.LocalPlayer then
-    repeat wait() until game.Players.LocalPlayer
-end
-if not game.Players.LocalPlayer.character then
-    repeat wait() until game.Players.LocalPlayer.Character
-end
+
 if  game.PlaceId ==  1499872953 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/my%20hero.lua"))()
 elseif game.PlaceId == 3351674303 then
