@@ -5,4 +5,6 @@ elseif game.PlaceId == 3351674303 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/drivingEmpire"))()
 elseif game.PlaceId == 3233893879 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/esp%20bad"))()
+else 
+   print("not")
 end
