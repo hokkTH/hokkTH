@@ -1052,13 +1052,13 @@ spawn(function()
 end)
 Main:Seperator("AUTOPUNCH")
 
-Main:Toggle("AUTOFARM",false,function(value)
-    _G.Auto = value
+Main:Toggle("AUTOPUCH",false,function(value)
+    _G.AUTOPUCH = value
 end)
 
 spawn(function()
     while wait(0.1) do
-        if _G.Puch then
+        if _G.AUTOPUCH then
             local d = "Normal"
             game:GetService("ReplicatedStorage").Game["__Remotes"].ClickEvent:FireServer(d)
         end
