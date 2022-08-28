@@ -1051,7 +1051,7 @@ spawn(function()
  while wait() do
 	 if _G.Auto then
 		 for i,v in pairs(game:GetService("Workspace")["__GAME"]["__Mobs"][_G.Area]:GetChildren()) do
-			 if (game:GetService("Workspace")["__TrainingZones"][_G.Area].Position- v.NpcModel.HumanoidRootPart.Position).Magnitude < 200 then
+			 if v.Name ~= "METEOR" and (game:GetService("Workspace")["__TrainingZones"][_G.Area].Position- v.NpcModel.HumanoidRootPart.Position).Magnitude < 200 then
 				 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.NpcModel.HumanoidRootPart.CFrame
 				 local args = {
 				 [1] = "Attack",
@@ -1079,7 +1079,7 @@ spawn(function()
 end)
 local Home = Library:Tab("LocalPlayer")
 Home:Seperator("WalkSpeed")
-Home:Slider("WalkSpeed",16,100,1,function(value)
+Home:Slider("WalkSpeed",16,100,60,function(value)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 end)
 Home:Seperator("AREA")
