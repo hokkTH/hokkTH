@@ -1026,12 +1026,23 @@ Main = Library:Tab("Main")
 
 Main:Line()
 
-Main:Seperator("FARM")
+w = {}
+for i,v in pairs(game:GetService("Workspace")["__TrainingZones"]:GetChildren()) do
+    if v.Name ~= "Script" and v.Name ~= "Area99999" then
+        table.insert(w,v)
+    end
+end
+Main:Seperator("AREA")
 
-Main:Slider("AREA",1,21,1,function(value)
- _G.Area = value
+Main:Dropdown("SELECTAREA",w,function(value)
+	_G.Area = value
+	for i,v in pairs(game:GetService("Workspace")["__TrainingZones"]:GetChildren()) do
+        if v.Name == value then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+        end
+    end
 end)
-
+Main:Seperator("FARM")
 Main:Toggle("AUTOFARM",false,function(value)
  _G.Auto = value
 end)
@@ -1039,8 +1050,8 @@ end)
 spawn(function()
  while wait() do
 	 if _G.Auto then
-		 for i,v in pairs(game:GetService("Workspace")["__GAME"]["__Mobs"]["Area".._G.Area]:GetChildren()) do
-			 if (game:GetService("Workspace")["__TrainingZones"]["Area".._G.Area].Position- v.NpcModel.HumanoidRootPart.Position).Magnitude < 200 then
+		 for i,v in pairs(game:GetService("Workspace")["__GAME"]["__Mobs"][_G.Area]:GetChildren()) do
+			 if (game:GetService("Workspace")["__TrainingZones"][_G.Area].Position- v.NpcModel.HumanoidRootPart.Position).Magnitude < 200 then
 				 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.NpcModel.HumanoidRootPart.CFrame
 				 local args = {
 				 [1] = "Attack",
@@ -1072,12 +1083,6 @@ Home:Slider("WalkSpeed",16,100,1,function(value)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 end)
 Home:Seperator("AREA")
-w = {}
-for i,v in pairs(game:GetService("Workspace")["__TrainingZones"]:GetChildren()) do
-    if v.Name ~= "Script" and v.Name ~= "Area99999" then
-        table.insert(w,v)
-    end
-end
 
 Home:Dropdown("SELECTAREA",w,function(value)
 	for i,v in pairs(game:GetService("Workspace")["__TrainingZones"]:GetChildren()) do
