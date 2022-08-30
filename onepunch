@@ -1048,17 +1048,23 @@ Main:Toggle("AUTOFARM",false,function(value)
 end)
 
 spawn(function()
- while wait() do
+ while wait(0.1) do
 	 if _G.Auto then
 		 for i,v in pairs(game:GetService("Workspace")["__GAME"]["__Mobs"][_G.Area]:GetChildren()) do
-			 if v.Name ~= "METEOR" and (game:GetService("Workspace")["__TrainingZones"][_G.Area].Position- v.NpcModel.HumanoidRootPart.Position).Magnitude < 200 then
-				 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.NpcModel.HumanoidRootPart.CFrame
-				 local args = {
-				 [1] = "Attack",
-				 [2] = v
-				 }
-				 game:GetService("ReplicatedStorage").Game.__Remotes.AttackEvent:FireServer(unpack(args))
-			 end
+			 if v.Name ~= "METEOR" and (game:GetService("Workspace")["__TrainingZones"][_G.Area].Position - v.NpcModel.HumanoidRootPart.Position).Magnitude < 200 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.NpcModel.HumanoidRootPart.CFrame
+				local args = {
+					[1] = {
+						[1] = {
+							[1] = "\4",
+							[2] = "Attack",
+							[3] = v
+						}
+					}
+				}
+				game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+				
+			end
 		 end
 	 end
  end
@@ -1072,8 +1078,16 @@ end)
 spawn(function()
     while wait(0.1) do
         if _G.AUTOPUCH then
-            local d = "Normal"
-            game:GetService("ReplicatedStorage").Game["__Remotes"].ClickEvent:FireServer(d)
+			local args = {
+				[1] = {
+					[1] = {
+						[1] = "\6",
+						[2] = "Normal"
+					}
+				}
+			}
+			
+			game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))			
         end
     end
 end)
