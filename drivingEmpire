@@ -3248,7 +3248,7 @@ local data = {
             ["fields"] = {
                 {
                     ["name"] =  "Money",
-                    ["value"] =  "$" ..game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text,
+                    ["value"] =  "DrivingEmprie",
                     ["inline"] = true
                 },
             },
