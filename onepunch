@@ -1023,7 +1023,15 @@ end
 
 local Library = Update:Window("ui","HOKHUB",Enum.KeyCode.RightControl);
 Main = Library:Tab("Main")
-
+la = Main:Label("")
+function up()
+	la:Set("\nStrength "..game:GetService("Players").LocalPlayer.PlayerGui.Interface.Status.Strength.TextLabel.Text.."\nCoins "..game:GetService("Players").LocalPlayer.PlayerGui.Interface.Status.Coins.TextLabel.Text.."\nGem "..game:GetService("Players").LocalPlayer.PlayerGui.Interface.Status.Gems.TextLabel.Text)
+end
+spawn(function()
+	while wait() do
+		up()
+	end
+end)
 Main:Line()
 
 w = {}
