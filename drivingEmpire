@@ -2833,7 +2833,7 @@ if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
 print("wait")
-wait(20)
+wait(15)
 print("wait")
 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
     if v.Name == "Main" and v.ClassName == 'Frame' and v.AbsolutePosition == Vector2.new(806.4000024,469.245941)  then
