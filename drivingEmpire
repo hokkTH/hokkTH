@@ -2833,7 +2833,7 @@ if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
 print("wait")
-wait(15)
+wait(20)
 print("wait")
 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
     if v.Name == "Main" and v.ClassName == 'Frame' and v.AbsolutePosition == Vector2.new(806.4000024,469.245941)  then
@@ -2978,15 +2978,21 @@ spawn(function()
 												_G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
 												_G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
 												if _G.A < _G.B then
-													wait(0.4)
-													TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(45),0))
+													--wait(0.4)
+													if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+														game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+													end
+													TP(v.CFrame * CFrame.new(1,-2,0) * CFrame.Angles(0,math.rad(45),0))
 												elseif _G.B < _G.A then
-													wait(0.4)
-													TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(45),0))
+													--wait(0.4)
+													if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+														game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+													end
+													TP(c.CFrame* CFrame.new(1,-2,0)* CFrame.Angles(0,math.rad(45),0))
 												end
 											elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
 													if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
-														wait(0.4)
+														--wait(0.4)
 														_G.fis = true
 												end
 											end
@@ -2995,7 +3001,10 @@ spawn(function()
 								end
 							end
 							if _G.fis then
-								TP(CFrame.new(-5628.90869, 15.4843054, -4804.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
+								if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+									game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+								end
+								TP(CFrame.new(-5628.90869, 12.4843054, -4804.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
 							end
 						end
 					else
@@ -3020,9 +3029,21 @@ end)
 spawn(function()
 	while wait() do
 	    if _G.set.auto == true then
+			if  _G.set.auto == true then
+				if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+					local Noclip = Instance.new("BodyVelocity")
+					Noclip.Name = "HOKHUB"
+					Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+					Noclip.MaxForce = Vector3.new(100000,100000,100000)
+					Noclip.Velocity = Vector3.new(0,0,0)
+				end
+			end
 	        AFK:lock()
 			AutoFarm:lock()
 	    elseif _G.set.auto == false then
+			if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+				game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+			end
 	        AFK:unlock()
 			AutoFarm:unlock()
 	    end
@@ -3072,10 +3093,41 @@ drop:Clear()
 end)
 page1:Blank()
 
-CFrace = CFrame.new(-5645.77832, 14.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
+CFrace = CFrame.new(-5645.77832, 12.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
 function TP(d)
-    game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:SetPrimaryPartCFrame(d)
+	w = game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]
+	p = w.PlateCenter.Position
+	tweenModel(w,d)
 end
+function tweenModel(model, CF)
+    local tweenfunc = {}
+	local tweenService = game:GetService("TweenService")
+	local Distance = (CF.Position - p).Magnitude
+	if Distance < 250 then
+		Speed = 450
+	elseif Distance < 500 then
+		Speed = 400
+	elseif Distance < 1000 then
+		Speed = 350
+	elseif Distance >= 1000 then
+		Speed = 200
+	end
+	local CFrameValue = Instance.new("CFrameValue")
+	CFrameValue.Value = model:GetPrimaryPartCFrame()
+
+	CFrameValue:GetPropertyChangedSignal("Value"):Connect(function()
+		model:SetPrimaryPartCFrame(CFrameValue.Value)
+	end)
+	
+	local tween = tweenService:Create(CFrameValue, TweenInfo.new(Distance/Speed), {Value = CF})
+	tween:Play()
+	function tweenfunc:Stop()
+	    tween:Cancel()
+	end 
+	if not tween then return tween end
+	return tweenfunc
+end
+
 spawn(function() 
     while  wait(0) do 
         if _G.set.auto then
@@ -3091,15 +3143,21 @@ spawn(function()
                                             _G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
                                             _G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
                                             if _G.A < _G.B then
-                                                wait(0.4)
-                                                TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(45),0))
+                                                --wait(0.4)
+												if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+													game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+												end
+                                                TP(v.CFrame * CFrame.new(1,-4,0) * CFrame.Angles(0,math.rad(45),0))
                                             elseif _G.B < _G.A then
-                                                wait(0.4)
-                                                TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(45),0))
+                                                --wait(0.4)
+												if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+													game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+												end
+                                                TP(c.CFrame* CFrame.new(1,-4,0)* CFrame.Angles(0,math.rad(45),0))
                                             end
                                         elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
                                                 if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
-                                                    wait(0.4)
+                                                    --wait(0.4)
                                                     _G.fis = true
                                             end
                                         end
@@ -3108,6 +3166,9 @@ spawn(function()
                             end
                         end
                         if _G.fis then
+							if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+								game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+							end
                             TP(CFrame.new(-5628.90869, 15.4843054, -4804.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
                         end
                     end
