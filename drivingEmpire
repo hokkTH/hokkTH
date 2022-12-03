@@ -2833,11 +2833,19 @@ if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
 print("wait")
-wait(20)
-print("wait")
+wait(15)
+print("play")
 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
-    if v.Name == "Main" and v.ClassName == 'Frame' and v.AbsolutePosition == Vector2.new(806.4000024,469.245941)  then
-        for d,o in pairs(getconnections(v.Play.MouseButton1Click)) do
+    if v.Name == "Play" and v.Visible == true  then
+        for d,o in pairs(getconnections(v.MouseButton1Click)) do
+            o.Function()
+        end
+    end
+end
+wait(0.1)
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
+    if v.Name == "Play" and v.Visible == true  then
+        for d,o in pairs(getconnections(v.MouseButton1Click)) do
             o.Function()
         end
     end
@@ -2845,7 +2853,7 @@ end
 
 if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text == "15,000" then
 	print("fristtime")
-	wait(10)
+	wait(8)
     for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.StarterCars.Contents.Dart.Select.MouseButton1Click)) do
         v.Function()
     end
@@ -3298,7 +3306,7 @@ end)
 if _G.LockFps30 then
 	setfpscap(30)
 end
-page2:Button("BootFps", function*()
+page2:Button("BootFps", function()
 	local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
 	local g = game
 	local w = g.Workspace
