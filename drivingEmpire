@@ -3113,9 +3113,9 @@ page1:Blank()
 
 CFrace = CFrame.new(-5645.77832, 12.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
 function TP(d)
-	w = game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]
-	p = w.PlateCenter.Position
-	tweenModel(w,d)
+	w = game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:SetPrimaryPartCFrame(d)
+	--p = w.PlateCenter.Position
+	--tweenModel(w,d)
 end
 function tweenModel(model, CF)
     local tweenfunc = {}
