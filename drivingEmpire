@@ -2833,20 +2833,16 @@ if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
 print("wait")
-wait(15)
+wait(17)
 print("play")
 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
-    if v.Name == "Play" and v.Visible == true  then
-        for d,o in pairs(getconnections(v.MouseButton1Click)) do
-            o.Function()
-        end
-    end
-end
-wait(0.1)
-for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
-    if v.Name == "Play" and v.Visible == true  then
-        for d,o in pairs(getconnections(v.MouseButton1Click)) do
-            o.Function()
+    if v.Name == "Loading"   then
+        if v.ClassName == "ScreenGui" then
+            if v.Enabled == true then
+                for d,o in pairs(getconnections(v.Menu.Main.Play.MouseButton1Click)) do
+                    o.Function()
+                end
+            end
         end
     end
 end
@@ -3110,7 +3106,7 @@ drop:Clear()
 	end
 end)
 page1:Blank()
-
+CFramedd = CFrame.new(-5627.8335, 16.8787994, -4802.33984, -0.863542736, -0.0572882555, 0.501010954, 0.000330270937, 0.993461549, 0.11416693, -0.504275501, 0.0987534896, -0.857877553)
 CFrace = CFrame.new(-5645.77832, 12.7413673, -4517.27783, 0.389310211, -1.14764775e-08, -0.921106696, 2.80008479e-08, 1, -6.24750418e-10, 0.921106696, -2.55485464e-08, 0.389310211)
 function TP(d)
 	w = game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:SetPrimaryPartCFrame(d)
@@ -3145,12 +3141,16 @@ function tweenModel(model, CF)
 	if not tween then return tween end
 	return tweenfunc
 end
-
 spawn(function() 
     while  wait(0) do 
         if _G.set.auto then
             if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
                 if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+					if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text == '0:00.00' then
+						if (CFramedd.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 60 then
+							TP(CFramedd)
+						end
+					end
                     if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
                         for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
                             for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
