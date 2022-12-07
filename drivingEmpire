@@ -2833,7 +2833,18 @@ if not game.Players.LocalPlayer.character then
     repeat wait() until game.Players.LocalPlayer.Character
 end
 print("wait")
-wait(17)
+--wait(17)
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
+    if v.Name == "Loading"   then
+        if v.ClassName == "ScreenGui" then
+            if v.Enabled == true then
+				if v.Loading.Visible == true then
+					repeat wait() until  v.Loading.Visible == false
+				end
+            end
+        end
+    end
+end
 print("play")
 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
     if v.Name == "Loading"   then
@@ -2854,7 +2865,7 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money
         v.Function()
     end
 end
-wait(8)
+wait(3)
 print("ui")
 
 local window = ui:CreateWindow("HOKHUB|:Driving Empire",0,9478211728,Enum.KeyCode.RightControl)
@@ -2941,6 +2952,11 @@ spawn(function()
 			if game:GetService("Players").LocalPlayer.leaderstats.Cash.Value > _G.set.Money then
 				if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
 					if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text == '0:00.00' then
+							if (CFramedd.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 60 then
+								TP(CFramedd)
+							end
+						end
 						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
 							if (game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Body.FP.CFrame.Position  - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
 								local args = {
@@ -2973,6 +2989,11 @@ spawn(function()
 			else
 				if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
 					if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text == '0:00.00' then
+							if (CFramedd.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 60 then
+								TP(CFramedd)
+							end
+						end
 						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
 							for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
 								for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
