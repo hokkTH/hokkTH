@@ -2857,7 +2857,6 @@ for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants
         end
     end
 end
-wait(3)
 if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text == "15,000" then
 	print("fristtime")
 	wait(8)
@@ -3055,7 +3054,6 @@ end)
 spawn(function()
 	while wait() do
 	    if _G.set.auto == true then
-			if  _G.set.auto == true then
 	        AFK:lock()
 			AutoFarm:lock()
 	    elseif _G.set.auto == false then
@@ -3193,7 +3191,6 @@ spawn(function()
 				    [1] = "tp",
 				    [2] = "circuit"
 				}
-
 				game:GetService("ReplicatedStorage").Remotes.ClientCommunication:FireServer(unpack(args))
 				wait(1)
 			elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - cri.Position).Magnitude < 56 then
