@@ -2857,7 +2857,7 @@ for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants
         end
     end
 end
-
+wait(3)
 if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.SideHUD.Bottom.Money.Money.Text == "15,000" then
 	print("fristtime")
 	wait(8)
