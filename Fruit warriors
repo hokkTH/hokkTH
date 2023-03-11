@@ -1070,6 +1070,7 @@ local MON = {
     'Anubis the Bone Keeper (Level 800)',
     'Sky Bandit (Level 1000)',
     'High-Level Sky Bandit (Level 1100)',
+    'Sky Leader (Level 1200)'
     
 }
    
