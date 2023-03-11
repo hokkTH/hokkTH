@@ -1058,17 +1058,19 @@ local MON = {
     'Bandit Leader (Level 15)',
     'Clown Pirate (Level 30)',
     'Clown Leader (Level 60)',
-    'Monkey (Level 90)',
     'Caveman (Level 75)',
+    'Monkey (Level 90)',
     'Gorilla (Level 120)',
     'Snow Bandit (Level 200)',
+    'Smoke Boss (Level 250)',
     'Small Yeti (Level 275)',
     'Yeti (Level 350)',
     'Sand Bandit (Level 450)',
     'Pharaoh Guard (Level 600)',
     'Anubis the Bone Keeper (Level 800)',
     'Sky Bandit (Level 1000)',
-    'High-Level Sky Bandit (Level 1100)'
+    'High-Level Sky Bandit (Level 1100)',
+    
 }
    
 Main:Dropdown("SelectMon",MON,function(value)
@@ -1085,11 +1087,11 @@ for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
     table.insert(Weapon, v.Name)
     end
 end
-Main:Dropdown("SelectWapon",Weapon,function(value)
+local SearchWeapon = Main:Dropdown("SelectWapon",Weapon,function(value)
     _G.Sele = value
 end)
 
-local SearchWeapon = Main:Button("Refresh Weapon",function()
+Main:Button("Refresh Weapon",function()
 	SearchWeapon:Clear()
     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
         if v:IsA("Tool") then
@@ -1113,7 +1115,7 @@ spawn(function()
             if _G.Autofarm then
                 EquipWeapon(_G.Sele)
                 if game:GetService("Players").LocalPlayer.PlayerGui.Quests.Main.AbsolutePosition == Vector2.new(-1920, -36) then
-                    wait(0.1)
+                    wait(0.3)
                     local args = {
                         [1] = "GetQuest",
                         [2] = _G.mon
@@ -1146,3 +1148,16 @@ spawn(function()
         end)
     end
 end)
+
+--[[for i,v in pairs(game:GetService("Workspace").Chests:GetChildren())  do
+    if string.find(v.Name,'GoldChest') then
+    	if not v.RootPart:FindFirstChild('reward1') then
+    	    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.RootPart.CFrame * CFrame.new(0,5,0)
+			if if (v.RootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 6 then
+    	    local args = {
+			    [1] = v
+			}
+			game:GetService("ReplicatedStorage").Remotes.ChestsPick:FireServer(unpack(args))
+    	end
+    end
+end]]
