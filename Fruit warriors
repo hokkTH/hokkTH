@@ -1095,12 +1095,14 @@ Main:Button("Refresh Weapon",function()
 	SearchWeapon:Clear()
     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
         if v:IsA("Tool") then
-            SearchWeapon:Add(v.Name)
+			table.insert(Weapon ,v.Name)
+            SearchWeapon:Add(Weapon)
         end
     end
     for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do  
         if v:IsA("Tool") then
-            SearchWeapon:Add(v.Name)
+			table.insert(Weapon ,v.Name)
+            SearchWeapon:Add(Weapon)
         end
     end
 end)
