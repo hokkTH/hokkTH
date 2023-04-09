@@ -56,9 +56,6 @@ spawn(function()
                         if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
                             if v.HumanoidRootPart.EnemyHealthBar.Title.Text == _G.mon then
                                 _G.dd = v
-                                if (v.HumanoidRootPart.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 30 then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.dd.HumanoidRootPart.CFrame 
-                                end
                             end
                         end
                     end
