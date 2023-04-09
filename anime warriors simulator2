@@ -21,7 +21,7 @@ end
 local drop = tgls:Dropdown("Select-Mon",wa, function(bool)
     _G.mon = bool
 end)
-tgls:Button("Add option", function()
+tgls:Button("RefedMon", function()
     drop:Clear()
     for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
         if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
@@ -72,6 +72,11 @@ spawn(function()
                         }
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                     wait(0.2)
+                    if game:GetService("Workspace").Drops.DataCost ~= 4 then
+                        for i,v in pairs(game:GetService("Workspace").Drops:GetChildren()) do
+                            v.Size = Vector3.new(100,100,100)
+                        end
+                    end
                 end
             end)    
         end
