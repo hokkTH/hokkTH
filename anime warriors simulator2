@@ -1,0 +1,160 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("discord library")
+
+local serv = win:Server("HOKHUB", "")
+
+local tgls = serv:Channel("Main")
+
+tgls:Toggle("Auto-Farm",false, function(bool)
+    _G.Auto = bool
+end)
+tgls:Toggle("Auto-Click",false,function(bool)
+    _G.click = bool
+end)
+wa = {}
+for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
+    if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
+        table.insert(wa,v.HumanoidRootPart.EnemyHealthBar.Title.Text)
+    end
+end
+local drop = tgls:Dropdown("Select-Mon",wa, function(bool)
+    _G.mon = bool
+end)
+tgls:Button("Add option", function()
+    drop:Clear()
+    for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
+        if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
+            drop:Add(v.HumanoidRootPart.EnemyHealthBar.Title.Text)
+        end
+    end
+end)
+tgls:Textbox("Warriors", "Type here!", true, function(te)
+    _G.wa = tonumber(te)
+end)
+spawn(function()
+    while wait() do
+        if _G.click then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0 then
+                    local args = {
+                        [1] = {
+                            [1] = {
+                                [1] = "&"
+                            }
+                        }
+                    }
+
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                end
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        if _G.Auto then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
+                    for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
+                        if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
+                            if v.HumanoidRootPart.EnemyHealthBar.Title.Text == _G.mon then
+                                _G.dd = v
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.dd.HumanoidRootPart.CFrame 
+                            end
+                        end
+                    end
+                    --if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Stats.Equipped.Value.Text == "3/3"  then
+                        cont = 0 
+                        repeat wait()
+                            cont = cont + 1 
+                            local args = {
+                                [1] = {
+                                    [1] = {
+                                        [1] = "%",
+                                        [2] = tostring(_G.dd)
+                                    }
+                                }    
+                            }
+                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                        until cont == tonumber(_G.wa)
+--[[                        local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = "%",
+                                    [2] = tostring(_G.dd)
+                                }
+                            }    
+                        }
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                        wait(0.3)
+                        local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = "%",
+                                    [2] = tostring(_G.dd)
+                                }
+                            }    
+                        }
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                        wait(0.3)
+                        local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = "%",
+                                    [2] = tostring(_G.dd)
+                                }
+                            }    
+                        }
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                    else
+                        local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = "%",
+                                    [2] = tostring(_G.dd)
+                                }
+                            }    
+                        }
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))]]
+                    --end
+                end
+            end)    
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        local GC = getconnections or get_signal_cons
+        if GC then
+            for i,v in pairs(GC(game.Players.LocalPlayer.Idled)) do
+                if v["Disable"] then
+                    v["Disable"](v)
+                elseif v["Disconnect"] then
+                    v["Disconnect"](v)
+                end
+            end
+        else
+            print("lol bad exploit")
+            local vu = game:GetService("VirtualUser")
+            game:GetService("Players").LocalPlayer.Idled:connect(function()
+                vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                wait(1)
+                vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            end)
+        end
+    end
+end)
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.RightControl then
+		if Open then
+            game:GetService("CoreGui").Discord.MainFrame.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").Discord.MainFrame.Visible = false
+            -- = true
+		end
+	end
+end)
