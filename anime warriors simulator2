@@ -71,7 +71,6 @@ spawn(function()
                             }    
                         }
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                    wait(0.2)
                     if game:GetService("Workspace").Drops.DataCost ~= 4 then
                         for i,v in pairs(game:GetService("Workspace").Drops:GetChildren()) do
                             v.Size = Vector3.new(100,100,100)
