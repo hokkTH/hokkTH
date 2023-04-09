@@ -29,9 +29,6 @@ tgls:Button("Add option", function()
         end
     end
 end)
-tgls:Textbox("Warriors", "Type here!", true, function(te)
-    _G.wa = tonumber(te)
-end)
 spawn(function()
     while wait() do
         if _G.click then
@@ -44,7 +41,6 @@ spawn(function()
                             }
                         }
                     }
-
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                 end
             end)
@@ -60,64 +56,21 @@ spawn(function()
                         if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
                             if v.HumanoidRootPart.EnemyHealthBar.Title.Text == _G.mon then
                                 _G.dd = v
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.dd.HumanoidRootPart.CFrame 
+                                if (v.HumanoidRootPart.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 30 then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.dd.HumanoidRootPart.CFrame 
+                                end
                             end
                         end
                     end
-                    --if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Stats.Equipped.Value.Text == "3/3"  then
-                        cont = 0 
-                        repeat wait()
-                            cont = cont + 1 
-                            local args = {
-                                [1] = {
-                                    [1] = {
-                                        [1] = "%",
-                                        [2] = tostring(_G.dd)
-                                    }
-                                }    
-                            }
-                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                        until cont == tonumber(_G.wa)
---[[                        local args = {
-                            [1] = {
+                    local args = {
+                        [1] = {
                                 [1] = {
                                     [1] = "%",
                                     [2] = tostring(_G.dd)
                                 }
                             }    
                         }
-                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                        wait(0.3)
-                        local args = {
-                            [1] = {
-                                [1] = {
-                                    [1] = "%",
-                                    [2] = tostring(_G.dd)
-                                }
-                            }    
-                        }
-                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                        wait(0.3)
-                        local args = {
-                            [1] = {
-                                [1] = {
-                                    [1] = "%",
-                                    [2] = tostring(_G.dd)
-                                }
-                            }    
-                        }
-                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                    else
-                        local args = {
-                            [1] = {
-                                [1] = {
-                                    [1] = "%",
-                                    [2] = tostring(_G.dd)
-                                }
-                            }    
-                        }
-                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))]]
-                    --end
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                 end
             end)    
         end
