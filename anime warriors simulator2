@@ -71,6 +71,7 @@ spawn(function()
                             }    
                         }
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                    wait(0.2)
                 end
             end)    
         end
