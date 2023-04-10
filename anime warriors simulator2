@@ -77,8 +77,8 @@ spawn(function()
                                 _G.dd = v
                             elseif v.HumanoidRootPart.EnemyHealthBar.Title.Text == "Tiny ".._G.mon then
                                 _G.dd = v
-                            --elseif v.HumanoidRootPart.EnemyHealthBar.Title.Text == _G.mon then
-                                --_G.dd = v
+                            elseif v.HumanoidRootPart.EnemyHealthBar.Title.Text == "Shiny "_G.mon then
+                                _G.dd = v
                             end
                         end
                     end
