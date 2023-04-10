@@ -1,6 +1,6 @@
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
 
-local win = DiscordLib:Window("discord library")
+local win = DiscordLib:Window("Anime-Warriors-Simlatotr2")
 
 local serv = win:Server("HOKHUB", "")
 
@@ -29,8 +29,6 @@ tgls:Button("RefedMon", function()
         end
     end
 end)
-
-
 spawn(function()
     while wait() do
         if _G.click then
@@ -61,7 +59,7 @@ spawn(function()
                             end
                         end
                     end
-                    wait(1)
+                    wait(0.7)
                     local args = {
                         [1] = {
                                 [1] = {
@@ -71,7 +69,10 @@ spawn(function()
                             }    
                         }
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                    wait(1)
+                    for r,t in pairs(game:GetService("Workspace").Warriors[game.Players.LocalPlayer.Name]:GetChildren()) do
+                        t.HumanoidRootPart.CFrame = _G.dd.HumanoidRootPart.CFrame
+                    end
+                    wait(0.7)
                     if game:GetService("Workspace").Drops.DataCost ~= 4 then
                         for i,v in pairs(game:GetService("Workspace").Drops:GetChildren()) do
                             v.Size = Vector3.new(1000,1000,1000)
