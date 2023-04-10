@@ -59,6 +59,7 @@ spawn(function()
                             end
                         end
                     end
+                    wait(0.2)
                     local args = {
                         [1] = {
                                 [1] = {
@@ -68,9 +69,10 @@ spawn(function()
                             }    
                         }
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                    wait(0.2)
                     if game:GetService("Workspace").Drops.DataCost ~= 4 then
                         for i,v in pairs(game:GetService("Workspace").Drops:GetChildren()) do
-                            v.Size = Vector3.new(100,100,100)
+                            v.Size = Vector3.new(1000,1000,1000)
                         end
                     end
                 end
@@ -109,7 +111,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 		else
 		    Open = true
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
-            -- = true
 		end
 	end
 end)
