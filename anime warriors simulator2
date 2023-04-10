@@ -12,6 +12,9 @@ end)
 tgls:Toggle("Auto-Click",false,function(bool)
     _G.click = bool
 end)
+tgls:Toggle("Auto-Collect",false,function(bool)
+    _G.Collect = bool
+end)
 wa = {}
 for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
     if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
@@ -49,6 +52,20 @@ spawn(function()
 end)
 spawn(function()
     while wait() do
+        pcall(function()
+            if _G.Collect then
+                wait(0.2)
+                if game:GetService("Workspace").Drops.DataCost ~= 4 then
+                    for i,v in pairs(game:GetService("Workspace").Drops:GetChildren()) do
+                       game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while wait() do
         if _G.Auto then
             pcall(function()
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
@@ -56,6 +73,12 @@ spawn(function()
                         if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
                             if v.HumanoidRootPart.EnemyHealthBar.Title.Text == _G.mon then
                                 _G.dd = v
+                            elseif v.HumanoidRootPart.EnemyHealthBar.Title.Text == "Giant ".._G.mon then
+                                _G.dd = v
+                            elseif v.HumanoidRootPart.EnemyHealthBar.Title.Text == "Tiny ".._G.mon then
+                                _G.dd = v
+                            --elseif v.HumanoidRootPart.EnemyHealthBar.Title.Text == _G.mon then
+                                --_G.dd = v
                             end
                         end
                     end
@@ -69,14 +92,9 @@ spawn(function()
                             }    
                         }
                     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                    wait(0.7)
                     for r,t in pairs(game:GetService("Workspace").Warriors[game.Players.LocalPlayer.Name]:GetChildren()) do
                         t.HumanoidRootPart.CFrame = _G.dd.HumanoidRootPart.CFrame
-                    end
-                    wait(0.7)
-                    if game:GetService("Workspace").Drops.DataCost ~= 4 then
-                        for i,v in pairs(game:GetService("Workspace").Drops:GetChildren()) do
-                            v.Size = Vector3.new(1000,1000,1000)
-                        end
                     end
                 end
             end)    
