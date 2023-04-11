@@ -5,6 +5,7 @@ local win = DiscordLib:Window("Anime-Warriors-Simlatotr2")
 local serv = win:Server("HOKHUB", "")
 
 local tgls = serv:Channel("Main")
+local Au = serv:Channel("Auto-Up-Warriors")
 
 tgls:Toggle("Auto-Farm",false, function(bool)
     _G.Auto = bool
@@ -24,11 +25,33 @@ end
 local drop = tgls:Dropdown("Select-Mon",wa, function(bool)
     _G.mon = bool
 end)
+
 tgls:Button("RefedMon", function()
     drop:Clear()
     for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
         if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
             drop:Add(v.HumanoidRootPart.EnemyHealthBar.Title.Text)
+        end
+    end
+end)
+Au:Toggle("Auto-Up",false,function(bool)
+    _G.au = bool
+end)
+Warriors = {"REwarriors"}
+local AU = Au:Dropdown("Select-Warriors",Warriors, function(bool)
+    _G.Select = bool
+end)
+Au:Button("RefedWarriors", function()
+    AU:Clear()
+    if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == false then
+        for _,e in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.Left.Buttons.Top.Warriors.Inner.Button.MouseButton1Click)) do
+            e.Function()
+        end
+    end
+    wait(0.1)
+    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Container:GetDescendants()) do
+        if v.Name == "Text" then
+            AU:Add(v.Text)
         end
     end
 end)
@@ -134,4 +157,65 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
 		end
 	end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.au then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Visible == false then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Feed.Visible == false then
+                        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Container:GetDescendants()) do
+                            if v.Name == "Text" then
+                                if v.Text ==  _G.Select then
+                                    for _,d in pairs(v.Parent:GetChildren()) do
+                                        if d.Name == "Button" then
+                                           for r,t in pairs(getconnections(d.MouseButton1Click)) do
+                                               t.Function()
+                                           end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Visible == true then
+                    wait(0.1)
+                    for d,o in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Buttons.Feed.Inner.Button.MouseButton1Click)) do
+                        o.Function()
+                    end
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Feed.Visible == true then
+                    for d,o in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Feed.Buttons.SelectUnlocked.Inner.Button.MouseButton1Click)) do
+                        o.Function()
+                    end
+                    Wait(0.1)
+                    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Feed.Buttons.Feed.Inner.Button.MouseButton1Click)) do
+                        v.Function()
+                    end
+                    wait(0.1)
+                    for p,c in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Components.Confirm.Frame.Yes.Button.MouseButton1Click)) do
+                        c.Function()
+                    end
+                end
+                wait(5)
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        if _G.au then
+            pcall(function()
+                local args = {
+                    [1] = "Reaper",
+                    [3] = false
+                }
+                
+                game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
+                wait(0.5)
+            end)
+        end
+    end
 end)
