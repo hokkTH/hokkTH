@@ -6,6 +6,7 @@ local serv = win:Server("HOKHUB", "")
 
 local tgls = serv:Channel("Main")
 local Au = serv:Channel("Auto-Up-Warriors")
+local Mic = serv:Channel("mic")
 
 tgls:Toggle("Auto-Farm",false, function(bool)
     _G.Auto = bool
@@ -54,6 +55,9 @@ Au:Button("RefedWarriors", function()
             AU:Add(v.Text)
         end
     end
+end)
+Mic:Button("ReJoin",function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
 spawn(function()
     while wait() do
