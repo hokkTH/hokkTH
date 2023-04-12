@@ -35,9 +35,13 @@ tgls:Button("RefedMon", function()
         end
     end
 end)
+Au:Dropdown("Select-EGG",{"Reaper","Reaper2"}, function(bool)
+    _G.Egg = bool
+end)
 Au:Toggle("Auto-Up",false,function(bool)
     _G.au = bool
 end)
+
 Warriors = {"REwarriors"}
 local AU = Au:Dropdown("Select-Warriors",Warriors, function(bool)
     _G.Select = bool
@@ -212,14 +216,25 @@ spawn(function()
     while wait() do
         if _G.au then
             pcall(function()
-                local args = {
-                    [1] = "Reaper",
-                    [3] = false
-                }
-                
-                game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
-                wait(0.5)
+                if _G.Egg == "Reaper" then
+                    local args = {
+                        [1] = "Reaper",
+                        [3] = false
+                    }
+                    
+                    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
+                    wait(0.5)
+                elseif _G.Egg == "Reaper2" then
+                    local args = {
+                        [1] = "Reaper",
+                        [2] = 2,
+                        [3] = false
+                    }
+                    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
+                    wait(0.5)
+                end
             end)
         end
     end
 end)
+
