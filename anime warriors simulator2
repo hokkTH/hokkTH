@@ -186,24 +186,6 @@ spawn(function()
                         for d,o in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Buttons.Feed.Inner.Button.MouseButton1Click)) do
                             o.Function()
                         end
-                    elseif game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Warrior.Text ~= _G.Select then 
-                        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Container:GetDescendants()) do
-                            if v.Name == "Text" then
-                                if v.Text ==  _G.Select then
-                                    for _,d in pairs(v.Parent:GetChildren()) do
-                                        if d.Name == "Button" then
-                                           for r,t in pairs(getconnections(d.MouseButton1Click)) do
-                                               t.Function()
-                                           end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                        wait(0.1)
-                        for d,o in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Buttons.Feed.Inner.Button.MouseButton1Click)) do
-                            o.Function()
-                        end
                     end
                 end
                 if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Feed.Visible == true then
