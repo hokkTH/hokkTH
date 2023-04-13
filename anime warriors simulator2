@@ -1,6 +1,7 @@
+
 repeat wait() until game:IsLoaded()
 repeat wait() until not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Loading") 
-
+wait(2)
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/main/script%20(1).lua")()
 
 local win = DiscordLib:Window("Anime-Warriors-Simlatotr2")
@@ -254,4 +255,3 @@ spawn(function()
         end
     end
 end)
-
