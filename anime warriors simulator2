@@ -1,4 +1,5 @@
-local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/main/script%20(1).lua")()
 
 local win = DiscordLib:Window("Anime-Warriors-Simlatotr2")
 
@@ -38,7 +39,7 @@ end)
 Au:Dropdown("Select-EGG",{"Reaper","Reaper2"}, function(bool)
     _G.Egg = bool
 end)
-Au:Toggle("Auto-Up",false,function(bool)
+Au:Toggle("Auto-Up",_G.AutoUp,function(bool)
     _G.au = bool
 end)
 
@@ -171,6 +172,11 @@ spawn(function()
     while wait() do
         if _G.au then
             pcall(function()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == false then
+                    for _,e in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.Left.Buttons.Top.Warriors.Inner.Button.MouseButton1Click)) do
+                        e.Function()
+                    end
+                end
                 if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Info.Visible == false then
                     if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Feed.Visible == false then
                         for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Container:GetDescendants()) do
@@ -212,26 +218,35 @@ spawn(function()
         end
     end
 end)
+local CFEggReaper1 = CFrame.new(-13342.4648, 249.54747, 2334.49365, 0.0883728191, -2.73017786e-09, -0.996087492, -8.58745786e-09, 1, -3.50278029e-09, 0.996087492, 8.86340956e-09, 0.0883728191)
+local CFEggReaper2 = CFrame.new(-13444.9502, 247.39888, 1652.57764, 0.971167266, -2.63095359e-08, 0.238399073, 2.13945732e-08, 1, 2.32040609e-08, -0.238399073, -1.74345782e-08, 0.971167266)
 spawn(function()
     while wait() do
         if _G.au then
             pcall(function()
                 if _G.Egg == "Reaper" then
-                    local args = {
-                        [1] = "Reaper",
-                        [3] = false
-                    }
-                    
-                    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
-                    wait(0.5)
+                    if (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggReaper1
+                    elseif (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
+                        local args = {
+                            [1] = "Reaper",
+                            [3] = false
+                        }
+                        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
+                        wait(0.5)
+                    end
                 elseif _G.Egg == "Reaper2" then
-                    local args = {
-                        [1] = "Reaper",
-                        [2] = 2,
-                        [3] = false
-                    }
-                    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
-                    wait(0.5)
+                    if (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggReaper2
+                    elseif (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
+                        local args = {
+                            [1] = "Reaper",
+                            [2] = 2,
+                            [3] = false
+                        }
+                        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
+                        wait(0.5)
+                    end
                 end
             end)
         end
