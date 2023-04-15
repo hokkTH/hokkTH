@@ -2237,7 +2237,7 @@ for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
         table.insert(wa,v.HumanoidRootPart.EnemyHealthBar.Title.Text)
     end
 end
-local drop = Sections:CreateDropdown("Select-Mon", {List = wa, Default = value, Search = true}, function(value)
+local drop = Sections:CreateDropdown("Select-Mon", {List = wa, Default = value,Search = true}, function(value)
     _G.mon = value
 end)
 
@@ -2327,7 +2327,7 @@ Sections2:CreateToggle("Auto-Up", {Toggled = _G.AutoUp, Description = "Open / Cl
     _G.au = value 
 end)
 Warriors = {}
-local AU = Sections2:CreateDropdown("Select-Warriors", {List = Warriors, Default = value, ,Search = true}, function(value)
+local AU = Sections2:CreateDropdown("Select-Warriors", {List = Warriors, Default = value}, function(value)
     _G.Select = value
     print(_G.Select )
 end)
@@ -2481,6 +2481,18 @@ spawn(function()
         end
     end
 end)
-
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.RightControl then
+		if Open then
+            game:GetService("CoreGui").CFAHubPremium2022.Container.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").CFAHubPremium2022.Container.Visible = false
+            -- = true
+		end
+	end
+end)
 return CFAHub
 end
