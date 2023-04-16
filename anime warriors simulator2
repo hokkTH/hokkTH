@@ -112,7 +112,7 @@ function CFAHub:DraggingEnabled(frame, parent)
     Input.InputChanged:Connect(function(input)
         if input == dragInput and dragging then
             local delta = input.Position - mousePos
-            Utility:TweenObject(parent, {Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)}, 0.25)
+            Utility:TweenObject(parent, {Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)}, 0)
         end
     end)
 end
@@ -2221,13 +2221,13 @@ local Tabs = Window:CreatePage("Main")
 local Sections = Tabs:CreateSection("Farm")
 local Sections2 = Tabs:CreateSection("Auto-Up-Warriors")
 
-Sections:CreateToggle("Auto-Farm", {Toggled = false, Description = "Open / Close"}, function(value)
+Sections:CreateToggle("Auto-Farm", {Toggled = false, Description = ""}, function(value)
        _G.Auto = value 
 end)
-Sections:CreateToggle("Auto-Click", {Toggled = false, Description = "Open / Close"}, function(value)
+Sections:CreateToggle("Auto-Click", {Toggled = false, Description = ""}, function(value)
     _G.click = value
 end)
-Sections:CreateToggle("Auto-Collect", {Toggled = false, Description = "Open / Close"}, function(value)
+Sections:CreateToggle("Auto-Collect", {Toggled = false, Description = ""}, function(value)
     _G.Collect = value
 end)
 
@@ -2319,17 +2319,16 @@ spawn(function()
         end
     end
 end)
-Sections2:CreateDropdown("Select-EGG",{List = {"Reaper","Reaper2","Hero1","Hero2"}, Default = value}, function(value)
+Sections2:CreateDropdown("Select-EGG",{List = {"Reaper","Reaper2","Hero1","Hero2"}, Default = _G.Egg}, function(value)
     _G.Egg = value 
 end)
 
-Sections2:CreateToggle("Auto-Up", {Toggled = _G.AutoUp, Description = "Open / Close"}, function(value)
+Sections2:CreateToggle("Auto-Up", {Toggled = _G.AutoUp, Description = ""}, function(value)
     _G.au = value 
 end)
 Warriors = {}
-local AU = Sections2:CreateDropdown("Select-Warriors", {List = Warriors, Default = value}, function(value)
+local AU = Sections2:CreateDropdown("Select-Warriors", {List = Warriors, Default = _G.Select}, function(value)
     _G.Select = value
-    print(_G.Select )
 end)
 
 Sections2:CreateButton("RefedWarriors", function(value)
@@ -2456,6 +2455,112 @@ spawn(function()
                 end
             end)
         end
+    end
+end)
+local Tabs1 = Window:CreatePage("TP")
+local Sections3 = Tabs1:CreateSection("TP-World")
+
+Sections3:CreateButton("Dungeon", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Dungeon"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
+end)
+Sections3:CreateButton("Pirate-Town", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Pirate Town"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+    
+end)
+Sections3:CreateButton("Alien-Planet", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Alien Planet"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+end)
+Sections3:CreateButton("Grass-Village", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Grass Village"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+end)
+Sections3:CreateButton("Land-Of-Demons", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Land of Demons"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+end)
+Sections3:CreateButton("Endless-Domain", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Endless Domain"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+end)
+Sections3:CreateButton("Hero-City", function(value)
+    local args = {
+        [1] = {
+            [1] = {
+                [1] = ";",
+                [2] = "Hero City"
+            }
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
+end)
+local Sections4 = Tabs1:CreateSection("MIC")
+
+Sections4:CreateButton("Ctrl + click to Teleport", function(value)
+    local Plr = game:GetService("Players").LocalPlayer
+    local Mouse = Plr:GetMouse()
+    Mouse.Button1Down:connect(function()
+    if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
+    if not Mouse.Target then return end
+    Plr.Character:MoveTo(Mouse.Hit.p)
+    end)
+end)
+Sections4:CreateButton("not Ctrl + click to Teleport", function(value)
+    local Plr = game:GetService("Players").LocalPlayer
+    local Mouse = Plr:GetMouse()
+    for i,v in pairs(getconnections(Mouse.Button1Down)) do
+        v:Disable()
     end
 end)
 
