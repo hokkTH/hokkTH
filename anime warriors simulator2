@@ -2461,8 +2461,8 @@ spawn(function()
                                     end
                                 elseif d:FindFirstChild("Lever") then
                                     local le = d.Lever.Rotate.CFrameValue.Value
-                                    if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le
+                                    if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le * CFrame.new(2,0,0)
                                     end
                                     --game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
                                 end
