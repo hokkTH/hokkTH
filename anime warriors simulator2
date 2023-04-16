@@ -2216,6 +2216,73 @@ function CFAHub:CreateWindow(title, gameName, intro)
     return Tabs
 end
 -- By : Deceit Hub <3
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+    AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+    table.insert(AllIDs, actualHour)
+    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+    local Site;
+    if foundAnything == "" then
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+    else
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+    end
+    local ID = ""
+    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+        foundAnything = Site.nextPageCursor
+    end
+    local num = 0;
+    for i,v in pairs(Site.data) do
+        local Possible = true
+        ID = tostring(v.id)
+        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+            for _,Existing in pairs(AllIDs) do
+                if num ~= 0 then
+                    if ID == tostring(Existing) then
+                        Possible = false
+                    end
+                else
+                if tonumber(actualHour) ~= tonumber(Existing) then
+                    local delFile = pcall(function()
+                        --delfile("NotSameServers.json")
+                        AllIDs = {}
+                        table.insert(AllIDs, actualHour)
+                    end)
+                end
+            end
+            num = num + 1
+        end
+        if Possible == true then
+            table.insert(AllIDs, ID)
+            wait()
+            pcall(function()
+                --writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                wait()
+                game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+            end)
+            end
+        end
+    end
+end
+function Teleport()
+    while wait() do
+        pcall(function()
+            TPReturner()
+            if foundAnything ~= "" then
+                TPReturner()
+            end
+        end)
+    end
+end
+
 local Window = CFAHub:CreateWindow("<font color=\"#FFCCE5\">HOK </font>HUB", " Anime Warriors Simulator 2", true)
 local Tabs = Window:CreatePage("Main")
 local Sections = Tabs:CreateSection("Farm")
@@ -2232,6 +2299,9 @@ Sections:CreateToggle("Auto-Collect", {Toggled = false, Description = ""}, funct
 end)
 Sections:CreateToggle("Auto-Dungeon", {Toggled = false, Description = ""}, function(value)
     _G.Dungeon = value
+end)
+Sections:CreateDropdown("Select-Dungeon", {List = {"Insane","Easy","EasyAndInsane"}, Default = value}, function(value)
+    _G.SelectDun = value
 end)
 wa = {}
 for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
@@ -2410,46 +2480,90 @@ spawn(function()
         if _G.Dungeon then
             pcall(function()
                 if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == false then 
-                    if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
-                        if _G.OPEN == true or _G.Auto == true or _G.au == true then
-                            _G.OPEN = false
-                            _G.Auto = false
-                            _G.au = false
-                            _G.lwe = true
-                        end
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
-                        wait(0.5)
-                        local args = {
-                            [1] = {
+                    if _G.SelectDun == "Insane" then
+                        if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
+                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                                _G.OPEN = false
+                                _G.Auto = false
+                                _G.au = false
+                                _G.lwe = true
+                            end
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
+                            wait(0.5)
+                            local args = {
                                 [1] = {
-                                    [1] = "R",
-                                    [2] = "Insane"
+                                    [1] = {
+                                        [1] = "R",
+                                        [2] = "Insane"
+                                    }
                                 }
                             }
-                        }
-                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                    elseif game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
-                        if _G.OPEN == true or _G.Auto == true or _G.au == true then
-                            _G.OPEN = false
-                            _G.Auto = false
-                            _G.au = false
-                            _G.lwe = true
+                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                         end
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
-                        wait(0.5)
-                        local args = {
-                            [1] = {
+                    elseif _G.SelectDun == "Easy" then
+                        if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
+                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                                _G.OPEN = false
+                                _G.Auto = false
+                                _G.au = false
+                                _G.lwe = true
+                            end
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
+                            wait(0.5)
+                            local args = {
                                 [1] = {
-                                    [1] = "R",
-                                    [2] = "Easy"
+                                    [1] = {
+                                        [1] = "R",
+                                        [2] = "Easy"
+                                    }
                                 }
                             }
-                        }
-                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                        end
+                    elseif _G.SelectDun == "EasyAndInsane" then
+                        if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
+                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                                _G.OPEN = false
+                                _G.Auto = false
+                                _G.au = false
+                                _G.lwe = true
+                            end
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
+                            wait(0.5)
+                            local args = {
+                                [1] = {
+                                    [1] = {
+                                        [1] = "R",
+                                        [2] = "Insane"
+                                    }
+                                }
+                            }
+                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                        elseif game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
+                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                                _G.OPEN = false
+                                _G.Auto = false
+                                _G.au = false
+                                _G.lwe = true
+                            end
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
+                            wait(0.5)
+                            local args = {
+                                [1] = {
+                                    [1] = {
+                                        [1] = "R",
+                                        [2] = "Easy"
+                                    }
+                                }
+                            }
+                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                        end
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == true then
                     if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == false then
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+                        local b = game:GetService("VirtualInputManager")
+                        b:SendKeyEvent(true,"E",false,game)
+                        b:SendKeyEvent(false,"E",false,game)
                         local CurrentRoom = tostring(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text)
                         local CurrentRoomTE =  string.gsub(CurrentRoom," ","")
                         for l,d in pairs(game:GetService("Workspace").Dungeons:GetDescendants()) do
@@ -2461,8 +2575,11 @@ spawn(function()
                                     end
                                 elseif d:FindFirstChild("Lever") then
                                     local le = d.Lever.Rotate.CFrameValue.Value
-                                    if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                                    if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
                                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le * CFrame.new(2,0,0)
+                                        local b = game:GetService("VirtualInputManager")
+                                        b:SendKeyEvent(true,"E",false,game)
+                                        b:SendKeyEvent(false,"E",false,game)
                                     end
                                     --game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
                                 end
@@ -2702,40 +2819,8 @@ Sections3:CreateButton("Hero-City", function(value)
     
     game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
 end)
-local Sections4 = Tabs1:CreateSection("MIC")
 
-Sections4:CreateButton("Ctrl + click to Teleport", function(value)
-    local Plr = game:GetService("Players").LocalPlayer
-    local Mouse = Plr:GetMouse()
-    Mouse.Button1Down:connect(function()
-    if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
-    if not Mouse.Target then return end
-    Plr.Character:MoveTo(Mouse.Hit.p)
-    end)
-end)
-Sections4:CreateButton("not Ctrl + click to Teleport", function(value)
-    local Plr = game:GetService("Players").LocalPlayer
-    local Mouse = Plr:GetMouse()
-    for i,v in pairs(getconnections(Mouse.Button1Down)) do
-        v:Disable()
-    end
-end)
-_G.NoCIP = false
-Sections4:CreateToggle("Noclip", {Toggled = false, Description = ""}, function(value)
-    _G.NoCIP = value
-end)
-local function NoclipLoop()
-    if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
-        for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-            if child:IsA("BasePart") and child.CanCollide == true then
-                child.CanCollide = false
-            end
-        end
-    end
-end
-if _G.CNOCLIP then
-    _G.CNOCLIP:Disconnect()
-end
+
 _G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
 local Tabs2 = Window:CreatePage("Auto-Open-Egg")
 local Sections5 = Tabs2:CreateSection("Open-Egg")
@@ -2745,6 +2830,31 @@ Sections5:CreateToggle("Open-Egg", {Toggled = false, Description = ""}, function
 end)
 Sections5:CreateDropdown("Select-Egg",{List = {"Reaper","Reaper2","Hero1","Hero2"}, Default = _G.Egg}, function(value)
     _G.Egg = value 
+end)
+
+local Tabs3 = Window:CreatePage("Mic")
+local Sections6 = Tabs3:CreateSection("mic")
+Sections6:CreateButton("Re-join", function(value)
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
+Sections6:CreateButton("Serverhop", function(value)
+    Teleport()
+end)
+Sections6:CreateButton("Ctrl + click to Teleport", function(value)
+    local Plr = game:GetService("Players").LocalPlayer
+    local Mouse = Plr:GetMouse()
+    Mouse.Button1Down:connect(function()
+    if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
+    if not Mouse.Target then return end
+    Plr.Character:MoveTo(Mouse.Hit.p)
+    end)
+end)
+Sections6:CreateButton("not Ctrl + click to Teleport", function(value)
+    local Plr = game:GetService("Players").LocalPlayer
+    local Mouse = Plr:GetMouse()
+    for i,v in pairs(getconnections(Mouse.Button1Down)) do
+        v:Disable()
+    end
 end)
 spawn(function()
     while wait() do
