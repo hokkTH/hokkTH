@@ -2222,7 +2222,7 @@ local Sections = Tabs:CreateSection("Farm")
 local Sections2 = Tabs:CreateSection("Auto-Up-Warriors")
 
 Sections:CreateToggle("Auto-Farm", {Toggled = false, Description = ""}, function(value)
-       _G.Auto = value 
+    _G.Auto = value 
 end)
 Sections:CreateToggle("Auto-Click", {Toggled = false, Description = ""}, function(value)
     _G.click = value
@@ -2404,13 +2404,19 @@ local doorEy = CFrame.new(-629.624878, 46.8890953, 269.754211, -1, 0, 0, 0, 1, 0
 local doorIn = CFrame.new(-551.25, 46.9990005, 269.753998, -1, 0, 0, 0, 1, 0, 0, 0, -1)
 local joinEy = CFrame.new(-629.297729, 39.4729958, 236.276978, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
 local joinIn = CFrame.new(-551.547729, 39.4729958, 236.276978, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
+_G.lwe = false
 spawn(function()
     while wait() do
         if _G.Dungeon then
             pcall(function()
-                print("AUTODUN")
                 if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == false then 
                     if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
+                        if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                            _G.OPEN = false
+                            _G.Auto = false
+                            _G.au = false
+                            _G.lwe = true
+                        end
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
                         wait(0.5)
                         local args = {
@@ -2423,6 +2429,12 @@ spawn(function()
                         }
                         game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                     elseif game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
+                        if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                            _G.OPEN = false
+                            _G.Auto = false
+                            _G.au = false
+                            _G.lwe = true
+                        end
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
                         wait(0.5)
                         local args = {
@@ -2435,47 +2447,63 @@ spawn(function()
                         }
                         game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                     end
-                elseif game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == true then 
-                    local CurrentRoom = tostring(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text)
-                    local CurrentRoomTE =  string.gsub(CurrentRoom," ","")
-                    for l,d in pairs(game:GetService("Workspace").Dungeons:GetDescendants()) do
-                        if d.name == CurrentRoomTE  then
-                            _G.DRT = d.Door.CFrame * CFrame.new(0,0,-220)
-                            if not d:FindFirstChild("Lever") then
-                                if (_G.DRT.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.DRT
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == true then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == false then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+                        local CurrentRoom = tostring(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text)
+                        local CurrentRoomTE =  string.gsub(CurrentRoom," ","")
+                        for l,d in pairs(game:GetService("Workspace").Dungeons:GetDescendants()) do
+                            if d.name == CurrentRoomTE  then
+                                _G.DRT = d.Door.CFrame * CFrame.new(0,0,-220)
+                                if not d:FindFirstChild("Lever") then
+                                    if (_G.DRT.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.DRT
+                                    end
+                                elseif d:FindFirstChild("Lever") then
+                                    local le = d.Lever.Rotate.CFrameValue.Value
+                                    if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le
+                                    end
+                                    --game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
                                 end
-                            elseif d:FindFirstChild("Lever") then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  d.Lever.Rotate.CFrameValue.Value
                             end
                         end
-                    end
-                    if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text ~= "Room 0" then
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
-                            for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
-                                if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
-                                    if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 300 then
-                                    _G.dongen = v
+                        if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text ~= "Room 0" then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
+                                for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
+                                    if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
+                                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 270 then
+                                        _G.dongen = v
+                                        end
                                     end
                                 end
+                                wait(0.1)
+                                local args = {
+                                    [1] = {
+                                            [1] = {
+                                                [1] = "%",
+                                                [2] = tostring(_G.dongen)
+                                            }
+                                        }    
+                                    }
+                                game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                                for r,t in pairs(game:GetService("Workspace").Warriors[game.Players.LocalPlayer.Name]:GetChildren()) do
+                                    t.HumanoidRootPart.CFrame = _G.dongen.HumanoidRootPart.CFrame
+                                end
+                                wait(0.1)
                             end
-                            wait(0.1)
-                            local args = {
-                                [1] = {
-                                        [1] = {
-                                            [1] = "%",
-                                            [2] = tostring(_G.dongen)
-                                        }
-                                    }    
-                                }
-                            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                            for r,t in pairs(game:GetService("Workspace").Warriors[game.Players.LocalPlayer.Name]:GetChildren()) do
-                                t.HumanoidRootPart.CFrame = _G.dongen.HumanoidRootPart.CFrame
-                            end
-                            wait(0.1)
+                        end
+                    elseif  game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == true then
+                        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Return.Inner.Button.MouseButton1Click)
+                        wait(0.5)
+                        if _G.lwe == true then
+                            _G.OPEN = true
+                            _G.Auto = true
+                            _G.au = true    
+                            _G.lwe = false
                         end
                     end
-                end
+                end 
             end)
         end   
     end
@@ -2487,22 +2515,44 @@ local CFEggHero1 = CFrame.new(-17281.7832, 263.809357, 2260.31885, -0.295125246,
 local CFEggHero2 = CFrame.new(-17278.6211, 262.955414, 1496.81335, 0.962847173, 2.61587161e-08, -0.27004683, -7.35679384e-09, 1, 7.06368155e-08, 0.27004683, -6.60257768e-08, 0.962847173)
 spawn(function()
     while wait() do
-        if _G.au then
+        if _G.au or _G.OPEN then
             pcall(function()
                 if _G.Egg == "Reaper" then
-                    if (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                    if (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggReaper1
+                    elseif (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                            local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = ";",
+                                    [2] = "Endless Domain"
+                                }
+                            }
+                        }
+                        
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
                     elseif (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
                         local args = {
                             [1] = "Reaper",
                             [3] = false
                         }
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
-                        wait(0.5)
+                        wait(0.3)
                     end
                 elseif _G.Egg == "Reaper2" then
-                    if (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                    if (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggReaper2
+                    elseif (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                            local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = ";",
+                                    [2] = "Endless Domain"
+                                }
+                            }
+                        }
+                        
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                     elseif (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
                         local args = {
                             [1] = "Reaper",
@@ -2510,12 +2560,23 @@ spawn(function()
                             [3] = false
                         }
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
-                        wait(0.5)
+                        wait(0.3)
                     end
                 elseif _G.Egg == "Hero1" then
-                    if (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+                    if (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggHero1
-                    elseif (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
+                    elseif (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                            local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = ";",
+                                    [2] = "Hero City"
+                                }
+                            }
+                        }
+                        
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))  
+                    elseif (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then  
                         local args = {
                             [1] = "Hero",
                             [2] = 1,
@@ -2523,19 +2584,30 @@ spawn(function()
                         }
                         
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))                        
-                        wait(0.5)
+                        wait(0.3)
                     end
                 elseif _G.Egg == "Hero2" then
-                    if (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =CFEggHero2
-                    elseif (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
+                    if (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggHero2
+                    elseif (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                            local args = {
+                            [1] = {
+                                [1] = {
+                                    [1] = ";",
+                                    [2] = "Hero City"
+                                }
+                            }
+                        }
+                        
+                        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
+                    elseif (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then 
                         local args = {
                             [1] = "Hero",
                             [3] = false
                         }
                         
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Open:InvokeServer(unpack(args))
-                        wait(0.5)
+                        wait(0.3)
                     end
                 end
             end)
@@ -2665,6 +2737,15 @@ if _G.CNOCLIP then
     _G.CNOCLIP:Disconnect()
 end
 _G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+local Tabs2 = Window:CreatePage("Auto-Open-Egg")
+local Sections5 = Tabs2:CreateSection("Open-Egg")
+
+Sections5:CreateToggle("Open-Egg", {Toggled = false, Description = ""}, function(value)
+    _G.OPEN = value
+end)
+Sections5:CreateDropdown("Select-Egg",{List = {"Reaper","Reaper2","Hero1","Hero2"}, Default = _G.Egg}, function(value)
+    _G.Egg = value 
+end)
 spawn(function()
     while wait() do
         local GC = getconnections or get_signal_cons
