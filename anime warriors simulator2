@@ -2482,11 +2482,18 @@ spawn(function()
                 if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == false then 
                     if _G.SelectDun == "Insane" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
-                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
+                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                            end
+                            if _G.OPEN == true then
                                 _G.OPEN = false
+                                _G.opdu = true
+                            elseif _G.Auto == true then
                                 _G.Auto = false
+                                _G.autdu = true
+                            elseif _G.au == true then
                                 _G.au = false
-                                _G.lwe = true
+                                _G.audu = true
                             end
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
                             wait(0.5)
@@ -2502,11 +2509,18 @@ spawn(function()
                         end
                     elseif _G.SelectDun == "Easy" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
-                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
+                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                            end
+                            if _G.OPEN == true then
                                 _G.OPEN = false
+                                _G.opdu = true
+                            elseif _G.Auto == true then
                                 _G.Auto = false
+                                _G.autdu = true
+                            elseif _G.au == true then
                                 _G.au = false
-                                _G.lwe = true
+                                _G.audu = true
                             end
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
                             wait(0.5)
@@ -2522,11 +2536,18 @@ spawn(function()
                         end
                     elseif _G.SelectDun == "EasyAndInsane" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
-                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
+                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                            end
+                            if _G.OPEN == true then
                                 _G.OPEN = false
+                                _G.opdu = true
+                            elseif _G.Auto == true then
                                 _G.Auto = false
+                                _G.autdu = true
+                            elseif _G.au == true then
                                 _G.au = false
-                                _G.lwe = true
+                                _G.audu = true
                             end
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
                             wait(0.5)
@@ -2540,11 +2561,18 @@ spawn(function()
                             }
                             game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                         elseif game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
-                            if _G.OPEN == true or _G.Auto == true or _G.au == true then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
+                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                            end
+                            if _G.OPEN == true then
                                 _G.OPEN = false
+                                _G.opdu = true
+                            elseif _G.Auto == true then
                                 _G.Auto = false
+                                _G.autdu = true
+                            elseif _G.au == true then
                                 _G.au = false
-                                _G.lwe = true
+                                _G.audu = true
                             end
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
                             wait(0.5)
@@ -2560,7 +2588,20 @@ spawn(function()
                         end
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == true then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
+                        firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                    end
                     if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == false then
+                        if _G.OPEN == true then
+                            _G.OPEN = false
+                            _G.opdu = true
+                        elseif _G.Auto == true then
+                            _G.Auto = false
+                            _G.autdu = true
+                        elseif _G.au == true then
+                            _G.au = false
+                            _G.audu = true
+                        end
                         local b = game:GetService("VirtualInputManager")
                         b:SendKeyEvent(true,"E",false,game)
                         b:SendKeyEvent(false,"E",false,game)
@@ -2576,7 +2617,7 @@ spawn(function()
                                 elseif d:FindFirstChild("Lever") then
                                     local le = d.Lever.Rotate.CFrameValue.Value
                                     if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le * CFrame.new(2,0,0)
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le * CFrame.new(0,0,5)
                                         local b = game:GetService("VirtualInputManager")
                                         b:SendKeyEvent(true,"E",false,game)
                                         b:SendKeyEvent(false,"E",false,game)
@@ -2613,11 +2654,15 @@ spawn(function()
                     elseif  game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == true then
                         firesignal(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Return.Inner.Button.MouseButton1Click)
                         wait(0.5)
-                        if _G.lwe == true then
+                        if _G.opdu == true then
                             _G.OPEN = true
+                            _G.opdu = false
+                        elseif _G.autdu == true then
                             _G.Auto = true
-                            _G.au = true    
-                            _G.lwe = false
+                            _G.autdu = false
+                        elseif _G.audu == true then
+                            _G.au = true
+                            _G.audu = false
                         end
                     end
                 end 
