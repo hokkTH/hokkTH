@@ -2303,6 +2303,31 @@ end)
 Sections:CreateDropdown("Select-Dungeon", {List = {"Insane","Easy","EasyAndInsane"}, Default = value}, function(value)
     _G.SelectDun = value
 end)
+local Room = {
+    "Room 5",
+    "Room 10",
+    "Room 15",
+    "Room 20",
+    "Room 25",
+    "Room 30",
+    "Room 35",
+    "Room 40",
+    "Room 45",
+    "Room 50",
+    "Room 55",
+    "Room 60",
+    "Room 65",
+    "Room 70",
+    "Room 75",
+    "Room 80",
+    "Room 85",
+    "Room 90",
+    "Room 95",
+    "Room 100"
+}
+Sections:CreateDropdown("Select-Room-Stop", {List = Room, Default = value}, function(value)
+    _G.Roomstop = value
+end)
 wa = {}
 for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
     if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
@@ -2470,11 +2495,13 @@ spawn(function()
         end
     end
 end)
+
 local doorEy = CFrame.new(-629.624878, 46.8890953, 269.754211, -1, 0, 0, 0, 1, 0, 0, 0, -1)
 local doorIn = CFrame.new(-551.25, 46.9990005, 269.753998, -1, 0, 0, 0, 1, 0, 0, 0, -1)
 local joinEy = CFrame.new(-629.297729, 39.4729958, 236.276978, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
 local joinIn = CFrame.new(-551.547729, 39.4729958, 236.276978, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
-_G.lwe = false
+_G.lein = false
+_G.leEY = false
 spawn(function()
     while wait() do
         if _G.Dungeon then
@@ -2483,7 +2510,7 @@ spawn(function()
                     if _G.SelectDun == "Insane" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
-                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                                firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
                             if _G.OPEN == true then
                                 _G.OPEN = false
@@ -2495,6 +2522,8 @@ spawn(function()
                                 _G.au = false
                                 _G.audu = true
                             end
+                            _G.lein = true
+                            _G.leEY = false
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
                             wait(0.5)
                             local args = {
@@ -2510,7 +2539,7 @@ spawn(function()
                     elseif _G.SelectDun == "Easy" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
-                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                                firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
                             if _G.OPEN == true then
                                 _G.OPEN = false
@@ -2522,6 +2551,8 @@ spawn(function()
                                 _G.au = false
                                 _G.audu = true
                             end
+                            _G.lein = false
+                            _G.leEY = true
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
                             wait(0.5)
                             local args = {
@@ -2537,7 +2568,7 @@ spawn(function()
                     elseif _G.SelectDun == "EasyAndInsane" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
-                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                                firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
                             if _G.OPEN == true then
                                 _G.OPEN = false
@@ -2549,6 +2580,8 @@ spawn(function()
                                 _G.au = false
                                 _G.audu = true
                             end
+                            _G.lein = true
+                            _G.leEY = false
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinIn
                             wait(0.5)
                             local args = {
@@ -2562,7 +2595,7 @@ spawn(function()
                             game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                         elseif game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
-                                firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                                firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
                             if _G.OPEN == true then
                                 _G.OPEN = false
@@ -2574,6 +2607,8 @@ spawn(function()
                                 _G.au = false
                                 _G.audu = true
                             end
+                            _G.lein = false
+                            _G.leEY = true
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = joinEy
                             wait(0.5)
                             local args = {
@@ -2589,7 +2624,7 @@ spawn(function()
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == true then
                     if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
-                        firesignal(game:GetService("Players").hokkTH.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
+                        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                     end
                     if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == false then
                         if _G.OPEN == true then
@@ -2602,29 +2637,43 @@ spawn(function()
                             _G.au = false
                             _G.audu = true
                         end
-                        local b = game:GetService("VirtualInputManager")
-                        b:SendKeyEvent(true,"E",false,game)
-                        b:SendKeyEvent(false,"E",false,game)
                         local CurrentRoom = tostring(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text)
+                        local CurrentRoomST = tostring(_G.Roomstop)
                         local CurrentRoomTE =  string.gsub(CurrentRoom," ","")
+                        local CurrentRoomSTTE =  string.gsub(CurrentRoomST," ","")
                         for l,d in pairs(game:GetService("Workspace").Dungeons:GetDescendants()) do
-                            if d.name == CurrentRoomTE  then
-                                _G.DRT = d.Door.CFrame * CFrame.new(0,0,-220)
-                                if not d:FindFirstChild("Lever") then
-                                    if (_G.DRT.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.DRT
-                                    end
-                                elseif d:FindFirstChild("Lever") then
-                                    local le = d.Lever.Rotate.CFrameValue.Value
-                                    if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le * CFrame.new(0,0,5)
+                            if d.name == CurrentRoomTE then
+                                if d.name ~= CurrentRoomSTTE then
+                                    _G.DRT = d.Door.CFrame * CFrame.new(0,0,-220)
+                                    if not d:FindFirstChild("Lever") then
+                                        if (_G.DRT.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.DRT
+                                        end
+                                    elseif d:FindFirstChild("Lever") then
+                                        local le = d.Lever.Rotate.CFrameValue.Value
+                                        if (le.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  le * CFrame.new(0,0,5)
+                                            local b = game:GetService("VirtualInputManager")
+                                            b:SendKeyEvent(true,"E",false,game)
+                                            b:SendKeyEvent(false,"E",false,game)
+                                        end
                                         local b = game:GetService("VirtualInputManager")
                                         b:SendKeyEvent(true,"E",false,game)
                                         b:SendKeyEvent(false,"E",false,game)
                                     end
-                                    --game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
                                 end
                             end
+                        end
+                        if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text == _G.Roomstop then
+                            if   _G.leEY == true then 
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Easy1[CurrentRoomTE].TeleportHub.Part.CFrame
+                            elseif _G.lein == true then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Insane1[CurrentRoomTE].TeleportHub.Part.CFrame
+                            end                  
+                            local b = game:GetService("VirtualInputManager")
+                            b:SendKeyEvent(true,"E",false,game)
+                            b:SendKeyEvent(false,"E",false,game)
+                            firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Teleport.Frame.Container["Pirate Town"].Inner.Teleport.Inner.Button.MouseButton1Click)
                         end
                         if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text ~= "Room 0" then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
@@ -2664,6 +2713,8 @@ spawn(function()
                             _G.au = true
                             _G.audu = false
                         end
+                        _G.lein = false
+                        _G.leEY = false 
                     end
                 end 
             end)
@@ -2679,8 +2730,12 @@ spawn(function()
     while wait() do
         if _G.au or _G.OPEN then
             pcall(function()
+                local b = game:GetService("VirtualInputManager")
+                b:SendKeyEvent(true,"Space",false,game)
+                wait(0.1)
+                b:SendKeyEvent(false,"Space",false,game)
                 if _G.Egg == "Reaper" then
-                    if (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
+                    if (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 8 and (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggReaper1
                     elseif (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
                             local args = {
@@ -2693,7 +2748,7 @@ spawn(function()
                         }
                         
                         game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
-                    elseif (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
+                    elseif (CFEggReaper1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 8 then
                         local args = {
                             [1] = "Reaper",
                             [3] = false
@@ -2702,7 +2757,7 @@ spawn(function()
                         wait(0.3)
                     end
                 elseif _G.Egg == "Reaper2" then
-                    if (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
+                    if (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 8 and (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggReaper2
                     elseif (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
                             local args = {
@@ -2715,7 +2770,7 @@ spawn(function()
                         }
                         
                         game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-                    elseif (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then
+                    elseif (CFEggReaper2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 8 then
                         local args = {
                             [1] = "Reaper",
                             [2] = 2,
@@ -2725,7 +2780,7 @@ spawn(function()
                         wait(0.3)
                     end
                 elseif _G.Egg == "Hero1" then
-                    if (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
+                    if (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 8 and (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggHero1
                     elseif (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
                             local args = {
@@ -2738,7 +2793,7 @@ spawn(function()
                         }
                         
                         game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))  
-                    elseif (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then  
+                    elseif (CFEggHero1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 8 then  
                         local args = {
                             [1] = "Hero",
                             [2] = 1,
@@ -2749,7 +2804,7 @@ spawn(function()
                         wait(0.3)
                     end
                 elseif _G.Egg == "Hero2" then
-                    if (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 and (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
+                    if (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 8 and (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 950 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFEggHero2
                     elseif (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
                             local args = {
@@ -2762,7 +2817,7 @@ spawn(function()
                         }
                         
                         game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
-                    elseif (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 5 then 
+                    elseif (CFEggHero2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 8 then 
                         local args = {
                             [1] = "Hero",
                             [3] = false
