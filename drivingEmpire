@@ -2953,82 +2953,89 @@ spawn(function()
 			if _G.set.AutoFarmAndAfk and _G.set.Money ~= nil then
 				if game:GetService("Players").LocalPlayer.leaderstats.Cash.Value > _G.set.Money then
 					if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
-						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959)  then
-							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition ~= Vector2.new(360,11.4930951) and game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition ~= Vector2.new(894.656006,45.2476959)  then
-								if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
-									wait(0.2)
-									TP(CFrace)
-								end
-							end
-							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
-								if (game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Body.FP.CFrame.Position  - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
-									local args = {
-										[1] = "Despawn"
-										}
-									game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-									wait(1)
-									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5537.16016, 14.9376659, -4597.00342, -0.630793452, -4.53971047e-08, -0.775950789, -2.97023064e-08, 1, -3.43592461e-08, 0.775950789, 1.37394029e-09, -0.630793452)
-									wait(1)
-									local args = {
-										[1] = "Spawn",
-										[2] = _G.set.SelectCar
-									}
-									game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-								end
-							end
-						else
-							if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
-								TP(CFrace)
-							end
-						end
-					elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
-						local args = {
-							[1] = "Spawn",
-							[2] = _G.set.SelectCar
-						}
-						game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-						wait(3)
-					end
-				else
-					if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
-						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959)  then
-							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
-								for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
-									for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
-										if v.Name == "Forcefield"  and c.Name == "Forcefield" then
-											if v.Transparency == 0 and c.Transparency == 0 then
-												if v.Position ~= c.Position then
-													_G.fis = false
-													_G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
-													_G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-													if _G.A < _G.B then
-														wait(0.2)
-														TP(v.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(-90),0))
-														wait(0.2)
-														TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
-													elseif _G.B < _G.A then
-														wait(0.2)
-														TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(-90),0))
-														wait(0.2)
-														TP(c.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
-													end
-												elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
-														if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
-															wait(0.2)
-															_G.fis = true
-													end
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959) or _G.we == true then
+							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Blackout.Visible == false then
+								if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceTitle.Visible == false then
+									if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Visible == true then	
+										if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Countdown.DataCost == 39 then
+											if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+												if (game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Body.FP.CFrame.Position  - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
+													local args = {
+														[1] = "Despawn"
+														}
+													game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+													wait(3)
+													game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5537.16016, 14.9376659, -4597.00342, -0.630793452, -4.53971047e-08, -0.775950789, -2.97023064e-08, 1, -3.43592461e-08, 0.775950789, 1.37394029e-09, -0.630793452)
+													wait(3)
+													local args = {
+														[1] = "Spawn",
+														[2] = _G.set.SelectCar
+													}
+													game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+													_G.we = false
 												end
 											end
 										end
 									end
 								end
-								if _G.fis then
-									TP(CFrame.new(-5628.90869, 12.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
-									wait(0.2)
-									TP(CFrame.new(-5628.90869, 12.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283) * CFrame.Angles(0,math.rad(90),0))
+							end
+						else
+							_G.we = true
+							if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
+								TP(CFrace)
+							end
+						end
+					end
+				else
+					if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959) or _G.we == true then
+							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Blackout.Visible == false then
+								if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceTitle.Visible == false then
+									if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Visible == true then	
+										if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Countdown.DataCost == 39 then
+											if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+												for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+													for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+														if v.Name == "Forcefield"  and c.Name == "Forcefield" then
+															if v.Transparency == 0 and c.Transparency == 0 then
+																if v.Position ~= c.Position then
+																	_G.fis = false
+																	_G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
+																	_G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+																	if _G.A < _G.B then
+																		wait(0.2)
+																		TP(v.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(-90),0))
+																		wait(0.2)
+																		TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
+																	elseif _G.B < _G.A then
+																		wait(0.2)
+																		TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(-90),0))
+																		wait(0.2)
+																		TP(c.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
+																	end
+																elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
+																		if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
+																			wait(0.5)
+																			_G.fis = true
+																	end
+																end
+															end
+														end
+													end
+												end
+												if _G.fis then
+													TP(CFrame.new(-5628.90869, 12.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
+													wait(0.2)
+													TP(CFrame.new(-5628.90869, 12.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283) * CFrame.Angles(0,math.rad(90),0))
+													_G.we = false
+												end
+											end
+										end
+									end
 								end
 							end
 						else
+							_G.we = true
 							_G.fis = false
 							if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
 								TP(CFrace)
@@ -3153,44 +3160,54 @@ spawn(function()
 		pcall(function()
     		if _G.set.auto then
     		    if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
-    		        if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959) then
-    		            if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
-    		                for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
-    		                    for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
-    		                        if v.Name == "Forcefield"  and c.Name == "Forcefield" then
-    		                            if v.Transparency == 0 and c.Transparency == 0 then
-    		                                if v.Position ~= c.Position then
-    		                                    _G.fis = false
-    		                                    _G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
-    		                                    _G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    		                                    if _G.A < _G.B then
-    		                                        wait(0.2)
-    		                                        TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(-90),0))
-													wait(0.2)
-													TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
-    		                                    elseif _G.B < _G.A then
-    		                                        wait(0.2)
-    		                                        TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(-90),0))
-													wait(0.2)
-													TP(c.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
-    		                                    end
-    		                                elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
-    		                                        if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
-    		                                            wait(0.2)
-    		                                            _G.fis = true
-    		                                    end
-    		                                end
-    		                            end
-    		                        end
-    		                    end
-    		                end
-    		                if _G.fis then
-    		                    TP(CFrame.new(-5628.90869, 15.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
-								wait(0.2)
-								TP(CFrame.new(-5628.90869, 15.4843054, -4800.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283) * CFrame.Angles(0,math.rad(90),0))
+    		        if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959) or _G.we == true then
+    		            if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Blackout.Visible == false then
+							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceTitle.Visible == false then
+								if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Visible == true then	
+									if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Countdown.DataCost == 39 then
+										if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+    		            				    for i,v in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+    		            				        for k,c in pairs(game:GetService("Workspace").Game.Races.LocalSession:GetDescendants()) do
+    		            				            if v.Name == "Forcefield"  and c.Name == "Forcefield" then
+    		            				                if v.Transparency == 0 and c.Transparency == 0 then
+    		            				                    if v.Position ~= c.Position then
+    		            				                        _G.fis = false
+    		            				                        _G.A = (v.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude 
+    		            				                        _G.B = (c.Position -  game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    		            				                        if _G.A < _G.B then
+    		            				                            wait(0.2)
+    		            				                            TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(-90),0))
+																	wait(0.2)
+																	TP(v.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
+    		            				                        elseif _G.B < _G.A then
+    		            				                            wait(0.2)
+    		            				                            TP(c.CFrame* CFrame.new(1,0,0)* CFrame.Angles(0,math.rad(-90),0))
+																	wait(0.2)
+																	TP(c.CFrame * CFrame.new(1,0,0) * CFrame.Angles(0,math.rad(90),0))
+    		            				                        end
+    		            				                    elseif v.CFrame ~= CFrame.new(-5057.44482, 24.793047, -5676.75342, 0.438346624, 0, 0.898806036, 0, 1, 0, -0.898806036, 0, 0.438346624) then
+    		            				                            if v.CFrame == CFrame.new(-5632.63428, 19.4176083, -4802.36572, -0.587827086, 0, -0.808986604, 0, 1, 0, 0.808986604, 0, -0.587827086) then
+    		            				                                wait(0.5)
+    		            				                                _G.fis = true
+    		            				                        end
+    		            				                    end
+    		            				                end
+    		            				            end
+    		            				        end
+    		            				    end
+    		            				    if _G.fis then
+    		            				        TP(CFrame.new(-5628.90869, 15.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
+												wait(0.2)
+												TP(CFrame.new(-5628.90869, 15.4843054, -4800.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283) * CFrame.Angles(0,math.rad(90),0))
+												_G.we = false
+											end
+    		            				end
+									end
+								end
 							end
-    		            end
+						end
     		        else
+						_G.we = true
     		            _G.fis = false
     		            if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
     		                TP(CFrace)
@@ -3223,36 +3240,56 @@ spawn(function()
 while wait() do
     if _G.AFK then
         if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
-            if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Position == UDim2.new(0.5,0,0,-30) then
-                if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
-                    wait(5)
-                    if (game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Body.FP.CFrame.Position  - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
-                        local args = {
-                            [1] = "Despawn"
-                            }
-                        game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-                        wait(3)
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5537.16016, 14.9376659, -4597.00342, -0.630793452, -4.53971047e-08, -0.775950789, -2.97023064e-08, 1, -3.43592461e-08, 0.775950789, 1.37394029e-09, -0.630793452)
-                        wait(3)
-                        local args = {
-                            [1] = "Spawn",
-                            [2] = _G.set.SelectCar
-                        }
-                        game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-                    end
-                end
+			if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959) or _G.we == true then
+				if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Blackout.Visible == false then
+					if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceTitle.Visible == false then
+						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Visible == true then	
+							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Countdown.DataCost == 39 then
+                				if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.Text ~= '0:00.00' then
+                				    if (game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Body.FP.CFrame.Position  - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
+                				        local args = {
+                				            [1] = "Despawn"
+                				            }
+                				        game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+                				        wait(3)
+                				        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5537.16016, 14.9376659, -4597.00342, -0.630793452, -4.53971047e-08, -0.775950789, -2.97023064e-08, 1, -3.43592461e-08, 0.775950789, 1.37394029e-09, -0.630793452)
+                				        wait(3)
+                				        local args = {
+                				            [1] = "Spawn",
+                				            [2] = _G.set.SelectCar
+                				        }
+                				        game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+										_G.we = false
+                				    end
+                				end
+							end
+						end
+					end
+				end
             else
+				_G.we = true
                 if (CFrace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
                     TP(CFrace)
                 end
             end
         elseif not game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
-            local args = {
-                [1] = "Spawn",
-                [2] = _G.set.SelectCar
-            }
-            game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-            wait(3)
+			if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - cri.Position).Magnitude > 200 then
+				local args = { 
+					[1] = "tp",
+					[2] = "circuit"
+				}
+				game:GetService("ReplicatedStorage").Remotes.ClientCommunication:FireServer(unpack(args))
+				wait(1)
+			elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - cri.Position).Magnitude < 199  then
+				wait(2)
+				local args = {
+					[1] = "Spawn",
+					[2] = _G.set.SelectCar
+				}
+			
+				game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
+				wait(3)
+			end
         end
     end
 end
