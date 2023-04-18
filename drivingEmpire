@@ -2906,12 +2906,15 @@ end
 page1:Line()
 local Farm = page1:Toggle("Auto-Farm",_G.set.auto, function(bool)
     _G.set.auto = bool
+	_G.we = false
     Save()
 end)
 local  AFK = page1:Toggle("Auto-FarmAFK",_G.AFK, function(far)
+	_G.we = false
     _G.AFK = far
 end)
 local AutoFarm = page1:Toggle("Auto-FarmAfkAndAuto-Farm",_G.set.AutoFarmAndAfk, function(Afk)
+	_G.we = false
     _G.set.AutoFarmAndAfk = Afk
 	Save()
 end)
