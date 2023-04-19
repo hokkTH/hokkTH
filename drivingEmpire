@@ -2989,7 +2989,7 @@ spawn(function()
 							end
 						end
 					end
-				else
+				elseif game:GetService("Players").LocalPlayer.leaderstats.Cash.Value < _G.set.Money then
 					if game:GetService("Workspace").Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) then
 						if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(360,11.4930951) or game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.RaceInfo.Time.AbsolutePosition == Vector2.new(894.656006,45.2476959) or _G.we == true then
 							if game:GetService("Players").LocalPlayer.PlayerGui.MainHUD.Blackout.Visible == false then
@@ -3202,6 +3202,7 @@ spawn(function()
     		            				        TP(CFrame.new(-5628.90869, 15.4843054, -4802.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283))
 												wait(0.2)
 												TP(CFrame.new(-5628.90869, 15.4843054, -4800.21191, -0.86339879, 0.00865115412, 0.504447937, -4.45800142e-05, 0.999851644, -0.0172235034, -0.504522145, -0.0148932403, -0.863270283) * CFrame.Angles(0,math.rad(90),0))
+												wait(0.5)
 												_G.we = false
 											end
     		            				end
