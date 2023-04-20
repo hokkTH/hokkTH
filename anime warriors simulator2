@@ -855,8 +855,19 @@ RightGroupbox1:AddButton('not Ctrl + click to Teleport',function()
         v:Disable()
     end
 end)
-RightGroupbox1:AddButton('Lock-Fps',function()
-    setfpscap(30)
+
+RightGroupbox1:AddSlider('Fps', {
+    Text = 'Fps',
+
+    Default = 60,
+    Min = 30,
+    Max = 144,
+    Rounding = 1,
+
+    Compact = false, 
+})
+Options.Fps:OnChanged(function()
+    setfpscap(tonumber(Options.Fps.Value))
 end)
 spawn(function()
     while wait() do
