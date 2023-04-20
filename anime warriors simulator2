@@ -148,7 +148,7 @@ local MyButton = LeftGroupBox:AddButton('ResetMon', function()
     end
 end)
 
-local Labe = LeftGroupBox:AddLabel('Stats-Dungeon)
+local Labe = LeftGroupBox:AddLabel('Stats-Dungeon')
 spawn(function()
     while wait() do
         pcall(function()
