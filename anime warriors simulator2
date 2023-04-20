@@ -148,7 +148,16 @@ local MyButton = LeftGroupBox:AddButton('ResetMon', function()
     end
 end)
 
-
+local Labe = LeftGroupBox:AddLabel('Stats-Dungeon)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.StatsDun ~= '' then
+                Labe:SetText(_G.StatsDun)
+            end
+        end)
+    end
+end)
 LeftGroupBox:AddToggle('AutoDungeon', {
     Text = 'Auto-Dungeon',
     Default = false, 
@@ -299,6 +308,7 @@ local joinEy = CFrame.new(-629.297729, 39.4729958, 236.276978, -1.1920929e-07, 0
 local joinIn = CFrame.new(-551.547729, 39.4729958, 236.276978, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
 _G.lein = false
 _G.leEY = false
+_G.StatsDun = ''
 spawn(function()
     while wait() do
         if _G.Dungeon then
@@ -315,8 +325,10 @@ spawn(function()
                 game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))    
                 end
                 if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Enabled == false then 
+                    _G.StatsDun = "WaitingDungeon"
                     if _G.SelectDun == "Insane" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
+                            _G.StatsDun = "JoinDungeon"
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
                                 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
@@ -346,6 +358,7 @@ spawn(function()
                         end
                     elseif _G.SelectDun == "Easy" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
+                            _G.StatsDun = "JoinDungeon"
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
                                 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
@@ -375,6 +388,7 @@ spawn(function()
                         end
                     elseif _G.SelectDun == "EasyAndInsane" then
                         if game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Insane.Door.CFrame ~= doorIn then
+                            _G.StatsDun = "JoinDungeon"
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
                                 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
@@ -402,6 +416,7 @@ spawn(function()
                             }
                             game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
                         elseif game:GetService("Workspace").Components.DungeonLobby.Gamemodes.Easy.Door.CFrame ~= doorEy then
+                            _G.StatsDun = "JoinDungeon"
                             if game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Enabled == true then
                                 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                             end
@@ -435,6 +450,7 @@ spawn(function()
                         firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Warriors.Frame.Exit.Inner.Button.MouseButton1Click)
                     end
                     if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Result.Visible == false then
+                        _G.StatsDun = "DungeonIsStart"
                         if _G.OPEN == true then
                             _G.OPEN = false
                             _G.opdu = true
@@ -454,6 +470,7 @@ spawn(function()
                         for l,d in pairs(game:GetService("Workspace").Dungeons:GetDescendants()) do
                             if d.name == CurrentRoomTE then
                                 if d.name ~= CurrentRoomSTTEEy or d.name ~= CurrentRoomSTTEIn then
+                                    _G.StatsDun = "GoToLever"
                                     _G.DRT = d.Door.CFrame * CFrame.new(0,0,-220)
                                     if not d:FindFirstChild("Lever") then
                                         if (_G.DRT.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
@@ -476,6 +493,7 @@ spawn(function()
                         end
                         if _G.leEY == true then
                             if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text == _G.RoomstopForEy then
+                                _G.StatsDun = "DungeonIsfinish"
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Easy1[CurrentRoomTE].TeleportHub.Part.CFrame              
                                 local b = game:GetService("VirtualInputManager")
                                 b:SendKeyEvent(true,"E",false,game)
@@ -510,6 +528,7 @@ spawn(function()
                             end
                         elseif _G.lein == true then
                             if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text == _G.RoomstopForIn then
+                                _G.StatsDun = "DungeonIsfinish"
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Insane1[CurrentRoomTE].TeleportHub.Part.CFrame               
                                 local b = game:GetService("VirtualInputManager")
                                 b:SendKeyEvent(true,"E",false,game)
@@ -527,6 +546,7 @@ spawn(function()
                                 end
                                 _G.lein = false
                                 _G.leEY = false 
+                                _G.StatsDun = "WaitingDungeon"
                                 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Teleport.Frame.Container["Pirate Town"].Inner.Teleport.Inner.Button.MouseButton1Click)
                                 wait(0.5)
                                 if _G.opdu == true then
@@ -541,10 +561,12 @@ spawn(function()
                                 end
                                 _G.lein = false
                                 _G.leEY = false 
+                                _G.StatsDun = "WaitingDungeon"
                             end
                         end
                         if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text ~= "Room 0" then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
+                                _G.StatsDun = "kill"
                                 for i,v in pairs(game:GetService("Workspace").ClientEnemies:GetChildren()) do
                                     if v.HumanoidRootPart:FindFirstChild("EnemyHealthBar") then
                                         if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 270 then
@@ -583,6 +605,7 @@ spawn(function()
                         end
                         _G.lein = false
                         _G.leEY = false 
+                        _G.StatsDun = "WaitingDungeon"
                     end
                 end 
             end)
