@@ -193,15 +193,27 @@ local Room = {
     "Room 100"
 }
 
-LeftGroupBox:AddDropdown('SelectRoomStop', {
+LeftGroupBox:AddDropdown('SelectRoomStopForEasy', {
     Values = Room,
     Default = "",
     Multi = false, 
-    Text = 'Select-Room-Stop',
+    Text = 'Select-Room-Stop-For-Easy',
     Tooltip = 'This is a tooltip', 
 
     Callback = function(Value)
-        _G.Roomstop = Value
+        _G.RoomstopForEy = Value
+    end
+})
+
+LeftGroupBox:AddDropdown('SelectRoomStopForInsane', {
+    Values = Room,
+    Default = "",
+    Multi = false, 
+    Text = 'Select-Room-Stop-For-Insane',
+    Tooltip = 'This is a tooltip', 
+
+    Callback = function(Value)
+        _G.RoomstopForIn = Value
     end
 })
 
@@ -434,12 +446,14 @@ spawn(function()
                             _G.audu = true
                         end
                         local CurrentRoom = tostring(game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text)
-                        local CurrentRoomST = tostring(_G.Roomstop)
+                        local CurrentRoomSTEy = tostring(_G.RoomstopForEy)
+                        local CurrentRoomSTIn = tostring(_G.RoomstopForIn)
                         local CurrentRoomTE =  string.gsub(CurrentRoom," ","")
-                        local CurrentRoomSTTE =  string.gsub(CurrentRoomST," ","")
+                        local CurrentRoomSTTEEy =  string.gsub(CurrentRoomSTEy," ","")
+                        local CurrentRoomSTTEIn =  string.gsub(CurrentRoomSTIn," ","")
                         for l,d in pairs(game:GetService("Workspace").Dungeons:GetDescendants()) do
                             if d.name == CurrentRoomTE then
-                                if d.name ~= CurrentRoomSTTE then
+                                if d.name ~= CurrentRoomSTTEEy or d.name ~= CurrentRoomSTTEIn then
                                     _G.DRT = d.Door.CFrame * CFrame.new(0,0,-220)
                                     if not d:FindFirstChild("Lever") then
                                         if (_G.DRT.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20 then
@@ -460,30 +474,50 @@ spawn(function()
                                 end
                             end
                         end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text == _G.Roomstop then
-                            if   _G.leEY == true then 
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Easy1[CurrentRoomTE].TeleportHub.Part.CFrame
-                            elseif _G.lein == true then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Insane1[CurrentRoomTE].TeleportHub.Part.CFrame
-                            end                  
-                            local b = game:GetService("VirtualInputManager")
-                            b:SendKeyEvent(true,"E",false,game)
-                            b:SendKeyEvent(false,"E",false,game)
-                            wait(1)
-                            firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Teleport.Frame.Container["Pirate Town"].Inner.Teleport.Inner.Button.MouseButton1Click)
-                            wait(0.5)
-                            if _G.opdu == true then
-                                _G.OPEN = true
-                                _G.opdu = false
-                            elseif _G.autdu == true then
-                                _G.Auto = true
-                                _G.autdu = false
-                            elseif _G.audu == true then
-                                _G.au = true
-                                _G.audu = false
+                        if _G.leEY == true then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text == _G.RoomstopForEy then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Easy1[CurrentRoomTE].TeleportHub.Part.CFrame              
+                                local b = game:GetService("VirtualInputManager")
+                                b:SendKeyEvent(true,"E",false,game)
+                                b:SendKeyEvent(false,"E",false,game)
+                                wait(1)
+                                firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Teleport.Frame.Container["Pirate Town"].Inner.Teleport.Inner.Button.MouseButton1Click)
+                                wait(0.5)
+                                if _G.opdu == true then
+                                    _G.OPEN = true
+                                    _G.opdu = false
+                                elseif _G.autdu == true then
+                                    _G.Auto = true
+                                    _G.autdu = false
+                                elseif _G.audu == true then
+                                    _G.au = true
+                                    _G.audu = false
+                                end
+                                _G.lein = false
+                                _G.leEY = false 
                             end
-                            _G.lein = false
-                            _G.leEY = false 
+                        elseif _G.lein == true then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text == _G.RoomstopForIn then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Dungeons.Insane1[CurrentRoomTE].TeleportHub.Part.CFrame               
+                                local b = game:GetService("VirtualInputManager")
+                                b:SendKeyEvent(true,"E",false,game)
+                                b:SendKeyEvent(false,"E",false,game)
+                                wait(1)
+                                firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Frames.Teleport.Frame.Container["Pirate Town"].Inner.Teleport.Inner.Button.MouseButton1Click)
+                                wait(0.5)
+                                if _G.opdu == true then
+                                    _G.OPEN = true
+                                    _G.opdu = false
+                                elseif _G.autdu == true then
+                                    _G.Auto = true
+                                    _G.autdu = false
+                                elseif _G.audu == true then
+                                    _G.au = true
+                                    _G.audu = false
+                                end
+                                _G.lein = false
+                                _G.leEY = false 
+                            end
                         end
                         if game:GetService("Players").LocalPlayer.PlayerGui.HUDs.Dungeon.Frame.CurrentRoom.Text ~= "Room 0" then
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Bottom.Click.Click.Inner.BackgroundTransparency == 0.5 then
