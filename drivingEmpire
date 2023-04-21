@@ -3226,14 +3226,14 @@ spawn(function()
 						game:GetService("ReplicatedStorage").Remotes.ClientCommunication:FireServer(unpack(args))
 						wait(1)
 					elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - cri.Position).Magnitude < 199  then
-    		        	wait(2)
+    		        	wait(1)
 						local args = {
     		        	    [1] = "Spawn",
     		        	    [2] = _G.set.SelectCar
     		        	}
 					
     		        	game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-    		        	wait(3)
+    		        	wait(2)
 					end
     		    end
     		end
@@ -3256,8 +3256,8 @@ while wait() do
                 				            }
                 				        game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
                 				        wait(3)
-                				        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5537.16016, 14.9376659, -4597.00342, -0.630793452, -4.53971047e-08, -0.775950789, -2.97023064e-08, 1, -3.43592461e-08, 0.775950789, 1.37394029e-09, -0.630793452)
-                				        wait(3)
+                				        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5442.54785, 14.738306, -4667.36719, -0.578608871, -1.72667871e-08, -0.815605164, -1.01809128e-07, 1, 5.10551921e-08, 0.815605164, 1.12577041e-07, -0.578608871)
+                				        wait(5)
                 				        local args = {
                 				            [1] = "Spawn",
                 				            [2] = _G.set.SelectCar
@@ -3285,14 +3285,14 @@ while wait() do
 				game:GetService("ReplicatedStorage").Remotes.ClientCommunication:FireServer(unpack(args))
 				wait(1)
 			elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - cri.Position).Magnitude < 199  then
-				wait(2)
+				wait(1)
 				local args = {
 					[1] = "Spawn",
 					[2] = _G.set.SelectCar
 				}
 			
 				game:GetService("ReplicatedStorage").Remotes.VehicleEvent:FireServer(unpack(args))
-				wait(3)
+				wait(2)
 			end
         end
     end
