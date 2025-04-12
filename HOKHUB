@@ -10,7 +10,7 @@ elseif game.PlaceId == 10524502174 then
 elseif game.PlaceId == 12192552089 then 
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/Fruit%20warriors"))()
 elseif game.PlaceId == 73956553001240 then
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/Fruit%20warriors"))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/VolleyballLegends"))()
 else
    print("not")
 end
