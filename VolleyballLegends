@@ -23,15 +23,20 @@ line1:Toggle("Auto-Farm",false, function(bool)
     _G.NoCIP = bool
 end)
 
-line1:Slider("SizeBall", 0, 20, 10, function(t)
+--[[line1:Slider("SizeBall", 0, 20, 10, function(t)
     _G.size = t
 end)
-
+]]
 line1:Button("FPS30", function()
     setfpscap(30)
 end)
 
-
+line1:Toggle("Lock-lvl",false, function(bool)
+    _G.lvl = bool
+end)
+line1:Slider("lvl", 0, 100, 10, function(t)
+    _G.le = tostring(t)
+end)
 _G.go = false 
 _G.NoCIP = false
 spawn(function()
@@ -71,18 +76,20 @@ spawn(function()
         end
     end
 end)
---[[spawn(function()
+spawn(function()
     while wait() do
-        if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text == "LVL 15" then
-            _G.Farm = false
-            game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
-		    game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
-            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.Visible == true then
-                game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.ReturnToLobby:InvokeServer()
+        if _G.lvl then 
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text == _G.le then
+                _G.Farm = false
+                game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+		        game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+                if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.Visible == true then
+                    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.ReturnToLobby:InvokeServer()
+                end
             end
         end
     end
-end)]]
+end)
 spawn(function()
     while wait() do
         if _G.Farm then
