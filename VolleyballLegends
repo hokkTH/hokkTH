@@ -1,0 +1,140 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("VolleyBall")
+
+local serv = win:Server("HOKHUB", "")
+
+local line1 = serv:Channel("AutoFram")
+
+_G.SelectedSide = nil 
+_G.Farm = false
+_G.NoCIP = false
+_G.go = false
+
+
+line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
+    _G.SelectedSide = side
+end)
+
+
+line1:Toggle("Auto-Farm",false, function(bool)
+    _G.Farm = bool
+    _G.NoCIP = bool
+end)
+
+line1:Slider("SizeBall", 0, 20, 10, function(t)
+    _G.size = t
+end)
+
+line1:Button("FPS30", function()
+    setfpscap(30)
+end)
+
+
+_G.go = false 
+_G.NoCIP = false
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Farm then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.Visible == false then
+                    _G.go = false -- รีเซ็ต _G.go จนกว่าจะเข้าได้
+                    local sideIndex = (_G.SelectedSide == "Left") and 1 or 2 -- Left = 1, Right = 2
+                    if _G.SelectedSide then
+                        for teamNum = 1, 6 do
+                            local args = { [1] = sideIndex, [2] = teamNum }
+                            local success = game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.RequestJoin:InvokeServer(unpack(args))
+                            if success then -- ถ้าเข้าร่วมสำเร็จ
+                                print("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
+                                break -- ออกจากลูปเมื่อเข้าร่วมได้
+                            end
+                            wait(0.5) -- รอสักครู่ก่อนลองทีมถัดไป
+                        end
+                    end
+                else
+                    _G.go = true -- เมื่อเข้าเกมแล้วให้เริ่มฟังก์ชันถัดไป
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Farm then
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.RoundOverStats.visible == true then
+                for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Interface.RoundOverStats.ReturnContainer.BackBtn.Activated)) do
+                    v.Function()
+                end
+            end
+        end
+    end
+end)
+--[[spawn(function()
+    while wait() do
+        if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text == "LVL 15" then
+            _G.Farm = false
+            game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+		    game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.Visible == true then
+                game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.ReturnToLobby:InvokeServer()
+            end
+        end
+    end
+end)]]
+spawn(function()
+    while wait() do
+        if _G.Farm then
+		    game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+		    game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+        end
+	end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Farm and _G.go then
+            --print("")
+		    for i,v in pairs(workspace:GetDescendants()) do
+		    	if v.ClassName == "Model" then
+		            if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
+		                for _,d in pairs(v:GetChildren()) do
+		                    if d.Name == "Cube.001" then
+		    		            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d.Position)* CFrame.new(1,0,0)
+		    					--d.Size = Vector3.new(_G.size,_G.size,_G.size)
+		                    end
+		                end
+		            end
+		    	end
+		    end
+        end
+	end
+end)
+
+local function NoclipLoop()
+        if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
+            for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if child:IsA("BasePart") and child.CanCollide == true then
+                    child.CanCollide = false 
+                end
+            end
+        end
+end
+if _G.CNOCLIP then
+    _G.CNOCLIP:Disconnect()
+end
+_G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
+		if Open then
+            game:GetService("CoreGui").Discord.MainFrame.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").Discord.MainFrame.Visible = false
+            -- = true
+		end
+	end
+end)
