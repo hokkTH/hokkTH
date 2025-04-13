@@ -32,6 +32,10 @@ line1:Button("FPS30", function()
     setfpscap(30)
 end)
 
+line1:Button("GetJobid", function()
+    setclipboard(tostring(game.JobId))
+end)
+
 line1:Toggle("Lock-lvl",false, function(bool)
     _G.lvl = bool
 end)
