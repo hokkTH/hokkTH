@@ -56,7 +56,7 @@ end)
 line1:Toggle("Lock-lvl",false, function(bool)
     _G.lvl = bool
 end)
-line1:Slider("lvl", 0, 100, 10, function(t)
+textbs:Textbox("Lvl","Type here!",true,function(t)
     _G.le = tostring(t)
 end)
 _G.go = false 
