@@ -101,7 +101,7 @@ end)
 spawn(function()
     while wait() do
         if _G.lvl then 
-            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text == _G.le then
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text == "LVL ".._G.le then
                 _G.Farm = false
                 game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
 		        game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
