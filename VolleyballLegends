@@ -53,7 +53,7 @@ line1:Button("Rejoin", function()
     ts:Teleport(game.PlaceId, p)
 end)
 
-line1:Toggle("Lock-lvl",false, function(bool)
+line1:Toggle("Lock-lvl",true, function(bool)
     _G.lvl = bool
 end)
 line1:Textbox("Lvl","Type here!",true,function(t)
@@ -102,6 +102,7 @@ spawn(function()
     while wait() do
         if _G.lvl then 
             if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text == "LVL ".._G.le then
+                print("end")
                 _G.Farm = false
                 game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
 		        game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
