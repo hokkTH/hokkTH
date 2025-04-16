@@ -28,12 +28,29 @@ end)
     _G.size = t
 end)
 ]]
-line1:Button("FPS30", function()
-    setfpscap(30)
+line1:Button("Code", function()
+    local config = {
+        codes = {"100K_INTERESTED2","SEASON_2","UPDATE_12","EASTER","RANKED_FIX","800K_LIKES","COOKED","DELAY_LEGENDS","TIMESKIP_KAGAYOMO","CHOPPED","EASTER_EGGS","SHIELD_BREAKER","400M_VISITS"}
+    }
+    
+    local codes = config.codes
+    
+    for _, code in pairs(codes) do
+        local args = {
+            [1] = code
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
+    end
 end)
 
 line1:Button("GetJobid", function()
     setclipboard(tostring(game.JobId))
+end)
+
+line1:Button("Rejoin", function()
+    local ts = game:GetService("TeleportService")
+    local p = game:GetService("Players").LocalPlayer
+    ts:Teleport(game.PlaceId, p)
 end)
 
 line1:Toggle("Lock-lvl",false, function(bool)
@@ -49,21 +66,21 @@ spawn(function()
         pcall(function()
             if _G.Farm then
                 if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.Visible == false then
-                    _G.go = false -- รีเซ็ต _G.go จนกว่าจะเข้าได้
-                    local sideIndex = (_G.SelectedSide == "Left") and 1 or 2 -- Left = 1, Right = 2
+                    _G.go = false 
+                    local sideIndex = (_G.SelectedSide == "Left") and 1 or 2 
                     if _G.SelectedSide then
                         for teamNum = 1, 6 do
                             local args = { [1] = sideIndex, [2] = teamNum }
                             local success = game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.RequestJoin:InvokeServer(unpack(args))
-                            if success then -- ถ้าเข้าร่วมสำเร็จ
+                            if success then 
                                 print("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
-                                break -- ออกจากลูปเมื่อเข้าร่วมได้
+                                break 
                             end
-                            wait(0.5) -- รอสักครู่ก่อนลองทีมถัดไป
+                            wait(0.5) 
                         end
                     end
                 else
-                    _G.go = true -- เมื่อเข้าเกมแล้วให้เริ่มฟังก์ชันถัดไป
+                    _G.go = true 
                 end
             end
         end)
@@ -147,7 +164,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 		else
 		    Open = true
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
-            -- = true
 		end
 	end
 end)
