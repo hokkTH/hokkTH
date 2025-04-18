@@ -114,15 +114,35 @@ spawn(function()
     end
 end)
 spawn(function()
-    while wait() do
+    while wait(1) do
         if _G.Farm then
 		    game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
 		    game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
         end
 	end
 end)
-
-spawn(function()
+local function Farm()
+    if _G.Farm and _G.go then
+        game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+        game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+        for i,v in pairs(workspace:GetDescendants()) do
+            if v.ClassName == "Model" then
+                if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
+                    for _,d in pairs(v:GetChildren()) do
+                        if d.Name == "Cube.001" then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d.Position)* CFrame.new(1,0,0)
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+if _G.loop then
+    _G.loop:Disconnect()
+end
+_G.loop = game:GetService('RunService').Stepped:Connect(Farm)
+--[[spawn(function()
     while wait() do
         if _G.Farm and _G.go then
             --print("")
@@ -140,16 +160,16 @@ spawn(function()
 		    end
         end
 	end
-end)
+end)]]
 
 local function NoclipLoop()
-        if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
-            for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                if child:IsA("BasePart") and child.CanCollide == true then
-                    child.CanCollide = false 
-                end
+    if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
+        for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if child:IsA("BasePart") and child.CanCollide == true then
+                child.CanCollide = false 
             end
         end
+    end
 end
 if _G.CNOCLIP then
     _G.CNOCLIP:Disconnect()
