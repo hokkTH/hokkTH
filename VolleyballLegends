@@ -1,6 +1,6 @@
 repeat wait() until game:IsLoaded()
 wait(2)
-local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
 
 local win = DiscordLib:Window("VolleyBall")
 
@@ -171,3 +171,8 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 		end
 	end
 end)
+
+--[[for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    numplay = i
+end
+print(numplay)]]
