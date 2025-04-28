@@ -53,7 +53,7 @@ line1:Button("Rejoin", function()
     ts:Teleport(game.PlaceId, p)
 end)
 
-line1:Toggle("Lock-lvl",true, function(bool)
+line1:Toggle("Lock-lvl",false, function(bool)
     _G.lvl = bool
 end)
 line1:Textbox("Lvl","Type here!",true,function(t)
