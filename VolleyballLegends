@@ -1,3 +1,6 @@
+if game:GetService("CoreGui"):FindFirstChild("Discord") then
+    game:GetService("CoreGui").Discord:Destroy()
+end
 repeat wait() until game:IsLoaded()
 wait(2)
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
@@ -13,7 +16,9 @@ _G.Farm = false
 _G.NoCIP = false
 _G.go = false
 
-
+if _G.locklvl == nil then
+    _G.locklvl = false
+end
 line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
     _G.SelectedSide = side
 end)
@@ -30,7 +35,7 @@ end)
 ]]
 line1:Button("Code", function()
     local config = {
-        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"}
+        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
     }
     
     local codes = config.codes
@@ -53,11 +58,11 @@ line1:Button("Rejoin", function()
     ts:Teleport(game.PlaceId, p)
 end)
 
-line1:Toggle("Lock-lvl",true, function(bool)
-    _G.lvl = bool
+line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
+    _G.locklvl = bool
 end)
 line1:Textbox("Lvl","Type here!",true,function(t)
-    _G.le = tostring(t)
+    _G.le = tonumber(t)
 end)
 _G.go = false 
 _G.NoCIP = false
@@ -107,12 +112,23 @@ spawn(function()
         end
 	end
 end)
+
 local function Farm()
     if _G.Farm and _G.go then
+        if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+            local Noclip = Instance.new("BodyVelocity")
+            Noclip.Name = "HOKHUB"
+            Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+            Noclip.MaxForce = Vector3.new(100000,100000,100000)
+            Noclip.Velocity = Vector3.new(0,0,0)
+        end
         game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
         game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
-        if _G.lvl then
-            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text ~= "LVL ".._G.le then
+        if _G.locklvl then
+            local gamelvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+            local numlvl = string.match(gamelvl, "%d+")
+            numlvl = tonumber(numlvl)
+            if numlvl < _G.le then
                 for i,v in pairs(workspace:GetDescendants()) do
                     if v.ClassName == "Model" then
                         if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
@@ -125,7 +141,7 @@ local function Farm()
                     end
                 end
             end
-        elseif _G.lvl == false then
+        elseif _G.locklvl == false then
             for i,v in pairs(workspace:GetDescendants()) do
                 if v.ClassName == "Model" then
                     if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
@@ -137,6 +153,10 @@ local function Farm()
                     end
                 end
             end
+        end
+    else
+        if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+            game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
         end
     end
 end
@@ -185,8 +205,3 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 		end
 	end
 end)
-
---[[for i,v in pairs(game:GetService("Players"):GetChildren()) do
-    numplay = i
-end
-print(numplay)]]
