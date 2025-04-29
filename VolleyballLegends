@@ -30,7 +30,7 @@ end)
 ]]
 line1:Button("Code", function()
     local config = {
-        codes = {"UPDATE_15","TWINS_ARE_HERE","600K_MEMBERS"}
+        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"}
     }
     
     local codes = config.codes
