@@ -57,7 +57,20 @@ line1:Button("Rejoin", function()
     local p = game:GetService("Players").LocalPlayer
     ts:Teleport(game.PlaceId, p)
 end)
-
+line1:Button("GetPlaceId", function()
+    setclipboard(tostring(game.PlaceId, p))
+end)
+line1:Button("Add To Acc", function()
+    local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
+    local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
+    style = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Styles.LeftSidePanel.Slot1.Title.Text
+    ability = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Abilities.LeftSidePanel.Slot1.Title.Text
+    lvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+    SUM  = lvl.." + "..style.." + "..ability
+    if MyAccount then
+        MyAccount:SetDescription(SUM)
+    end
+end)
 line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
     _G.locklvl = bool
 end)
