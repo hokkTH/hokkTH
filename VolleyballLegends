@@ -15,9 +15,12 @@ _G.SelectedSide = nil
 _G.Farm = false
 _G.NoCIP = false
 _G.go = false
+_G.code = false
 
 if _G.locklvl == nil then
     _G.locklvl = false
+elseif _G.autocode == nil then
+    _G.autocode = false
 end
 line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
     _G.SelectedSide = side
@@ -122,6 +125,43 @@ spawn(function()
         if _G.Farm then
 		    game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
 		    game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+        end
+        if _G.autocode then
+            local gamelvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+            local numlvl = string.match(gamelvl, "%d+")
+            numlvl = tonumber(numlvl)
+            if numlvl == 15 or numlvl > 15 then
+                _G.code = true
+                if _G.code and _G.autocode then
+                    local config = {
+                        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
+                    }
+
+                    local codes = config.codes
+
+                    for _, code in pairs(codes) do
+                        local args = {
+                            [1] = code
+                        }
+                        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
+                    end
+                    wait(0.5)
+                    local config = {
+                        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
+                    }
+
+                    local codes = config.codes
+
+                    for _, code in pairs(codes) do
+                        local args = {
+                            [1] = code
+                        }
+                        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
+                    end
+                    _G.code = false
+                    _G.autocode = false
+                end
+            end
         end
 	end
 end)
