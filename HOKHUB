@@ -11,6 +11,8 @@ elseif game.PlaceId == 12192552089 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/main/Fruit%20warriors"))()
 elseif game.PlaceId == 73956553001240 or game.PlaceId == 134314141048307 or game.PlaceId == 109684591839194 or game.PlaceId == 86789627188240 or game.PlaceId == 6931042565 or game.PlaceId == 74691681039273 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/VolleyballLegends"))()
+elseif  game.PlaceId == 95295765150201 then
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/rock.lua"))()
 else
-   print("not")
+   print("not support")
 end
