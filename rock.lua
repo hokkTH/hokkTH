@@ -2315,6 +2315,7 @@ end)
 
 local function Farm()
     if _G.farm then
+        game.Players.LocalPlayer.Character.Humanoid.EvaluateStateMachine = false
         if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
             local Noclip = Instance.new("BodyVelocity")
             Noclip.Name = "HOKHUB"
@@ -2333,6 +2334,7 @@ local function Farm()
             end
         end
     else
+        game.Players.LocalPlayer.Character.Humanoid.EvaluateStateMachine = true
         if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
             game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
         end
