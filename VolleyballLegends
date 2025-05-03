@@ -19,8 +19,12 @@ _G.code = false
 
 if _G.locklvl == nil then
     _G.locklvl = false
-elseif _G.autocode == nil then
+end
+if _G.autocode == nil then
     _G.autocode = false
+end
+if _G.le == nil then
+    _G.le = "Type here!"
 end
 line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
     _G.SelectedSide = side
@@ -31,12 +35,22 @@ line1:Toggle("Auto-Farm",false, function(bool)
     _G.Farm = bool
     _G.NoCIP = bool
 end)
-
+line1:Toggle("AutoCode",_G.autocode, function(bool)
+    _G.autocode = bool
+end)
+line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
+    _G.locklvl = bool
+end)
+line1:Textbox("Lvl",_G.le,true,function(t)
+    _G.le = tonumber(t)
+end)
 --[[line1:Slider("SizeBall", 0, 20, 10, function(t)
     _G.size = t
 end)
 ]]
-line1:Button("Code", function()
+local line2 = serv:Channel("Misc")
+
+line2:Button("Code", function()
     local config = {
         codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
     }
@@ -51,19 +65,19 @@ line1:Button("Code", function()
     end
 end)
 
-line1:Button("GetJobid", function()
+line2:Button("GetJobid", function()
     setclipboard(tostring(game.JobId))
 end)
 
-line1:Button("Rejoin", function()
+line2:Button("Rejoin", function()
     local ts = game:GetService("TeleportService")
     local p = game:GetService("Players").LocalPlayer
     ts:Teleport(game.PlaceId, p)
 end)
-line1:Button("GetPlaceId", function()
+line2:Button("GetPlaceId", function()
     setclipboard(tostring(game.PlaceId, p))
 end)
-line1:Button("Add To Acc", function()
+line2:Button("Add To Acc", function()
     local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
     local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
     style = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Styles.LeftSidePanel.Slot1.Title.Text
@@ -74,12 +88,7 @@ line1:Button("Add To Acc", function()
         MyAccount:SetDescription(SUM)
     end
 end)
-line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
-    _G.locklvl = bool
-end)
-line1:Textbox("Lvl","Type here!",true,function(t)
-    _G.le = tonumber(t)
-end)
+
 _G.go = false 
 _G.NoCIP = false
 spawn(function()
