@@ -154,7 +154,6 @@ spawn(function()
                         }
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
                     end
-                    end
                     wait(0.5)
                     local config = {
                         codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
@@ -167,7 +166,6 @@ spawn(function()
                             [1] = code
                         }
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
-                    end
                     end
                     _G.code = false
                     _G.autocode = false
