@@ -52,7 +52,7 @@ local line2 = serv:Channel("Misc")
 
 line2:Button("Code", function()
     local config = {
-        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
+        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
     }
     
     local codes = config.codes
@@ -143,29 +143,31 @@ spawn(function()
                 _G.code = true
                 if _G.code and _G.autocode then
                     local config = {
-                        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
+                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
                     }
-
+                    
                     local codes = config.codes
-
+                    
                     for _, code in pairs(codes) do
                         local args = {
                             [1] = code
                         }
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
                     end
+                    end
                     wait(0.5)
                     local config = {
-                        codes = {"UPDATE_16","SEASON_3,","SILLY_POTIONS","1.5M_FAVS"} 
+                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
                     }
-
+                    
                     local codes = config.codes
-
+                    
                     for _, code in pairs(codes) do
                         local args = {
                             [1] = code
                         }
                         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
+                    end
                     end
                     _G.code = false
                     _G.autocode = false
