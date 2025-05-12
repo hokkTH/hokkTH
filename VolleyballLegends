@@ -52,7 +52,7 @@ local line2 = serv:Channel("Misc")
 
 line2:Button("Code", function()
     local config = {
-        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
+        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
     }
     
     local codes = config.codes
@@ -143,7 +143,7 @@ spawn(function()
                 _G.code = true
                 if _G.code and _G.autocode then
                     local config = {
-                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
+                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
                     }
                     
                     local codes = config.codes
@@ -156,7 +156,7 @@ spawn(function()
                     end
                     wait(0.5)
                     local config = {
-                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE"} 
+                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
                     }
                     
                     local codes = config.codes
