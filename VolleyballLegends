@@ -294,6 +294,9 @@ spawn(function()
         if _G.FPS then
 		    setfpscap(15)
 		    wait(10)
+        else 
+            setfpscap(60)
+		    wait(10)
         end
         wait(0.1)
 	end
@@ -324,15 +327,3 @@ if _G.CNOCLIP then
 end
 _G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
 
-local Open = false
-game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
-	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
-		if Open then
-            game:GetService("CoreGui").Discord.MainFrame.Visible = true
-            Open =false
-		else
-		    Open = true
-            game:GetService("CoreGui").Discord.MainFrame.Visible = false
-		end
-	end
-end)
