@@ -1,15 +1,5 @@
-if game:GetService("CoreGui"):FindFirstChild("Discord") then
-    game:GetService("CoreGui").Discord:Destroy()
-end
 repeat wait() until game:IsLoaded()
 wait(2)
-local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
-
-local win = DiscordLib:Window("VolleyBall")
-
-local serv = win:Server("HOKHUB", "")
-
-local line1 = serv:Channel("AutoFram")
 
 _G.SelectedSide = nil 
 _G.Farm = false
@@ -26,32 +16,156 @@ end
 if _G.le == nil then
     _G.le = "Type here!"
 end
-line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
-    _G.SelectedSide = side
-end)
+if _G.FPS == nil then
+    _G.FPS = false
+end
+
+getgenv().Config = {
+	Invite = "HOK HUB",
+	Version = "0.0",
+}
+
+getgenv().luaguardvars = {
+	DiscordName = "hokk15",
+}
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/uifuji"))()
+
+library:init() 
+
+local Window = library.NewWindow({
+	title = "HOKHUB",
+	size = UDim2.new(0, 525, 0, 650)
+})
+
+local tabs = {
+    Tab1 = Window:AddTab("Tab1"),
+	Settings = library:CreateSettingsTab(Window),
+}
 
 
-line1:Toggle("Auto-Farm",false, function(bool)
-    _G.Farm = bool
-    _G.NoCIP = bool
-end)
-line1:Toggle("AutoCode",_G.autocode, function(bool)
-    _G.autocode = bool
-end)
-line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
-    _G.locklvl = bool
-end)
-line1:Textbox("Lvl",_G.le,true,function(t)
-    _G.le = tonumber(t)
-end)
---[[line1:Slider("SizeBall", 0, 20, 10, function(t)
-    _G.size = t
-end)
-]]
-local line2 = serv:Channel("Misc")
+local sections = {
+	Section1 = tabs.Tab1:AddSection("Farm", 1),
+	Section2 = tabs.Tab1:AddSection("Misc", 2),
+}
 
-line2:Button("Code", function()
-    local config = {
+local a = sections.Section1:AddList({
+	enabled = true,
+	text = "Select-Side",
+	tooltip = "Select-Side",
+	value = "Select-Side",
+	values = {"Left", "Right"},
+	callback = function(v)
+	   _G.SelectedSide = v
+	end
+})
+
+
+sections.Section1:AddToggle({
+	enabled = true,
+	text = "Auto-Farm",
+	tooltip = "Farm",
+	state = _G.Farm, 
+	callback = function(lol)
+	    _G.Farm = lol
+        _G.NoCIP = lol
+	end
+})
+
+sections.Section1:AddToggle({
+	enabled = true,
+	text = "AutoCode",
+	tooltip = "Code",
+	state = _G.autocode, 
+	callback = function(lol)
+        _G.autocode = lol
+	end
+})
+
+sections.Section1:AddToggle({
+	enabled = true,
+	text = "Lock-lvl",
+	tooltip = "lvl",
+	state = _G.locklvl, 
+	callback = function(lol)
+        _G.locklvl = lol
+	end
+})
+
+sections.Section1:AddBox({
+	enabled = true,
+	text = "Lock-lvl",
+    input = tostring(_G.le),
+	callback = function(t)
+        _G.le = tonumber(t)
+	end
+})
+
+sections.Section2:AddButton({
+	enabled = true,
+	text = "Code",
+	tooltip = "Code",
+	callback = function()
+        code()
+	end
+})
+
+sections.Section2:AddButton({
+	enabled = true,
+	text = "GetJobid",
+	tooltip = "GetJobid",
+	callback = function()
+        setclipboard(tostring(game.JobId))
+	end
+})
+
+sections.Section2:AddButton({
+	enabled = true,
+	text = "Rejoin",
+	tooltip = "Rejoin",
+	callback = function()
+        local ts = game:GetService("TeleportService")
+        local p = game:GetService("Players").LocalPlayer
+        ts:Teleport(game.PlaceId, p)
+	end
+})
+
+
+sections.Section2:AddButton({
+	enabled = true,
+	text = "Add To Acc",
+	tooltip = "Add To Acc",
+	callback = function()
+        acc() 
+	end
+})
+
+sections.Section2:AddToggle({
+	enabled = true,
+	text = "Lock-Fps15",
+	tooltip = "Fps15",
+	state = _G.FPS, 
+	callback = function(lol)
+        _G.FPS = lol
+	end
+})
+
+--function
+
+function acc() 
+    local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
+    local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
+    style = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Styles.LeftSidePanel.Slot1.Title.Text
+    ability = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Abilities.LeftSidePanel.Slot1.Title.Text
+    lvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+    SUM  = lvl.." + "..style.." + "..ability
+    if MyAccount then
+        MyAccount:SetDescription(SUM)
+    end
+end
+
+function code() 
+        local config = {
         codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
     }
     
@@ -63,34 +177,8 @@ line2:Button("Code", function()
         }
         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
     end
-end)
+end
 
-line2:Button("GetJobid", function()
-    setclipboard(tostring(game.JobId))
-end)
-
-line2:Button("Rejoin", function()
-    local ts = game:GetService("TeleportService")
-    local p = game:GetService("Players").LocalPlayer
-    ts:Teleport(game.PlaceId, p)
-end)
-line2:Button("GetPlaceId", function()
-    setclipboard(tostring(game.PlaceId, p))
-end)
-line2:Button("Add To Acc", function()
-    local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
-    local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
-    style = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Styles.LeftSidePanel.Slot1.Title.Text
-    ability = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Abilities.LeftSidePanel.Slot1.Title.Text
-    lvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
-    SUM  = lvl.." + "..style.." + "..ability
-    if MyAccount then
-        MyAccount:SetDescription(SUM)
-    end
-end)
-
-_G.go = false 
-_G.NoCIP = false
 spawn(function()
     while wait() do
         pcall(function()
@@ -142,31 +230,9 @@ spawn(function()
             if numlvl == 15 or numlvl > 15 then
                 _G.code = true
                 if _G.code and _G.autocode then
-                    local config = {
-                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
-                    }
-                    
-                    local codes = config.codes
-                    
-                    for _, code in pairs(codes) do
-                        local args = {
-                            [1] = code
-                        }
-                        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
-                    end
+                    code() 
                     wait(0.5)
-                    local config = {
-                        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
-                    }
-                    
-                    local codes = config.codes
-                    
-                    for _, code in pairs(codes) do
-                        local args = {
-                            [1] = code
-                        }
-                        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
-                    end
+                    code() 
                     _G.code = false
                     _G.autocode = false
                 end
@@ -222,17 +288,20 @@ local function Farm()
         end
     end
 end
+
+spawn(function()
+	while  true  do
+        if _G.FPS then
+		    setfpscap(15)
+		    wait(10)
+        end
+        wait(0.1)
+	end
+end)
+
 spawn(function()
     while wait() do
-        local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
-        local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
-        style = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Styles.LeftSidePanel.Slot1.Title.Text
-        ability = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Abilities.LeftSidePanel.Slot1.Title.Text
-        lvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
-        SUM  = lvl.." + "..style.." + "..ability
-        if MyAccount then
-            MyAccount:SetDescription(SUM)
-        end
+        acc()
         wait(600)
     end
 end)
