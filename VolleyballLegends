@@ -166,7 +166,7 @@ end
 
 function code() 
         local config = {
-        codes = {"UPDATE18_CRYSTALS","OP_LIBERO","KIMIRO_OUT","SUPER_DIVE","1M_Likes"} 
+        codes = {"UPDATE_19","1.6_M_MEMBERS","NEW_TIMESKIP"} 
     }
     
     local codes = config.codes
