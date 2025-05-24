@@ -1,6 +1,7 @@
+if game:GetService("CoreGui"):FindFirstChild("Discord") then
+    game:GetService("CoreGui").Discord:Destroy()
+end
 repeat wait() until game:IsLoaded()
-wait(2)
-
 _G.SelectedSide = nil 
 _G.Farm = false
 _G.NoCIP = false
@@ -19,138 +20,36 @@ end
 if _G.FPS == nil then
     _G.FPS = false
 end
+wait(2)
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
 
-getgenv().Config = {
-	Invite = "HOK HUB",
-	Version = "0.0",
-}
+local win = DiscordLib:Window("VolleyBall")
 
-getgenv().luaguardvars = {
-	DiscordName = "hokk15",
-}
+local serv = win:Server("HOKHUB", "")
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/uifuji"))()
+local line1 = serv:Channel("AutoFram")
 
-library:init() 
-
-local Window = library.NewWindow({
-	title = "HOKHUB",
-	size = UDim2.new(0, 525, 0, 650)
-})
-
-local tabs = {
-    Tab1 = Window:AddTab("Tab1"),
-	Settings = library:CreateSettingsTab(Window),
-}
+line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
+    _G.SelectedSide = side
+end)
 
 
-local sections = {
-	Section1 = tabs.Tab1:AddSection("Farm", 1),
-	Section2 = tabs.Tab1:AddSection("Misc", 2),
-}
-
-local a = sections.Section1:AddList({
-	enabled = true,
-	text = "Select-Side",
-	tooltip = "Select-Side",
-	value = "Select-Side",
-	values = {"Left", "Right"},
-	callback = function(v)
-	   _G.SelectedSide = v
-	end
-})
-
-
-sections.Section1:AddToggle({
-	enabled = true,
-	text = "Auto-Farm",
-	tooltip = "Farm",
-	state = _G.Farm, 
-	callback = function(lol)
-	    _G.Farm = lol
-        _G.NoCIP = lol
-	end
-})
-
-sections.Section1:AddToggle({
-	enabled = true,
-	text = "AutoCode",
-	tooltip = "Code",
-	state = _G.autocode, 
-	callback = function(lol)
-        _G.autocode = lol
-	end
-})
-
-sections.Section1:AddToggle({
-	enabled = true,
-	text = "Lock-lvl",
-	tooltip = "lvl",
-	state = _G.locklvl, 
-	callback = function(lol)
-        _G.locklvl = lol
-	end
-})
-
-sections.Section1:AddBox({
-	enabled = true,
-	text = "Lock-lvl",
-    input = tostring(_G.le),
-	callback = function(t)
-        _G.le = tonumber(t)
-	end
-})
-
-sections.Section2:AddButton({
-	enabled = true,
-	text = "Code",
-	tooltip = "Code",
-	callback = function()
-        code()
-	end
-})
-
-sections.Section2:AddButton({
-	enabled = true,
-	text = "GetJobid",
-	tooltip = "GetJobid",
-	callback = function()
-        setclipboard(tostring(game.JobId))
-	end
-})
-
-sections.Section2:AddButton({
-	enabled = true,
-	text = "Rejoin",
-	tooltip = "Rejoin",
-	callback = function()
-        local ts = game:GetService("TeleportService")
-        local p = game:GetService("Players").LocalPlayer
-        ts:Teleport(game.PlaceId, p)
-	end
-})
-
-
-sections.Section2:AddButton({
-	enabled = true,
-	text = "Add To Acc",
-	tooltip = "Add To Acc",
-	callback = function()
-        acc() 
-	end
-})
-
-sections.Section2:AddToggle({
-	enabled = true,
-	text = "Lock-Fps15",
-	tooltip = "Fps15",
-	state = _G.FPS, 
-	callback = function(lol)
-        _G.FPS = lol
-	end
-})
-
---function
+line1:Toggle("Auto-Farm",false, function(bool)
+    _G.Farm = bool
+    _G.NoCIP = bool
+end)
+line1:Toggle("AutoCode",_G.autocode, function(bool)
+    _G.autocode = bool
+end)
+line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
+    _G.locklvl = bool
+end)
+line1:Textbox("Lvl",_G.le,true,function(t)
+    _G.le = tonumber(t)
+end)
+line1:Toggle("Lock-Fps",_G.FPS, function(bool)
+    _G.FPS = bool
+end)
 
 function acc() 
     local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
@@ -176,8 +75,32 @@ function code()
             [1] = code
         }
         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
+        wait(1)
     end
 end
+
+
+local line2 = serv:Channel("Misc")
+
+line2:Button("Code", function()
+    code()
+end)
+
+line2:Button("GetJobid", function()
+    setclipboard(tostring(game.JobId))
+end)
+
+line2:Button("Rejoin", function()
+    local ts = game:GetService("TeleportService")
+    local p = game:GetService("Players").LocalPlayer
+    ts:Teleport(game.PlaceId, p)
+end)
+line2:Button("GetPlaceId", function()
+    setclipboard(tostring(game.PlaceId, p))
+end)
+line2:Button("Add To Acc", function()
+    acc() 
+end)
 
 spawn(function()
     while wait() do
@@ -191,7 +114,7 @@ spawn(function()
                             local args = { [1] = sideIndex, [2] = teamNum }
                             local success = game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.RequestJoin:InvokeServer(unpack(args))
                             if success then 
-                                --sprint("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
+                                print("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
                                 break 
                             end
                             wait(0.5) 
@@ -230,9 +153,9 @@ spawn(function()
             if numlvl == 15 or numlvl > 15 then
                 _G.code = true
                 if _G.code and _G.autocode then
-                    code() 
+                    code()
                     wait(0.5)
-                    code() 
+                    code()
                     _G.code = false
                     _G.autocode = false
                 end
@@ -242,21 +165,35 @@ spawn(function()
 end)
 
 local function Farm()
-    if _G.Farm and _G.go then
-        if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
-            local Noclip = Instance.new("BodyVelocity")
-            Noclip.Name = "HOKHUB"
-            Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-            Noclip.MaxForce = Vector3.new(100000,100000,100000)
-            Noclip.Velocity = Vector3.new(0,0,0)
-        end
-        game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
-        game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
-        if _G.locklvl then
-            local gamelvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
-            local numlvl = string.match(gamelvl, "%d+")
-            numlvl = tonumber(numlvl)
-            if numlvl < _G.le then
+    pcall(function()
+        if _G.Farm and _G.go then
+            if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+                local Noclip = Instance.new("BodyVelocity")
+                Noclip.Name = "HOKHUB"
+                Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+                Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                Noclip.Velocity = Vector3.new(0,0,0)
+            end
+            game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+            game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+            if _G.locklvl then
+                local gamelvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+                local numlvl = string.match(gamelvl, "%d+")
+                numlvl = tonumber(numlvl)
+                if numlvl < _G.le then
+                    for i,v in pairs(workspace:GetDescendants()) do
+                        if v.ClassName == "Model" then
+                            if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
+                                for _,d in pairs(v:GetChildren()) do
+                                    if d.Name == "Cube.001" then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d.Position)* CFrame.new(1,0,0)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            elseif _G.locklvl == false then
                 for i,v in pairs(workspace:GetDescendants()) do
                     if v.ClassName == "Model" then
                         if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
@@ -269,49 +206,33 @@ local function Farm()
                     end
                 end
             end
-        elseif _G.locklvl == false then
-            for i,v in pairs(workspace:GetDescendants()) do
-                if v.ClassName == "Model" then
-                    if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
-                        for _,d in pairs(v:GetChildren()) do
-                            if d.Name == "Cube.001" then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d.Position)* CFrame.new(1,0,0)
-                            end
-                        end
-                    end
-                end
+        else
+            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
             end
         end
-    else
-        if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
-            game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
-        end
-    end
+    end)
 end
-
-spawn(function()
-	while  true  do
-        if _G.FPS then
-		    setfpscap(15)
-		    wait(10)
-        else 
-            setfpscap(60)
-		    wait(10)
-        end
-        wait(0.1)
-	end
-end)
-
-spawn(function()
-    while wait() do
-        acc()
-        wait(600)
-    end
-end)
 if _G.loop then
     _G.loop:Disconnect()
 end
 _G.loop = game:GetService('RunService').Stepped:Connect(Farm)
+
+spawn(function()
+    while wait() do
+            acc()
+        wait(600)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.FPS then
+            setfpscap(15)
+            wait(5)
+        end
+    end
+end)
 
 local function NoclipLoop()
     if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
@@ -327,3 +248,15 @@ if _G.CNOCLIP then
 end
 _G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
 
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
+		if Open then
+            game:GetService("CoreGui").Discord.MainFrame.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").Discord.MainFrame.Visible = false
+		end
+	end
+end)
