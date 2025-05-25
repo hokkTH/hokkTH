@@ -3,7 +3,6 @@ if game:GetService("CoreGui"):FindFirstChild("Discord") then
 end
 repeat wait() until game:IsLoaded()
 _G.SelectedSide = nil 
-_G.Farm = false
 _G.NoCIP = false
 _G.go = false
 _G.code = false
@@ -20,7 +19,10 @@ end
 if _G.FPS == nil then
     _G.FPS = false
 end
-wait(2)
+if _G.Farm == nil then
+    _G.Farm = false
+end
+wait(5)
 
 function Save()
     writefile('hok.json',game:service'HttpService':JSONEncode(_G.set))
@@ -66,7 +68,7 @@ line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
 end)
 
 
-line1:Toggle("Auto-Farm",false, function(bool)
+line1:Toggle("Auto-Farm",_G.Farm, function(bool)
     _G.Farm = bool
     _G.NoCIP = bool
 end)
@@ -146,7 +148,7 @@ spawn(function()
                             local args = { [1] = sideIndex, [2] = teamNum }
                             local success = game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.RequestJoin:InvokeServer(unpack(args))
                             if success then 
-                                print("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
+                                --print("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
                                 break 
                             end
                             wait(0.5) 
@@ -199,6 +201,12 @@ end)
 local function Farm()
     pcall(function()
         if _G.Farm and _G.go then
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.MouseLockComputer.ImageColor3 ~= Color3.fromRGB(255, 255, 255) then
+                local vi = game:service'VirtualInputManager'
+                vi:SendKeyEvent(true, 304, 0,  game, 1)
+                wait(0)
+                vi:SendKeyEvent(false, 304, 0, game, 1)
+            end
             if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
                 local Noclip = Instance.new("BodyVelocity")
                 Noclip.Name = "HOKHUB"
@@ -285,12 +293,12 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
 		if Open then
             game:GetService("CoreGui").Discord.MainFrame.Visible = true
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.TextLabel.Visible = true
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
             Open =false
 		else
 		    Open = true
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.TextLabel.Visible = false
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = false
 		end
 	end
 end)
