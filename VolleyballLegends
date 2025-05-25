@@ -33,6 +33,25 @@ end
 _G.set = game:service'HttpService':JSONDecode(readfile('hok.json'))
 _G.name = game.Players.LocalPlayer.Name
 _G.SelectedSide = _G.set[_G.name]
+
+local ScreenGui = Instance.new("ScreenGui") 
+local TextBox = Instance.new("TextBox") 
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") 
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
+TextBox.Parent = ScreenGui 
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255) 
+TextBox.BackgroundTransparency = 0.300 
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0) 
+TextBox.BorderSizePixel = 0 TextBox.Position = UDim2.new(0.333902657, 0, 0.021327015, 0) 
+TextBox.Size = UDim2.new(0, 389, 0, 71) 
+TextBox.Font = Enum.Font.SourceSans 
+TextBox.Text = tostring(_G.SelectedSide)
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0) 
+TextBox.TextSize = 40.000
+
+
+
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
 
 local win = DiscordLib:Window("VolleyBall")
@@ -265,10 +284,12 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
 		if Open then
             game:GetService("CoreGui").Discord.MainFrame.Visible = true
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
             Open =false
 		else
 		    Open = true
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = false
 		end
 	end
 end)
