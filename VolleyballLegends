@@ -39,7 +39,7 @@ _G.SelectedSide = _G.set[_G.name]
 local ScreenGui = Instance.new("ScreenGui") 
 local TextBox = Instance.new("TextLabel") 
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") 
+ScreenGui.Parent = game:GetService("CoreGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
 TextBox.Parent = ScreenGui 
 TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255) 
@@ -293,12 +293,12 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
 		if Open then
             game:GetService("CoreGui").Discord.MainFrame.Visible = true
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+            game:GetService("CoreGui").ScreenGui.TextLabel.Visible = true
             Open =false
 		else
 		    Open = true
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = false
+            game:GetService("CoreGui").ScreenGui.TextLabel.Visible = false
 		end
 	end
 end)
