@@ -285,12 +285,12 @@ game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
 	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
 		if Open then
             game:GetService("CoreGui").Discord.MainFrame.Visible = true
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.TextLabel.Visible = true
             Open =false
 		else
 		    Open = true
             game:GetService("CoreGui").Discord.MainFrame.Visible = false
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = false
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.TextLabel.Visible = false
 		end
 	end
 end)
