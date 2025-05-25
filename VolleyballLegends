@@ -21,6 +21,18 @@ if _G.FPS == nil then
     _G.FPS = false
 end
 wait(2)
+
+function Save()
+    writefile('hok.json',game:service'HttpService':JSONEncode(_G.set))
+end
+if not isfile('hok.json') then
+    _G.set = {
+    }
+    Save()
+end
+_G.set = game:service'HttpService':JSONDecode(readfile('hok.json'))
+_G.name = game.Players.LocalPlayer.Name
+_G.SelectedSide = _G.set[_G.name]
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
 
 local win = DiscordLib:Window("VolleyBall")
