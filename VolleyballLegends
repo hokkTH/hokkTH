@@ -35,7 +35,7 @@ _G.name = game.Players.LocalPlayer.Name
 _G.SelectedSide = _G.set[_G.name]
 
 local ScreenGui = Instance.new("ScreenGui") 
-local TextBox = Instance.new("TextBox") 
+local TextBox = Instance.new("TextLabel") 
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
@@ -43,7 +43,8 @@ TextBox.Parent = ScreenGui
 TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255) 
 TextBox.BackgroundTransparency = 0.300 
 TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0) 
-TextBox.BorderSizePixel = 0 TextBox.Position = UDim2.new(0.333902657, 0, 0.021327015, 0) 
+TextBox.BorderSizePixel = 0 
+TextBox.Position = UDim2.new(0.333902657, 0, 0.021327015, 0) 
 TextBox.Size = UDim2.new(0, 389, 0, 71) 
 TextBox.Font = Enum.Font.SourceSans 
 TextBox.Text = tostring(_G.SelectedSide)
