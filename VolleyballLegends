@@ -111,6 +111,322 @@ end
 
 function code() 
         local config = {
+        codes = {"UPDATE_21"} 
+    }
+    
+    local codes = config.codes
+    
+    for _, code in pairs(codes) do
+        local args = {
+            [1] = code
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.CodeService.RF.Redeem:InvokeServer(unpack(args))
+        wait(1)
+    end
+end
+
+
+local line2 = serv:Channel("Misc")
+
+line2:Button("Code", function()
+    code()
+end)
+
+line2:Button("GetJobid", function()
+    setclipboard(tostring(game.JobId))
+end)
+
+line2:Button("Rejoin", function()
+    local ts = game:GetService("TeleportService")
+    local p = game:GetService("Players").LocalPlayer
+    ts:Teleport(game.PlaceId, p)
+end)
+line2:Button("GetPlaceId", function()
+    setclipboard(tostring(game.PlaceId, p))
+end)
+line2:Button("Add To Acc", function()
+    acc() 
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Farm then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.Visible == false then
+                    _G.go = false 
+                    local sideIndex = (_G.SelectedSide == "Left") and 1 or 2 
+                    if _G.SelectedSide then
+                        for teamNum = 1, 6 do
+                            local args = { [1] = sideIndex, [2] = teamNum }
+                            local success = game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.GameService.RF.RequestJoin:InvokeServer(unpack(args))
+                            if success then 
+                                --print("Joined team " .. teamNum .. " on " .. _G.SelectedSide)
+                                break 
+                            end
+                            wait(0.5) 
+                        end
+                    end
+                else
+                    _G.go = true 
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Farm then
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.RoundOverStats.visible == true then
+                for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Interface.RoundOverStats.ReturnContainer.BackBtn.Activated)) do
+                    v.Function()
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait(1) do
+        if _G.Farm then
+		    game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+		    game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+        end
+        if _G.autocode then
+            local gamelvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+            local numlvl = string.match(gamelvl, "%d+")
+            numlvl = tonumber(numlvl)
+            if numlvl == 15 or numlvl > 15 then
+                _G.code = true
+                if _G.code and _G.autocode then
+                    code()
+                    wait(0.5)
+                    code()
+                    _G.code = false
+                    _G.autocode = false
+                end
+            end
+        end
+	end
+end)
+
+local function Farm()
+    pcall(function()
+        if _G.Farm and _G.go then
+            if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Game.MouseLockComputer.ImageColor3 ~= Color3.fromRGB(255, 255, 255) then
+                local vi = game:service'VirtualInputManager'
+                vi:SendKeyEvent(true, 304, 0,  game, 1)
+                wait(0)
+                vi:SendKeyEvent(false, 304, 0, game, 1)
+            end
+            if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+                local Noclip = Instance.new("BodyVelocity")
+                Noclip.Name = "HOKHUB"
+                Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+                Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                Noclip.Velocity = Vector3.new(0,0,0)
+            end
+            game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
+            game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+            if _G.locklvl then
+                local gamelvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+                local numlvl = string.match(gamelvl, "%d+")
+                numlvl = tonumber(numlvl)
+                if numlvl < _G.le then
+                    for i,v in pairs(workspace:GetDescendants()) do
+                        if v.ClassName == "Model" then
+                            if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
+                                for _,d in pairs(v:GetChildren()) do
+                                    if d.Name == "Cube.001" then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d.Position)* CFrame.new(1,0,0)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            elseif _G.locklvl == false then
+                for i,v in pairs(workspace:GetDescendants()) do
+                    if v.ClassName == "Model" then
+                        if v.Name == "ClassicBall" or string.find(v.Name ,"CLIENT_BALL") then
+                            for _,d in pairs(v:GetChildren()) do
+                                if d.Name == "Cube.001" then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d.Position)* CFrame.new(1,0,0)
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        else
+            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("HOKHUB"):Destroy()
+            end
+        end
+    end)
+end
+if _G.loop then
+    _G.loop:Disconnect()
+end
+_G.loop = game:GetService('RunService').Stepped:Connect(Farm)
+
+spawn(function()
+    while wait() do
+            acc()
+        wait(600)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.FPS then
+            setfpscap(15)
+            wait(5)
+        end
+    end
+end)
+
+local function NoclipLoop()
+    if game.Players.LocalPlayer.Character ~= nil and _G.NoCIP == true then
+        for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if child:IsA("BasePart") and child.CanCollide == true then
+                child.CanCollide = false 
+            end
+        end
+    end
+end
+if _G.CNOCLIP then
+    _G.CNOCLIP:Disconnect()
+end
+_G.CNOCLIP = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+
+local Open = false
+game:GetService("UserInputService").InputBegan:Connect(function(KeyCode)
+	if KeyCode.KeyCode == Enum.KeyCode.LeftControl then
+		if Open then
+            game:GetService("CoreGui").Discord.MainFrame.Visible = true
+            game:GetService("CoreGui").ScreenGui.Frame.Visible = true
+            Open =false
+		else
+		    Open = true
+            game:GetService("CoreGui").Discord.MainFrame.Visible = false
+            game:GetService("CoreGui").ScreenGui.Frame.Visible = false
+		end
+	end
+end)
+if game:GetService("CoreGui"):FindFirstChild("Discord") then
+    game:GetService("CoreGui").Discord:Destroy()
+end
+if game:GetService("CoreGui"):FindFirstChild("ScreenGui") then
+    game:GetService("CoreGui").ScreenGui:Destroy()
+end
+repeat wait() until game:IsLoaded()
+_G.SelectedSide = nil 
+_G.NoCIP = false
+_G.go = false
+_G.code = false
+
+if _G.locklvl == nil then
+    _G.locklvl = false
+end
+if _G.autocode == nil then
+    _G.autocode = false
+end
+if _G.le == nil then
+    _G.le = "Type here!"
+end
+if _G.FPS == nil then
+    _G.FPS = false
+end
+if _G.Farm == nil then
+    _G.Farm = false
+end
+wait(5)
+
+function Save()
+    writefile('hok.json',game:service'HttpService':JSONEncode(_G.set))
+end
+if not isfile('hok.json') then
+    _G.set = {
+    }
+    Save()
+end
+_G.set = game:service'HttpService':JSONDecode(readfile('hok.json'))
+_G.name = game.Players.LocalPlayer.Name
+_G.SelectedSide = _G.set[_G.name]
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.309991449, 0, 0, 0)
+Frame.Size = UDim2.new(0, 444, 0, 88)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.27477476, 0, 0.215909094, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = tostring(_G.SelectedSide)
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 40
+
+
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hokkTH/hokkTH/refs/heads/main/script%20(1).lua")()
+
+local win = DiscordLib:Window("VolleyBall")
+
+local serv = win:Server("HOKHUB", "")
+
+local line1 = serv:Channel("AutoFram")
+
+line1:Dropdown("Select Side", {"Left", "Right"}, function(side)
+    _G.SelectedSide = side
+end)
+
+
+line1:Toggle("Auto-Farm",_G.Farm, function(bool)
+    _G.Farm = bool
+    _G.NoCIP = bool
+end)
+line1:Toggle("AutoCode",_G.autocode, function(bool)
+    _G.autocode = bool
+end)
+line1:Toggle("Lock-lvl",_G.locklvl, function(bool)
+    _G.locklvl = bool
+end)
+line1:Textbox("Lvl",_G.le,true,function(t)
+    _G.le = tonumber(t)
+end)
+line1:Toggle("Lock-Fps",_G.FPS, function(bool)
+    _G.FPS = bool
+end)
+
+function acc() 
+    local RAMAccount = loadstring(game:HttpGet'https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAMAccount.lua')()
+    local MyAccount = RAMAccount.new(game:GetService'Players'.LocalPlayer.Name)
+    style = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Styles.LeftSidePanel.Slot1.Title.Text
+    ability = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Lobby.Abilities.LeftSidePanel.Slot1.Title.Text
+    lvl = game:GetService("Players").LocalPlayer.PlayerGui.Interface.Stats.LeftSidePanel.PlayerLevelButton.Amount.Text
+    SUM  = lvl.." + "..style.." + "..ability
+    if MyAccount then
+        MyAccount:SetDescription(SUM)
+    end
+end
+
+function code() 
+        local config = {
         codes = {"UPDATE_19","750K_MEMBERS","UPDATE_20","TWINS_REWORK","BACK_TILT"} 
     }
     
